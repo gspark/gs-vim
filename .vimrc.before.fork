@@ -1,0 +1,21 @@
+let g:spf13_no_neosnippet_expand = 1
+let g:spf13_no_keyfixes = 1
+let g:spf13_no_fastTabs = 1
+let g:spf13_no_easyWindows = 1
+let g:spf13_no_autochdir = 1
+let g:spf13_no_views = 1
+let g:spf13_bundle_groups=['general', 'snipmate', 'programming', 'javascript', 'html', 'misc']
+let g:spf13_no_omni_complete = 1
+" Enable powerline symbols
+"" let g:airline_powerline_fonts = 1
+" To specify a different directory in which to place the vimbackup,
+  " vimviews, vimundo, and vimswap files/directories, add the following to
+  " your .vimrc.before.local file:
+  "   let g:spf13_consolidated_directory = <full path to desired directory>
+  "   eg: let g:spf13_consolidated_directory = $HOME . '/.vim/'
+let g:spf13_consolidated_directory = $HOME . '/temp/'
+let $XDG_CACHE_HOME                = $HOME . '/temp/cache'
+let g:ctrlp_cache_dir              = $HOME . '/temp/cache/ctrlp'
+let g:neocomplcache_temporary_dir  = $HOME . '/temp/cache/neocomplcache'
+
+

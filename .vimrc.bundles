@@ -32,7 +32,8 @@
         " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
         " across (heterogeneous) systems easier.
         if has('win32') || has('win64')
-          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+""           set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after,$VIM/bin
 
           " Be nice and check for multi_byte even if the config requires
           " multi_byte support most of the time
@@ -47,7 +48,8 @@
             " fallback into cp1252 instead of eg. iso-8859-15.
             " Newer Windows files might contain utf-8 or utf-16 LE so we might
             " want to try them first.
-            set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
+""             set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
+             set fileencodings=ucs-bom,utf-8,gb2312,cp936,gb18030,big5,euc-jp,euc-kr,latin1
           endif
         endif
     " }
@@ -55,26 +57,45 @@
     " Setup Bundle Support {
         " The next three lines ensure that the ~/.vim/bundle/ system works
         filetype off
-        set rtp+=~/.vim/bundle/vundle
-        call vundle#rc()
+        if has('vim_starting')
+            set runtimepath+=~/.vim/bundle/neobundle.vim/
+        endif
+
+
+        call neobundle#init#_rc(expand('~/.vim/bundle/'), 0)
+
+        command! -nargs=? -bang -bar
+              \ -complete=customlist,neobundle#complete_bundles
+              \ BundleInstall
+              \ call neobundle#installer#install('!' == '<bang>', <q-args>)
+
+        command! -nargs=+ Bundle
+              \ call neobundle#parser#bundle(
+              \   substitute(<q-args>, '\s"[^"]\+$', '', ''))
+
+        command! -nargs=? -bang -bar
+              \ -complete=customlist,neobundle#complete_deleted_bundles
+              \ BundleClean
+              \ call neobundle#installer#clean('!' == '<bang>', <q-args>)
     " }
 
     " Add an UnBundle command {
-    function! UnBundle(arg, ...)
-      let bundle = vundle#config#init_bundle(a:arg, a:000)
-      call filter(g:bundles, 'v:val["name_spec"] != "' . a:arg . '"')
-    endfunction
+        function! UnBundle(arg, ...)
+            for bundle in filter(neobundle#config#get_neobundles(), 'v:val.orig_name ==# a:arg')
+                call neobundle#config#rm(bundle.path)
+            endfor
+        endfunction
 
-    com! -nargs=+         UnBundle
-    \ call UnBundle(<args>)
+        com! -nargs=+         UnBundle
+        \ call UnBundle(<args>)
     " }
 
 " }
 
 " Bundles {
 
-    " Deps {
-        Bundle 'gmarik/vundle'
+    " Deps
+        NeoBundleFetch 'Shougo/neobundle.vim'
         Bundle 'MarcWeber/vim-addon-mw-utils'
         Bundle 'tomtom/tlib_vim'
         if executable('ag')

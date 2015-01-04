@@ -1,0 +1,199 @@
+
+" General {
+    set spelllang=en_us
+}
+
+" Vim UI {
+    set nocursorline                  " Highlight current line
+    set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:. " Highlight problematic whitespace
+    set linebreak " Wrap long lines at a blank
+    set showbreak=↪  " Change wrap line break
+" }
+
+" Plugins
+    " NeoBundle
+        let g:neobundle#types#git#default_protocol = 'git'
+
+    " Tagbar
+        if isdirectory(expand("~/.vim/bundle/tagbar/"))
+            nnoremap <silent> <F10> :TagbarToggle<cr>
+        endif
+
+    " NerdTree
+        if isdirectory(expand("~/.vim/bundle/nerdtree"))
+            unmap <leader>e
+            unmap <C-e>
+            map <silent> <leader>nt :NERDTreeFind<CR>
+            let NERDTreeIgnore = ['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.DS_Store']
+            let NERDTreeQuitOnOpen = 0
+            let NERDTreeShowHidden = 0
+        endif
+
+    " Tabularize
+        if isdirectory(expand("~/.vim/bundle/tabular"))
+            nmap <Leader>a" :Tabularize /"<CR>
+            vmap <Leader>a" :Tabularize /"<CR>
+            nmap <Leader>a/ :Tabularize /\/<CR>
+            vmap <Leader>a/ :Tabularize /\/<CR>
+        endif
+
+    " unite
+        if isdirectory(expand("~/.vim/bundle/unite.vim"))
+            let g:unite_winheight = 10
+            let g:unite_split_rule = 'botright'
+            let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g "" --ignore-dir .git'
+
+            call unite#custom#source('file_mru', 'converters', ['converter_relative_word'])
+            call unite#custom#source('file_rec/async', 'max_candidates', 3)
+            call unite#custom#source('file_rec/async', 'sorters', ['sorter_ftime'])
+            call unite#custom#profile('default', 'context', {
+            \   'unique': 1,
+            \   'direction': 'botright'
+            \ })
+            nnoremap <silent> <C-p> :Unite -start-insert file_rec/async file_mru<cr>
+
+            let g:unite_source_grep_max_candidates = 200
+            let g:unite_source_grep_command = 'ag'
+            let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden --ignore-dir dist'
+            let g:unite_source_grep_recursive_opt = ''
+
+            call unite#custom#profile('source/grep', 'context', {'no_quit' : 1})
+            nnoremap <silent> <f3> :Unite grep<cr>
+
+            let g:unite_source_history_yank_enable = 1
+            nmap <leader>y :Unite history/yank<cr>
+        endif
+
+    " Gist
+        if isdirectory(expand("~/.vim/bundle/gist-vim"))
+            let g:gist_open_browser_after_post = 1
+            let g:gist_post_private = 1
+            let g:gist_show_private = 1
+        endif
+
+    " syntastic
+        if isdirectory(expand("~/.vim/bundle/syntastic"))
+            let g:syntastic_check_on_wq = 0
+            let g:syntastic_mode_map = { 'mode': 'active',
+                        \ 'active_filetypes': [],
+                        \ 'passive_filetypes': ['html', 'java'] }
+        endif
+
+    " Emmet
+        if isdirectory(expand("~/.vim/bundle/emmet-vim"))
+            let g:user_emmet_leader_key = '<c-k>'
+        endif
+
+    " Indent guides
+        if isdirectory(expand("~/.vim/bundle/vim-indent-guides"))
+            let g:indent_guides_auto_colors = 0
+            autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#212121 ctermbg=235
+            autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#404040 ctermbg=237
+        endif
+
+    " vitality
+        if isdirectory(expand("~/.vim/bundle/vitality.vim"))
+            let g:vitality_fix_focus = 0
+        endif
+
+""     " airline
+""         if isdirectory(expand("~/.vim/bundle/vim-airline"))
+""             let g:airline_theme = 'powerlineish'
+""             let g:airline_branch_prefix = '⎇ '
+""             let g:airline_left_sep = ''
+""             let g:airline_right_sep = ''
+""             let g:airline_linecolumn_prefix = '␊ '
+""             let g:airline_paste_symbol = 'Þ'
+""             let g:airline#extensions#eclim#enabled = 0
+""         endif
+
+    " surround
+        if isdirectory(expand("~/.vim/bundle/vim-surround"))
+            let g:surround_no_insert_mappings = 1
+        endif
+
+    " dash
+        if isdirectory(expand("~/.vim/bundle/dash.vim"))
+            nmap <silent> K <Plug>DashGlobalSearch
+        endif
+
+    " SnipMate
+        if isdirectory(expand("~/.vim/bundle/vim-snipmate"))
+            nmap <silent> <F9> :SnipMateOpenSnippetFiles<cr>
+        endif
+
+    " JSON
+        if isdirectory(expand("~/.vim/bundle/vim-json"))
+            let g:vim_json_syntax_conceal = 0
+            autocmd FileType json setlocal foldmethod=syntax
+            autocmd FileType json setlocal foldlevel=1
+        endif
+
+    " Startify
+        if isdirectory(expand("~/.vim/bundle/vim-startify"))
+            let g:startify_custom_header = [
+                        \ "                    Code Works ",
+                        \ "",
+                        \ "                     _oo8oo_",
+                        \ "                    o8888888o",
+                        \ "                    88\" . \"88",
+                        \ "                    (| -_- |)",
+                        \ "                    0\\  =  /0",
+                        \ "                  ___/'==='\\___",
+                        \ "                .' \\\\|     |// '.",
+                        \ "               / \\\\|||  :  |||// \\",
+                        \ "              / _||||| -:- |||||_ \\",
+                        \ "             |   | \\\\\\  -  /// |   |",
+                        \ "             | \\_|  ''\\---/''  |_/ |",
+                        \ "             \\  .-\\__  '-'  __/-.  /",
+                        \ "           ___'. .'  /--.--\\  '. .'___",
+                        \ "        .\"\" '<  '.___\\_<|>_/___.'  >' \"\".",
+                        \ "       | | :  `- \\`.:`\\ _ /`:.`/ -`  : | |",
+                        \ "       \\  \\ `-.   \\_ __\\ /__ _/   .-` /  /",
+                        \ "   =====`-.____`.___ \\_____/ ___.`____.-`=====",
+                        \ "                     `=---=`",
+                        \ "",
+                        \ ]
+            let g:startify_custom_footer =
+                  \ ['', "   Vim is charityware. Please read ':help uganda'.", '']
+
+            let g:startify_relative_path = 1
+
+            let g:startify_skiplist = [
+                   \ '.git',
+                   \ 'node_modules',
+                   \ 'logs',
+                   \ 'bower_components'
+                   \ ]
+            hi StartifyBracket ctermfg=240
+            hi StartifyNumber  ctermfg=215
+            hi StartifyPath    ctermfg=245
+            hi StartifySlash   ctermfg=240
+            hi StartifySpecial ctermfg=240
+            hi StartifyHeader  ctermfg=114
+            hi StartifyFooter  ctermfg=240
+        endif
+
+" GUI Settings {
+    " GVIM- (here instead of .gvimrc)
+        if has('gui_running')
+            set guioptions-=m
+            if has("gui_gtk2")
+                set guifont=Courier\ 10\ Pitch\ 16
+            elseif has("x11")
+                set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
+            elseif has("gui_win32")
+""                 set guifont=Consolas:h13:cANSI
+                 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12:cANSI
+                "auto bufenter * set guifont=courier_new:h16 "一般字体
+                "auto bufenter *.txt if &ft=='help'|set gfn=courier_new:h14|endif
+                "set guifont=bitstream_vera_sans_mono:h14:cansi " 英文
+                "set guifont=arial_monospaced_for_sap:h14:cansi
+                "set guifontwide=幼圆:h14.5:cgb2312 " 中文
+                "set guifontwide=方正准圆简体:h14.5:cgb2312
+                set guifontwide=微软雅黑:h12:cGB2312
+            endif
+        endif
+
+" }
+

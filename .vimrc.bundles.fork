@@ -1,0 +1,79 @@
+" Remove Bundle
+    UnBundle 'spf13/vim-preview'
+    UnBundle 'tpope/vim-cucumber'
+    UnBundle 'quentindecock/vim-cucumber-align-pipes'
+    UnBundle 'Puppet-Syntax-Highlighting'
+    UnBundle 'Lokaltog/vim-easymotion'
+    UnBundle 'vim-scripts/sessionman.vim'
+    UnBundle 'terryma/vim-multiple-cursors'
+    UnBundle 'matchit.zip'
+    UnBundle 'jistr/vim-nerdtree-tabs'
+    UnBundle 'flazz/vim-colorschemes'
+""     UnBundle 'altercation/vim-colors-solarized'
+    UnBundle 'spf13/vim-colors'
+    UnBundle 'spf13/vim-autoclose'
+    UnBundle 'godlygeek/csapprox'
+    UnBundle 'kchmck/vim-coffee-script'
+    UnBundle 'kien/ctrlp.vim'
+    UnBundle 'tacahiroy/ctrlp-funky'
+    UnBundle 'mileszs/ack.vim'
+    UnBundle 'gorodinskiy/vim-coloresque'
+    UnBundle 'mhinz/vim-signify'
+    UnBundle 'bling/vim-bufferline'
+    UnBundle 'osyo-manga/vim-over'
+
+" General
+    Bundle 'jlanzarotta/bufexplorer'
+    Bundle 'cmdline-completion'
+    Bundle 'tomasr/molokai'
+    Bundle 'sjl/vitality.vim'
+    Bundle 'tyru/fencview.vim'
+    Bundle 'Shougo/unite.vim'
+    Bundle 'Shougo/neomru.vim'
+    Bundle 'mhinz/vim-startify'
+    Bundle 'Shougo/vimproc', {
+    \ 'build' : {
+    \     'windows' : 'make -f make_mingw32.mak',
+    \     'cygwin' : 'make -f make_cygwin.mak',
+    \     'mac' : 'make -f make_mac.mak',
+    \     'unix' : 'make -f make_unix.mak',
+    \    },
+    \ }
+
+" HTML
+    if count(g:spf13_bundle_groups, 'html')
+        Bundle 'lepture/vim-velocity'
+        Bundle 'juvenn/mustache.vim'
+        Bundle 'mattn/emmet-vim'
+        Bundle 'nono/vim-handlebars'
+        Bundle 'digitaltoad/vim-jade'
+        Bundle 'briancollins/vim-jst'
+        Bundle 'wavded/vim-stylus'
+    endif
+
+" JavaScript
+    if count(g:spf13_bundle_groups, 'javascript')
+        Bundle 'moll/vim-node'
+    endif
+
+" Misc
+    if count(g:spf13_bundle_groups, 'misc')
+        Bundle 'parantapa/moin.vim'
+        Bundle 'vim-scripts/nginx.vim'
+    endif
+
+" Fenbi.com
+    if count(g:spf13_bundle_groups, 'fenbi')
+        Bundle 'perfectworks/fenbi-frontend'
+    endif
+
+" eclim
+    if count(g:spf13_bundle_groups, 'eclim')
+        Bundle 'perfectworks/unite-eclim'
+    endif
+
+" dash
+    if count(g:spf13_bundle_groups, 'dash')
+        Bundle 'rizzatti/funcoo.vim'
+        Bundle 'rizzatti/dash.vim'
+    endif
