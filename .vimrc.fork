@@ -1,7 +1,7 @@
 
 " General {
     set spelllang=en_us
-}
+" }
 
 " Vim UI {
     set nocursorline                  " Highlight current line
@@ -177,6 +177,7 @@
 " GUI Settings {
     " GVIM- (here instead of .gvimrc)
         if has('gui_running')
+            au GUIEnter * simalt ~x
             set guioptions-=m
             if has("gui_gtk2")
                 set guifont=Courier\ 10\ Pitch\ 16
