@@ -25,9 +25,9 @@
 " General
     Bundle 'jlanzarotta/bufexplorer'
     Bundle 'cmdline-completion'
-    Bundle 'tomasr/molokai'
+    ""Bundle 'tomasr/molokai'
     Bundle 'sjl/vitality.vim'
-    Bundle 'tyru/fencview.vim'
+    ""Bundle 'tyru/fencview.vim'
     Bundle 'Shougo/unite.vim'
     Bundle 'Shougo/neomru.vim'
     Bundle 'mhinz/vim-startify'

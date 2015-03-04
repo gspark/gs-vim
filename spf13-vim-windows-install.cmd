@@ -33,6 +33,7 @@ call mklink "%HOME%\.vimrc.bundles.fork" "%APP_DIR%\.vimrc.bundles.fork"
 call mklink "%HOME%\.vimrc.before" "%APP_DIR%\.vimrc.before"
 call mklink "%HOME%\.vimrc.before.fork" "%APP_DIR%\.vimrc.before.fork"
 call mklink "%HOME%\.vimrc.bundles.default" "%APP_DIR%\.vimrc.bundles.default"
+call mklink "%HOME%\.vimrc.local" "%APP_DIR%\.vimrc.local"
 
 
 call vim vim +NeoBundleInstall! +NeoBundleClean +q
