@@ -1,36 +1,32 @@
-" Remove Bundle
-    UnBundle 'spf13/vim-preview'
-    UnBundle 'tpope/vim-cucumber'
-    UnBundle 'quentindecock/vim-cucumber-align-pipes'
-    UnBundle 'Puppet-Syntax-Highlighting'
-    UnBundle 'Lokaltog/vim-easymotion'
-    UnBundle 'vim-scripts/sessionman.vim'
-    UnBundle 'terryma/vim-multiple-cursors'
-    UnBundle 'matchit.zip'
-    UnBundle 'jistr/vim-nerdtree-tabs'
-    UnBundle 'flazz/vim-colorschemes'
-""     UnBundle 'altercation/vim-colors-solarized'
-    UnBundle 'spf13/vim-colors'
-    UnBundle 'spf13/vim-autoclose'
-    UnBundle 'godlygeek/csapprox'
-    UnBundle 'kchmck/vim-coffee-script'
-    UnBundle 'kien/ctrlp.vim'
-    UnBundle 'tacahiroy/ctrlp-funky'
+" Deps
     UnBundle 'mileszs/ack.vim'
-    UnBundle 'gorodinskiy/vim-coloresque'
-    UnBundle 'mhinz/vim-signify'
-    UnBundle 'bling/vim-bufferline'
-    UnBundle 'osyo-manga/vim-over'
 
 " General
+""    UnBundle 'altercation/vim-colors-solarized'
+    UnBundle 'spf13/vim-colors'
+    UnBundle 'spf13/vim-autoclose'
+    UnBundle 'ctrlpvim/ctrlp.vim'
+    UnBundle 'tacahiroy/ctrlp-funky'
+    UnBundle 'kristijanhusak/vim-multiple-cursors'
+    UnBundle 'vim-scripts/sessionman.vim'
+    UnBundle 'matchit.zip'
+    UnBundle 'bling/vim-bufferline'
+    UnBundle 'Lokaltog/vim-easymotion'
+    UnBundle 'jistr/vim-nerdtree-tabs'
+    UnBundle 'flazz/vim-colorschemes'
+    UnBundle 'mhinz/vim-signify'
+    UnBundle 'osyo-manga/vim-over'
+    UnBundle 'tomasr/molokai'
+    UnBundle 'mhinz/vim-startify'
+
     Bundle 'jlanzarotta/bufexplorer'
     Bundle 'cmdline-completion'
-    ""Bundle 'tomasr/molokai'
+""    Bundle 'tomasr/molokai'
     Bundle 'sjl/vitality.vim'
-    ""Bundle 'tyru/fencview.vim'
+    Bundle 'tyru/fencview.vim'
     Bundle 'Shougo/unite.vim'
     Bundle 'Shougo/neomru.vim'
-    Bundle 'mhinz/vim-startify'
+""    Bundle 'mhinz/vim-startify'
     Bundle 'Shougo/vimproc', {
     \ 'build' : {
     \     'windows' : 'make -f make_mingw32.mak',
@@ -42,22 +38,31 @@
 
 " HTML
     if count(g:spf13_bundle_groups, 'html')
-        Bundle 'lepture/vim-velocity'
-        Bundle 'juvenn/mustache.vim'
+        UnBundle 'gorodinskiy/vim-coloresque'
+        UnBundle 'amirh/HTML-AutoCloseTag'
+
         Bundle 'mattn/emmet-vim'
         Bundle 'nono/vim-handlebars'
         Bundle 'digitaltoad/vim-jade'
-        Bundle 'briancollins/vim-jst'
         Bundle 'wavded/vim-stylus'
     endif
 
 " JavaScript
     if count(g:spf13_bundle_groups, 'javascript')
+        UnBundle 'kchmck/vim-coffee-script'
+
         Bundle 'moll/vim-node'
     endif
 
 " Misc
     if count(g:spf13_bundle_groups, 'misc')
+        UnBundle 'rust-lang/rust.vim'
+        UnBundle 'spf13/vim-preview'
+        UnBundle 'tpope/vim-cucumber'
+        UnBundle 'cespare/vim-toml'
+        UnBundle 'quentindecock/vim-cucumber-align-pipes'
+        UnBundle 'saltstack/salt-vim'
+
         Bundle 'parantapa/moin.vim'
         Bundle 'vim-scripts/nginx.vim'
     endif
@@ -65,15 +70,4 @@
 " Fenbi.com
     if count(g:spf13_bundle_groups, 'fenbi')
         Bundle 'perfectworks/fenbi-frontend'
-    endif
-
-" eclim
-    if count(g:spf13_bundle_groups, 'eclim')
-        Bundle 'perfectworks/unite-eclim'
-    endif
-
-" dash
-    if count(g:spf13_bundle_groups, 'dash')
-        Bundle 'rizzatti/funcoo.vim'
-        Bundle 'rizzatti/dash.vim'
     endif

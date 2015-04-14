@@ -1,226 +1,228 @@
 
 " General {
-set spell spelllang=en_us
-setlocal spell spelllang=en_us
-highlight clear SpellBad
-highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
-highlight clear SpellCap
-highlight SpellCap term=underline cterm=underline
-highlight clear SpellRare
-highlight SpellRare term=underline cterm=underline
-highlight clear SpellLocal
-highlight SpellLocal term=underline cterm=underline
+    set spell spelllang=en_us
+    setlocal spell spelllang=en_us
+    highlight clear SpellBad
+    highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
+    highlight clear SpellCap
+    highlight SpellCap term=underline cterm=underline
+    highlight clear SpellRare
+    highlight SpellRare term=underline cterm=underline
+    highlight clear SpellLocal
+    highlight SpellLocal term=underline cterm=underline
 
-set textwidth=76
-set wrap
+    set textwidth=76
+    set wrap
 " }
 
 " Vim UI {
-set nocursorline                                            " Highlight current line
+    set nocursorline                                            " Highlight current line
 
-if g:gs_vim_font=='DejaVu Sans Mono for Powerline'
-    set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:. " Highlight problematic whitespace
-    set showbreak=↪                                         " Change wrap line break
-else
-""elseif g:gs_vim_font=='Ubuntu Mono derivative Powerline'
-    ""set listchars=tab:»\ ,eol:¬,extends:>,precedes:<,nbsp:.   " Highlight problematic whitespace
-    ""set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
-    set listchars=nbsp:.,eol:¬,tab:›\ ,extends:»,precedes:«,trail:•
-    set showbreak=ˆ
-endif
-highlight Tab guifg=darkblue ctermfg=darkblue
-highlight ExtraWhitespace guifg=darkblue ctermfg=darkblue
-""hi SpecialKey ctermfg=66 guifg=#649A9A
-""hi NonText ctermfg=darkblue guifg=gray
+    if g:gs_vim_font=='DejaVu Sans Mono for Powerline'
+        set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:. " Highlight problematic whitespace
+        set showbreak=↪                                         " Change wrap line break
+    else
+    ""elseif g:gs_vim_font=='Ubuntu Mono derivative Powerline'
+        ""set listchars=tab:»\ ,eol:¬,extends:>,precedes:<,nbsp:.   " Highlight problematic whitespace
+        ""set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
+        set listchars=nbsp:.,eol:¬,tab:›\ ,extends:»,precedes:«,trail:•
+        set showbreak=ˆ
+    endif
+    highlight Tab guifg=darkblue ctermfg=darkblue
+    highlight ExtraWhitespace guifg=darkblue ctermfg=darkblue
+    ""hi SpecialKey ctermfg=66 guifg=#649A9A
+    ""hi NonText ctermfg=darkblue guifg=gray
 
-set linebreak                                               " Wrap long lines at a blank
+    set linebreak                                               " Wrap long lines at a blank
 " }
 
-" Plugins
-" NeoBundle
-let g:neobundle#types#git#default_protocol = 'git'
+" Plugins {
+    " NeoBundle
+        let g:neobundle#types#git#default_protocol = 'git'
 
-" Tagbar
-if isdirectory(expand("~/.vim/bundle/tagbar/"))
-    nnoremap <silent> <F10> :TagbarToggle<cr>
-endif
-
-" NerdTree
-if isdirectory(expand("~/.vim/bundle/nerdtree"))
-    unmap <leader>e
-    unmap <C-e>
-    map <silent> <leader>nt :NERDTreeFind<CR>
-    let NERDTreeIgnore = ['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.DS_Store']
-    let NERDTreeQuitOnOpen = 0
-    let NERDTreeShowHidden = 0
-endif
-
-" Tabularize
-if isdirectory(expand("~/.vim/bundle/tabular"))
-    nmap <Leader>a" :Tabularize /"<CR>
-    vmap <Leader>a" :Tabularize /"<CR>
-    nmap <Leader>a/ :Tabularize /\/<CR>
-    vmap <Leader>a/ :Tabularize /\/<CR>
-endif
-
-" unite
-if isdirectory(expand("~/.vim/bundle/unite.vim"))
-    let g:unite_winheight = 10
-    let g:unite_split_rule = 'botright'
-    let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g "" --ignore-dir .git'
-
-    call unite#custom#source('file_mru', 'converters', ['converter_relative_word'])
-    call unite#custom#source('file_rec/async', 'max_candidates', 3)
-    call unite#custom#source('file_rec/async', 'sorters', ['sorter_ftime'])
-    call unite#custom#profile('default', 'context', {
-                \   'unique': 1,
-                \   'direction': 'botright'
-                \ })
-    nnoremap <silent> <C-p> :Unite -start-insert file_rec/async file_mru<cr>
-
-    let g:unite_source_grep_max_candidates = 200
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden --ignore-dir dist'
-    let g:unite_source_grep_recursive_opt = ''
-
-    call unite#custom#profile('source/grep', 'context', {'no_quit' : 1})
-    nnoremap <silent> <f3> :Unite grep<cr>
-
-    let g:unite_source_history_yank_enable = 1
-    nmap <leader>y :Unite history/yank<cr>
-endif
-
-" Gist
-if isdirectory(expand("~/.vim/bundle/gist-vim"))
-    let g:gist_open_browser_after_post = 1
-    let g:gist_post_private = 1
-    let g:gist_show_private = 1
-endif
-
-" syntastic
-if isdirectory(expand("~/.vim/bundle/syntastic"))
-    let g:syntastic_check_on_wq = 0
-    let g:syntastic_mode_map = { 'mode': 'active',
-                \ 'active_filetypes': [],
-                \ 'passive_filetypes': ['html', 'java'] }
-endif
-
-" Emmet
-if isdirectory(expand("~/.vim/bundle/emmet-vim"))
-    let g:user_emmet_leader_key = '<c-k>'
-endif
-
-" Indent guides
-if isdirectory(expand("~/.vim/bundle/vim-indent-guides"))
-    let g:indent_guides_auto_colors = 0
-    let g:indent_guides_exclude_filetypes = ['startify']
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#212121 ctermbg=235
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#404040 ctermbg=237
-endif
-
-" vitality
-if isdirectory(expand("~/.vim/bundle/vitality.vim"))
-    let g:vitality_fix_focus = 0
-endif
-
-" airline
-if isdirectory(expand("~/.vim/bundle/vim-airline"))
-    ""let g:airline#extensions#eclim#enabled = 0
-    ""let g:airline_theme = 'powerlineish'
-    ""let g:airline_branch_prefix = '⎇ '
-    ""let g:airline_left_sep = ''
-    ""let g:airline_right_sep = ''
-    ""let g:airline_linecolumn_prefix = '␊ '
-    ""let g:airline_paste_symbol = 'Þ'
-    let g:airline_section_y = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b][HEX=\%02.2b]"
-endif
-
-" surround
-if isdirectory(expand("~/.vim/bundle/vim-surround"))
-    let g:surround_no_insert_mappings = 1
-endif
-
-" dash
-if isdirectory(expand("~/.vim/bundle/dash.vim"))
-    nmap <silent> K <Plug>DashGlobalSearch
-endif
-
-" SnipMate
-if isdirectory(expand("~/.vim/bundle/vim-snipmate"))
-    nmap <silent> <F9> :SnipMateOpenSnippetFiles<cr>
-endif
-
-" JSON
-if isdirectory(expand("~/.vim/bundle/vim-json"))
-    let g:vim_json_syntax_conceal = 0
-    autocmd FileType json setlocal foldmethod=syntax
-    autocmd FileType json setlocal foldlevel=1
-endif
-
-" Startify
-if isdirectory(expand("~/.vim/bundle/vim-startify"))
-    let g:startify_custom_header = [
-                \ "",
-                \ "                          _oo8oo_",
-                \ "                         o8888888o",
-                \ "                         88\" . \"88",
-                \ "                         (| -_- |)",
-                \ "                         0\\  =  /0",
-                \ "                       ___/'==='\\___",
-                \ "                     .' \\\\|     |// '.",
-                \ "                    / \\\\|||  :  |||// \\",
-                \ "                   / _||||| -:- |||||_ \\",
-                \ "                  |   | \\\\\\  -  /// |   |",
-                \ "                  | \\_|  ''\\---/''  |_/ |",
-                \ "                  \\  .-\\__  '-'  __/-.  /",
-                \ "                ___'. .'  /--.--\\  '. .'___",
-                \ "             .\"\" '<  '.___\\_<|>_/___.'  >' \"\".",
-                \ "            | | :  `- \\`.:`\\ _ /`:.`/ -`  : | |",
-                \ "            \\  \\ `-.   \\_ __\\ /__ _/   .-` /  /",
-                \ "        =====`-.____`.___ \\_____/ ___.`____.-`=====",
-                \ "                          `=---=`",
-                \ "",
-                \ ]
-    let g:startify_custom_footer =
-                \ ['', "   Vim is charityware. Please read ':help uganda'.", '']
-
-    let g:startify_relative_path = 1
-
-    let g:startify_skiplist = [
-                \ '.git',
-                \ 'node_modules',
-                \ 'logs',
-                \ 'bower_components'
-                \ ]
-
-    let g:startify_session_dir=$HOME . '/temp/session'
-
-    if has('gui_running')
-        hi StartifyHeader  guifg=#87afff
-        hi StartifyFooter  guifg=#87afff
-        hi StartifyBracket guifg=#585858
-        hi StartifyNumber  guifg=#ffaf5f
-        hi StartifyPath    guifg=#8a8a8a
-        hi StartifySlash   guifg=#585858
-    else
-        hi StartifyHeader  ctermfg=111
-        hi StartifyFooter  ctermfg=111
-        hi StartifyBracket ctermfg=240
-        hi StartifyNumber  ctermfg=215
-        hi StartifyPath    ctermfg=245
-        hi StartifySlash   ctermfg=240
-
-        ""        hi StartifyHeader  ctermfg=114
-        ""        hi StartifyFooter  ctermfg=240
-        ""        hi StartifyBracket ctermfg=240
-        ""        hi StartifyNumber  ctermfg=215
-        ""        hi StartifyPath    ctermfg=245
-        ""        hi StartifySlash   ctermfg=240
-        hi StartifySpecial ctermfg=240
+    " Tagbar
+    if isdirectory(expand("~/.vim/bundle/tagbar/"))
+        nnoremap <silent> <F10> :TagbarToggle<cr>
     endif
 
-endif
+    " NerdTree
+    if isdirectory(expand("~/.vim/bundle/nerdtree"))
+        unmap <leader>e
+        unmap <C-e>
+        map <silent> <leader>nt :NERDTreeFind<CR>
+        let NERDTreeIgnore = ['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.DS_Store']
+        let NERDTreeQuitOnOpen = 0
+        let NERDTreeShowHidden = 0
+    endif
 
+    " Tabularize
+    if isdirectory(expand("~/.vim/bundle/tabular"))
+        nmap <Leader>a" :Tabularize /"<CR>
+        vmap <Leader>a" :Tabularize /"<CR>
+        nmap <Leader>a/ :Tabularize /\/<CR>
+        vmap <Leader>a/ :Tabularize /\/<CR>
+    endif
+
+    " unite
+    if isdirectory(expand("~/.vim/bundle/unite.vim"))
+        let g:unite_winheight = 10
+        let g:unite_split_rule = 'botright'
+        let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g "" --ignore-dir .git'
+
+        call unite#custom#source('file_mru', 'converters', ['converter_relative_word'])
+        call unite#custom#source('file_rec/async', 'max_candidates', 3)
+        call unite#custom#source('file_rec/async', 'sorters', ['sorter_ftime'])
+        call unite#custom#profile('default', 'context', {
+                    \   'unique': 1,
+                    \   'direction': 'botright'
+                    \ })
+        nnoremap <silent> <C-p> :Unite -start-insert file_rec/async file_mru<cr>
+
+        let g:unite_source_grep_max_candidates = 200
+        let g:unite_source_grep_command = 'ag'
+        let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden --ignore-dir dist'
+        let g:unite_source_grep_recursive_opt = ''
+
+        call unite#custom#profile('source/grep', 'context', {'no_quit' : 1})
+        nnoremap <silent> <f3> :Unite grep<cr>
+
+        let g:unite_source_history_yank_enable = 1
+        nmap <leader>y :Unite history/yank<cr>
+    endif
+
+    " Gist
+    if isdirectory(expand("~/.vim/bundle/gist-vim"))
+        let g:gist_open_browser_after_post = 1
+        let g:gist_post_private = 1
+        let g:gist_show_private = 1
+    endif
+
+    " syntastic
+        if isdirectory(expand("~/.vim/bundle/syntastic"))
+            nnoremap <silent> <leader>l :SyntasticCheck<cr>
+            let g:syntastic_always_populate_loc_list = 1
+            let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+            let g:syntastic_check_on_wq = 0
+            let g:syntastic_mode_map = { 'mode': 'passive',
+                        \ 'active_filetypes': [],
+                        \ 'passive_filetypes': ['html', 'java'] }
+        endif
+
+    " Emmet
+        if isdirectory(expand("~/.vim/bundle/emmet-vim"))
+            let g:user_emmet_leader_key = '<c-k>'
+        endif
+
+    " Indent guides
+        if isdirectory(expand("~/.vim/bundle/vim-indent-guides"))
+            let g:indent_guides_auto_colors = 0
+            autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#212121 ctermbg=235
+            autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#404040 ctermbg=237
+        endif
+
+    " vitality
+        if isdirectory(expand("~/.vim/bundle/vitality.vim"))
+            let g:vitality_fix_focus = 0
+        endif
+
+    " airline
+    if isdirectory(expand("~/.vim/bundle/vim-airline"))
+        ""let g:airline#extensions#eclim#enabled = 0
+        ""let g:airline_theme = 'powerlineish'
+        ""let g:airline_branch_prefix = '⎇ '
+        ""let g:airline_left_sep = ''
+        ""let g:airline_right_sep = ''
+        ""let g:airline_linecolumn_prefix = '␊ '
+        ""let g:airline_paste_symbol = 'Þ'
+        let g:airline_section_y = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b][HEX=\%02.2b]"
+    endif
+
+    " surround
+    if isdirectory(expand("~/.vim/bundle/vim-surround"))
+        let g:surround_no_insert_mappings = 1
+    endif
+
+    " dash
+    if isdirectory(expand("~/.vim/bundle/dash.vim"))
+        nmap <silent> K <Plug>DashGlobalSearch
+    endif
+
+    " SnipMate
+    if isdirectory(expand("~/.vim/bundle/vim-snipmate"))
+        nmap <silent> <F9> :SnipMateOpenSnippetFiles<cr>
+    endif
+
+    " JSON
+    if isdirectory(expand("~/.vim/bundle/vim-json"))
+        let g:vim_json_syntax_conceal = 0
+        autocmd FileType json setlocal foldmethod=syntax
+        autocmd FileType json setlocal foldlevel=1
+    endif
+
+    " Startify
+    if isdirectory(expand("~/.vim/bundle/vim-startify"))
+        let g:startify_custom_header = [
+                    \ "",
+                    \ "                          _oo8oo_",
+                    \ "                         o8888888o",
+                    \ "                         88\" . \"88",
+                    \ "                         (| -_- |)",
+                    \ "                         0\\  =  /0",
+                    \ "                       ___/'==='\\___",
+                    \ "                     .' \\\\|     |// '.",
+                    \ "                    / \\\\|||  :  |||// \\",
+                    \ "                   / _||||| -:- |||||_ \\",
+                    \ "                  |   | \\\\\\  -  /// |   |",
+                    \ "                  | \\_|  ''\\---/''  |_/ |",
+                    \ "                  \\  .-\\__  '-'  __/-.  /",
+                    \ "                ___'. .'  /--.--\\  '. .'___",
+                    \ "             .\"\" '<  '.___\\_<|>_/___.'  >' \"\".",
+                    \ "            | | :  `- \\`.:`\\ _ /`:.`/ -`  : | |",
+                    \ "            \\  \\ `-.   \\_ __\\ /__ _/   .-` /  /",
+                    \ "        =====`-.____`.___ \\_____/ ___.`____.-`=====",
+                    \ "                          `=---=`",
+                    \ "",
+                    \ ]
+        let g:startify_custom_footer =
+                    \ ['', "   Vim is charityware. Please read ':help uganda'.", '']
+
+        let g:startify_relative_path = 1
+
+        let g:startify_skiplist = [
+                    \ '.git',
+                    \ 'node_modules',
+                    \ 'logs',
+                    \ 'bower_components'
+                    \ ]
+
+        let g:startify_session_dir=$HOME . '/temp/session'
+
+        if has('gui_running')
+            hi StartifyHeader  guifg=#87afff
+            hi StartifyFooter  guifg=#87afff
+            hi StartifyBracket guifg=#585858
+            hi StartifyNumber  guifg=#ffaf5f
+            hi StartifyPath    guifg=#8a8a8a
+            hi StartifySlash   guifg=#585858
+        else
+            hi StartifyHeader  ctermfg=111
+            hi StartifyFooter  ctermfg=111
+            hi StartifyBracket ctermfg=240
+            hi StartifyNumber  ctermfg=215
+            hi StartifyPath    ctermfg=245
+            hi StartifySlash   ctermfg=240
+
+            ""        hi StartifyHeader  ctermfg=114
+            ""        hi StartifyFooter  ctermfg=240
+            ""        hi StartifyBracket ctermfg=240
+            ""        hi StartifyNumber  ctermfg=215
+            ""        hi StartifyPath    ctermfg=245
+            ""        hi StartifySlash   ctermfg=240
+            hi StartifySpecial ctermfg=240
+        endif
+
+    endif
+" }
 
 " GUI Settings {
 " GVIM- (here instead of .gvimrc)
