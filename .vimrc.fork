@@ -238,8 +238,8 @@ if has('gui_running')
             set guifont=Ubuntu\ Mono\ derivative\ Powerline:h13.8:cANSI
             set guifontwide=微软雅黑:h11.6:w5.6:cGB2312
         elseif g:gs_vim_font=='DejaVu Sans Mono for Powerline'
-            set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12:cANSI
-            set guifontwide=微软雅黑:h12:w5:cGB2312
+            set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11.62:cANSI
+            set guifontwide=微软雅黑:h11.623:w5.625:cGB2312
         elseif g:gs_vim_font=='Consolas'
             set guifont=Consolas:h12.5:cANSI
             set guifontwide=微软雅黑:h12.3:w5.2:cGB2312
