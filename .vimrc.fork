@@ -104,7 +104,7 @@
             let g:syntastic_javascript_checkers = ['jshint', 'jscs']
             let g:syntastic_check_on_wq = 0
             let g:syntastic_mode_map = { 'mode': 'passive',
-                        \ 'active_filetypes': [],
+                        \ 'active_filetypes': ['go'],
                         \ 'passive_filetypes': ['html', 'java'] }
         endif
 

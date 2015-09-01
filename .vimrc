@@ -58,6 +58,13 @@
         endif
     " }
 
+    " Arrow Key Fix {
+        " https://github.com/spf13/spf13-vim/issues/780
+        if &term[:4] == "xterm" || &term[:5] == 'screen' || &term[:3] == 'rxvt'
+            inoremap <silent> <C-[>OC <RIGHT>
+        endif
+    " }
+
 " }
 
 " Use before config if available {
@@ -535,8 +542,8 @@
         if isdirectory(expand("~/.vim/bundle/tabular"))
             nmap <Leader>a& :Tabularize /&<CR>
             vmap <Leader>a& :Tabularize /&<CR>
-            nmap <Leader>a= :Tabularize /=<CR>
-            vmap <Leader>a= :Tabularize /=<CR>
+            nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+            vmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
             nmap <Leader>a=> :Tabularize /=><CR>
             vmap <Leader>a=> :Tabularize /=><CR>
             nmap <Leader>a: :Tabularize /:<CR>
@@ -601,6 +608,9 @@
             else
                 let s:ctrlp_fallback = 'find %s -type f'
             endif
+            if exists("g:ctrlp_user_command")
+                unlet g:ctrlp_user_command
+            endif
             let g:ctrlp_user_command = {
                 \ 'types': {
                     \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
@@ -622,21 +632,6 @@
     " TagBar {
         if isdirectory(expand("~/.vim/bundle/tagbar/"))
             nnoremap <silent> <leader>tt :TagbarToggle<CR>
-
-            " If using go please install the gotags program using the following
-            " go install github.com/jstemmer/gotags
-            " And make sure gotags is in your path
-            let g:tagbar_type_go = {
-                \ 'ctagstype' : 'go',
-                \ 'kinds'     : [  'p:package', 'i:imports:1', 'c:constants', 'v:variables',
-                    \ 't:types',  'n:interfaces', 'w:fields', 'e:embedded', 'm:methods',
-                    \ 'r:constructor', 'f:functions' ],
-                \ 'sro' : '.',
-                \ 'kind2scope' : { 't' : 'ctype', 'n' : 'ntype' },
-                \ 'scope2kind' : { 'ctype' : 't', 'ntype' : 'n' },
-                \ 'ctagsbin'  : 'gotags',
-                \ 'ctagsargs' : '-sort -silent'
-                \ }
         endif
     "}
 
@@ -755,7 +750,7 @@
 
                     " <CR>: close popup
                     " <s-CR>: close popup and save indent.
-                    inoremap <expr><s-CR> pumvisible() ? neocomplete#smart_close_popup()"\<CR>" : "\<CR>"
+                    inoremap <expr><s-CR> pumvisible() ? neocomplete#smart_close_popup()."\<CR>" : "\<CR>"
 
                     function! CleverCr()
                         if pumvisible()
@@ -882,7 +877,7 @@
 
                     " <CR>: close popup
                     " <s-CR>: close popup and save indent.
-                    inoremap <expr><s-CR> pumvisible() ? neocomplcache#close_popup()"\<CR>" : "\<CR>"
+                    inoremap <expr><s-CR> pumvisible() ? neocomplcache#close_popup()."\<CR>" : "\<CR>"
                     "inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
 
                     " <C-h>, <BS>: close popup and delete backword char.
