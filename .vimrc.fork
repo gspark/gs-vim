@@ -16,11 +16,11 @@
 " }
 
 " Vim UI {
-    set nocursorline                                            " Highlight current line
+    set nocursorline                                                    "no Highlight current line
 
     if g:gs_vim_font=='DejaVu Sans Mono for Powerline'
-        set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:. " Highlight problematic whitespace
-        set showbreak=↪                                         " Change wrap line break
+        set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:.,trail:• " Highlight problematic whitespace
+        set showbreak=↪                                                 " Change wrap line break
     else
     ""elseif g:gs_vim_font=='Ubuntu Mono derivative Powerline'
         ""set listchars=tab:»\ ,eol:¬,extends:>,precedes:<,nbsp:.   " Highlight problematic whitespace
@@ -98,32 +98,32 @@
     endif
 
     " syntastic
-        if isdirectory(expand("~/.vim/bundle/syntastic"))
-            nnoremap <silent> <leader>l :SyntasticCheck<cr>
-            let g:syntastic_always_populate_loc_list = 1
-            let g:syntastic_javascript_checkers = ['jshint', 'jscs']
-            let g:syntastic_check_on_wq = 0
-            let g:syntastic_mode_map = { 'mode': 'passive',
-                        \ 'active_filetypes': ['go'],
-                        \ 'passive_filetypes': ['html', 'java'] }
-        endif
+    if isdirectory(expand("~/.vim/bundle/syntastic"))
+        nnoremap <silent> <leader>l :SyntasticCheck<cr>
+        let g:syntastic_always_populate_loc_list = 1
+        let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+        let g:syntastic_check_on_wq = 0
+        let g:syntastic_mode_map = { 'mode': 'passive',
+                    \ 'active_filetypes': ['go'],
+                    \ 'passive_filetypes': ['html', 'java'] }
+    endif
 
     " Emmet
-        if isdirectory(expand("~/.vim/bundle/emmet-vim"))
-            let g:user_emmet_leader_key = '<c-k>'
-        endif
+    if isdirectory(expand("~/.vim/bundle/emmet-vim"))
+        let g:user_emmet_leader_key = '<c-k>'
+    endif
 
     " Indent guides
-        if isdirectory(expand("~/.vim/bundle/vim-indent-guides"))
-            let g:indent_guides_auto_colors = 0
-            autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#212121 ctermbg=235
-            autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#404040 ctermbg=237
-        endif
+    if isdirectory(expand("~/.vim/bundle/vim-indent-guides"))
+        let g:indent_guides_auto_colors = 0
+        autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#212121 ctermbg=235
+        autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#404040 ctermbg=237
+    endif
 
     " vitality
-        if isdirectory(expand("~/.vim/bundle/vitality.vim"))
-            let g:vitality_fix_focus = 0
-        endif
+    if isdirectory(expand("~/.vim/bundle/vitality.vim"))
+        let g:vitality_fix_focus = 0
+    endif
 
     " airline
     if isdirectory(expand("~/.vim/bundle/vim-airline"))
@@ -224,37 +224,4 @@
     endif
 " }
 
-" GUI Settings {
-" GVIM- (here instead of .gvimrc)
-if has('gui_running')
-    au GUIEnter * simalt ~x
-    set guioptions-=m
-    if has("gui_gtk2")
-        set guifont=Courier\ 10\ Pitch\ 16
-    elseif has("x11")
-        set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
-    elseif has("gui_win32")
-        if g:gs_vim_font=='Ubuntu Mono derivative Powerline'
-            set guifont=Ubuntu\ Mono\ derivative\ Powerline:h13.8:cANSI
-            set guifontwide=微软雅黑:h11.6:w5.6:cGB2312
-        elseif g:gs_vim_font=='DejaVu Sans Mono for Powerline'
-            "" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11.62:cANSI
-            set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12:cANSI
-            "" set guifontwide=微软雅黑:h11.623:w5.625:cGB2312
-            set guifontwide=微软雅黑:h12:cGB2312
-        elseif g:gs_vim_font=='Consolas'
-            set guifont=Consolas:h12.5:cANSI
-            set guifontwide=微软雅黑:h12.3:w5.2:cGB2312
-        endif
-        ""set guifont=文泉驿等宽微米黑:h13
-        "auto bufenter * set guifont=courier_new:h16 "一般字体
-        "auto bufenter *.txt if &ft=='help'|set gfn=courier_new:h14|endif
-        "set guifont=bitstream_vera_sans_mono:h14:cansi " 英文
-        "set guifont=arial_monospaced_for_sap:h14:cansi
-        "set guifontwide=幼圆:h14.5:cgb2312 " 中文
-        "set guifontwide=方正准圆简体:h14.5:cgb2312
-        ""set guifontwide=文泉驿等宽微米黑:h13:cGB2312
-    endif
-endif
 
-" }

@@ -1,0 +1,34 @@
+" GUI Settings {
+" GVIM- (here instead of .gvimrc)
+if has('gui_running')
+    au GUIEnter * simalt ~x
+    set guioptions-=m
+    if has("gui_gtk2")
+        set guifont=Courier\ 10\ Pitch\ 16
+    elseif has("x11")
+        set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
+    elseif has("gui_win32")
+        if g:gs_vim_font=='Ubuntu Mono derivative Powerline'
+            set guifont=Ubuntu\ Mono\ derivative\ Powerline:h13.8:cANSI
+            set guifontwide=微软雅黑:h11.6:w5.6:cGB2312
+        elseif g:gs_vim_font=='DejaVu Sans Mono for Powerline'
+            "" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11.62:cANSI
+            set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12:cANSI
+            "" set guifontwide=微软雅黑:h11.623:w5.625:cGB2312
+            set guifontwide=幼圆:h12:cGB2312
+        elseif g:gs_vim_font=='Consolas'
+            set guifont=Consolas:h12.5:cANSI
+            set guifontwide=微软雅黑:h12.3:w5.2:cGB2312
+        endif
+        ""set guifont=文泉驿等宽微米黑:h13
+        "auto bufenter * set guifont=courier_new:h16 "一般字体
+        "auto bufenter *.txt if &ft=='help'|set gfn=courier_new:h14|endif
+        "set guifont=bitstream_vera_sans_mono:h14:cansi " 英文
+        "set guifont=arial_monospaced_for_sap:h14:cansi
+        "set guifontwide=幼圆:h14.5:cgb2312 " 中文
+        "set guifontwide=方正准圆简体:h14.5:cgb2312
+        ""set guifontwide=文泉驿等宽微米黑:h13:cGB2312
+    endif
+endif
+
+" }
