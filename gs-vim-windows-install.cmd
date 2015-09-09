@@ -32,8 +32,28 @@ call mklink "%HOME%\.vimrc.bundles" "%APP_DIR%\.vimrc.bundles"
 call mklink "%HOME%\.vimrc.bundles.fork" "%APP_DIR%\.vimrc.bundles.fork"
 call mklink "%HOME%\.vimrc.before" "%APP_DIR%\.vimrc.before"
 call mklink "%HOME%\.vimrc.before.fork" "%APP_DIR%\.vimrc.before.fork"
-call mklink "%HOME%\.vimrc.bundles.default" "%APP_DIR%\.vimrc.bundles.default"
-call mklink "%HOME%\.vimrc.local" "%APP_DIR%\.vimrc.local"
+REM call mklink "%HOME%\.vimrc.before.local" "%APP_DIR%\.vimrc.before.local"
+REM call mklink "%HOME%\.vimrc.bundles.default" "%APP_DIR%\.vimrc.bundles.default"
 
 
-call vim vim +NeoBundleInstall! +NeoBundleClean +q
+REM IF NOT EXIST "%HOME%\.vim\bundle\neobundle.vim" (
+REM     git clone git://github.com/Shougo/neobundle.vim.git %HOME%\.vim\bundle\neobundle.vim
+REM ) ELSE (
+REM     @set ORIGINAL_DIR=%CD%
+REM     echo updating neobundle-vim
+REM     chdir /d "%HOME%\.vim\bundle\neobundle.vim" 
+REM     call git pull
+REM     chdir /d "%ORIGINAL_DIR%"
+REM )
+
+REM call vim vim +NeoBundleInstall! +NeoBundleClean +q
+
+IF NOT EXIST "%HOME%/.vim/bundle/vundle" (
+    call git clone https://github.com/gmarik/vundle.git "%HOME%/.vim/bundle/vundle"
+) ELSE (
+  call cd "%HOME%/.vim/bundle/vundle"
+  call git pull
+  call cd %HOME%
+)
+
+call vim -u "%APP_PATH%/.vimrc.bundles.default" +BundleInstall! +BundleClean +qall 
