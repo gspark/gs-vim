@@ -35,5 +35,5 @@
     "" let g:gs_vim_font='Ubuntu Mono derivative Powerline'    " font
     let g:gs_vim_font='DejaVu Sans Mono for Powerline'      " font
 
-}
+" }
 
