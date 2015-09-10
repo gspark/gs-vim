@@ -33,8 +33,8 @@ call mklink "%HOME%\.vimrc.bundles.fork" "%APP_DIR%\.vimrc.bundles.fork"
 call mklink "%HOME%\.vimrc.before" "%APP_DIR%\.vimrc.before"
 call mklink "%HOME%\.vimrc.before.fork" "%APP_DIR%\.vimrc.before.fork"
 REM call mklink "%HOME%\.vimrc.before.local" "%APP_DIR%\.vimrc.before.local"
-REM call mklink "%HOME%\.vimrc.bundles.default" "%APP_DIR%\.vimrc.bundles.default"
 call mklink "%HOME%\.gvimrc.local" "%APP_DIR%\.gvimrc.local"
+call mklink "%HOME%\.vimrc.bundles.default" "%APP_DIR%\.vimrc.bundles.default"
 
 
 REM IF NOT EXIST "%HOME%\.vim\bundle\neobundle.vim" (

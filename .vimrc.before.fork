@@ -18,7 +18,7 @@
     let g:spf13_no_easyWindows = 1
     let g:spf13_no_autochdir = 1
     let g:spf13_no_views = 1
-    let g:spf13_bundle_groups=['general', 'snipmate', 'programming', 'javascript', 'html', 'misc']
+    let g:spf13_bundle_groups=['general', 'neocomplete', 'programming', 'python', 'javascript', 'html', 'misc',]
     let g:spf13_no_omni_complete = 1
     " Enable powerline symbols
     let g:airline_powerline_fonts = 1
@@ -31,8 +31,8 @@
     let $XDG_CACHE_HOME                = $HOME . '/temp/cache'
     let g:ctrlp_cache_dir              = $HOME . '/temp/cache/ctrlp'
     let g:neocomplcache_temporary_dir  = $HOME . '/temp/cache/neocomplcache'
-    "" let g:gs_vim_font='Consolas'                            " font
-    "" let g:gs_vim_font='Ubuntu Mono derivative Powerline'    " font
+    ""let g:gs_vim_font='Consolas'                            " font
+    ""let g:gs_vim_font='Ubuntu Mono derivative Powerline'    " font
     let g:gs_vim_font='DejaVu Sans Mono for Powerline'      " font
 
 " }
