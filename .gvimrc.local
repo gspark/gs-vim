@@ -3,6 +3,9 @@
     if has('gui_running')
         au GUIEnter * simalt ~x
         set guioptions-=m
+        set guioptions-=l
+        set guioptions-=r
+        set guioptions-=T
         if has("gui_gtk2")
             set guifont=Courier\ 10\ Pitch\ 16
         elseif has("x11")
