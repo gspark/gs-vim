@@ -1,11 +1,11 @@
 REM    Copyright 2014 Steve Francia
-REM 
+REM
 REM    Licensed under the Apache License, Version 2.0 (the "License");
 REM    you may not use this file except in compliance with the License.
 REM    You may obtain a copy of the License at
-REM 
+REM
 REM        http://www.apache.org/licenses/LICENSE-2.0
-REM 
+REM
 REM    Unless required by applicable law or agreed to in writing, software
 REM    distributed under the License is distributed on an "AS IS" BASIS,
 REM    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,7 +35,6 @@ call mklink "%HOME%\.vimrc.before.fork" "%APP_DIR%\.vimrc.before.fork"
 REM call mklink "%HOME%\.vimrc.before.local" "%APP_DIR%\.vimrc.before.local"
 call mklink "%HOME%\.gvimrc.local" "%APP_DIR%\.gvimrc.local"
 call mklink "%HOME%\.vimrc.bundles.default" "%APP_DIR%\.vimrc.bundles.default"
-
 
 REM IF NOT EXIST "%HOME%\.vim\bundle\neobundle.vim" (
 REM     git clone git://github.com/Shougo/neobundle.vim.git %HOME%\.vim\bundle\neobundle.vim

@@ -30,14 +30,14 @@
         Bundle 'Shougo/unite.vim'
         Bundle 'Shougo/neomru.vim'
     ""    Bundle 'mhinz/vim-startify'
-        Bundle 'Shougo/vimproc', {
-        \ 'build' : {
-        \     'windows' : 'make -f make_mingw32.mak',
-        \     'cygwin' : 'make -f make_cygwin.mak',
-        \     'mac' : 'make -f make_mac.mak',
-        \     'unix' : 'make -f make_unix.mak',
-        \    },
-        \ }
+    ""    Bundle 'Shougo/vimproc', {
+    ""    \ 'build' : {
+    ""    \     'windows' : 'make -f make_mingw32.mak',
+    ""    \     'cygwin' : 'make -f make_cygwin.mak',
+    ""    \     'mac' : 'make -f make_mac.mak',
+    ""    \     'unix' : 'make -f make_unix.mak',
+    ""    \    },
+    ""    \ }
     " }
 
     " HTML {
@@ -57,6 +57,8 @@
             UnBundle 'kchmck/vim-coffee-script'
 
             Bundle 'moll/vim-node'
+            Bundle 'maksimr/vim-jsbeautify'
+            ""Bundle 'einars/js-beautify'
         endif
     " }
 
