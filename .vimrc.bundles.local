@@ -9,16 +9,28 @@
     " }
 
     " UI {
-        call UnBundle('w0ng/vim-hybrid')                        " Colorscheme hybrid
+        ""call UnBundle('w0ng/vim-hybrid')                        " Colorscheme hybrid
         call UnBundle('altercation/vim-colors-solarized')       " Colorscheme solarized
-        call UnBundle('mhinz/vim-startify')                     " Start page
         ""NeoBundle 'zenorocha/dracula-theme', {'rtp': 'vim/'}    " Colorscheme dracula
+        call UnBundle('bling/vim-bufferline')                   " Buffer line
+        call UnBundle('mhinz/vim-startify')                     " Start page
+        call UnBundle('junegunn/goyo.vim')                      " Distraction-free
+        call UnBundle('junegunn/limelight.vim')                 " Hyperfocus-writing
         NeoBundle 'morhetz/gruvbox'                             " Colorscheme gruvbox
     " }
 
     " enhance {
-        if count(g:gsvim_bundle_groups, 'enhance') " Vim enhancement
-            ""call UnBundle('Keithbsmiley/investigate.vim')   " Helper
+        if count(g:gsvim_bundle_groups, 'enhance')          " Vim enhancement
+            call UnBundle('Keithbsmiley/investigate.vim')   " Helper
+            call UnBundle('wikitopian/hardmode')            " Hard mode
+            call UnBundle('wellle/targets.vim')             " Text objects
+            call UnBundle('roman/golden-ratio')             " Resize windows
+        endif
+    " }
+
+    " navigate {
+        if count(g:gsvim_bundle_groups, 'navigate')         " Navigation
+            call UnBundle('mhinz/vim-tmuxify')              " Tmux panes
         endif
     " }
 
@@ -26,7 +38,8 @@
         if count(g:gsvim_bundle_groups, 'javascript')
             NeoBundle 'moll/vim-node'
             NeoBundle 'maksimr/vim-jsbeautify'
-            ""Bundle 'einars/js-beautify'
+            ""NeoBundle 'hallettj/jslint.vim'
+            ""NeoBundle 'einars/js-beautify'
         endif
     " }
 
