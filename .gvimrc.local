@@ -4,6 +4,7 @@
         au GUIEnter * simalt ~x
         set guioptions-=m
         set guioptions-=l
+        set guioptions-=L
         set guioptions-=r
         set guioptions-=T
         if has("gui_gtk2")

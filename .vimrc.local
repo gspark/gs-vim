@@ -1,0 +1,140 @@
+
+" General {
+    ""set spell spelllang=en_us
+    ""setlocal spell spelllang=en_us
+    " for error highlight，防止错误整行标红导致看不清
+    highlight clear SpellBad
+    highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
+    highlight clear SpellCap
+    highlight SpellCap term=underline cterm=underline
+    highlight clear SpellRare
+    highlight SpellRare term=underline cterm=underline
+    highlight clear SpellLocal
+    highlight SpellLocal term=underline cterm=underline
+
+    set textwidth=76
+    set wrap
+
+    if has('clipboard')
+        if has('unnamedplus')  " When possible use + register for copy-paste
+            set clipboard=unnamed,unnamedplus
+        else         " On mac and Windows, use * register for copy-paste
+            set clipboard=unnamed
+        endif
+    endif
+
+" }
+
+"Options {
+    let $XDG_CACHE_HOME = $HOME . '/temp/cache'
+    let g:startify_session_dir=$HOME . '/temp/session'
+    let g:unite_data_directory=$HOME . '/temp/cache/unite'
+    let g:neocomplete#data_directory=$HOME . '/temp/cache/neocomplete'
+    let g:neocomplcache_temporary_dir=$HOME . '/temp/cache/neocomplcache'
+" }
+
+" Vim UI {
+    if g:gs_vim_font=='DejaVu Sans Mono for Powerline'
+        set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:.,trail:• " Highlight problematic whitespace
+        set showbreak=↪                                                 " Change wrap line break
+    else
+    ""elseif g:gs_vim_font=='Ubuntu Mono derivative Powerline'
+        ""set listchars=tab:»\ ,eol:¬,extends:>,precedes:<,nbsp:.       " Highlight problematic whitespace
+        ""set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
+        set listchars=nbsp:.,eol:¬,tab:›\ ,extends:»,precedes:«,trail:•
+        set showbreak=ˆ
+    endif
+
+    set linebreak                                                       " Wrap long lines at a blank
+
+    colorscheme Dracula
+" }
+
+" Plugins {
+    " airline
+    if isdirectory(expand("~/.vim/bundle/vim-airline"))
+        ""let g:airline#extensions#eclim#enabled = 0
+        ""let g:airline_theme = 'powerlineish'
+        ""let g:airline_branch_prefix = '⎇ '
+        ""let g:airline_left_sep = ''
+        ""let g:airline_right_sep = ''
+        ""let g:airline_linecolumn_prefix = '␊ '
+        ""let g:airline_paste_symbol = 'Þ'
+        let g:airline_section_y = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b][HEX=\%02.2b]"
+    endif
+
+    " Startify
+    if isdirectory(expand("~/.vim/bundle/vim-startify"))
+        let g:startify_custom_header = [
+                    \ "",
+                    \ "                          _oo8oo_",
+                    \ "                         o8888888o",
+                    \ "                         88\" . \"88",
+                    \ "                         (| -_- |)",
+                    \ "                         0\\  =  /0",
+                    \ "                       ___/'==='\\___",
+                    \ "                     .' \\\\|     |// '.",
+                    \ "                    / \\\\|||  :  |||// \\",
+                    \ "                   / _||||| -:- |||||_ \\",
+                    \ "                  |   | \\\\\\  -  /// |   |",
+                    \ "                  | \\_|  ''\\---/''  |_/ |",
+                    \ "                  \\  .-\\__  '-'  __/-.  /",
+                    \ "                ___'. .'  /--.--\\  '. .'___",
+                    \ "             .\"\" '<  '.___\\_<|>_/___.'  >' \"\".",
+                    \ "            | | :  `- \\`.:`\\ _ /`:.`/ -`  : | |",
+                    \ "            \\  \\ `-.   \\_ __\\ /__ _/   .-` /  /",
+                    \ "        =====`-.____`.___ \\_____/ ___.`____.-`=====",
+                    \ "                          `=---=`",
+                    \ "",
+                    \ ]
+        let g:startify_custom_footer =
+                    \ ['', "   Vim is charityware. Please read ':help uganda'.", '']
+
+        let g:startify_relative_path = 1
+
+        let g:startify_skiplist = [
+                    \ '.git',
+                    \ 'node_modules',
+                    \ 'logs',
+                    \ 'bower_components'
+                    \ ]
+
+        let g:startify_session_dir=$HOME . '/temp/session'
+
+        if has('gui_running')
+            hi StartifyHeader  guifg=#87afff
+            hi StartifyFooter  guifg=#87afff
+            hi StartifyBracket guifg=#585858
+            hi StartifyNumber  guifg=#ffaf5f
+            hi StartifyPath    guifg=#8a8a8a
+            hi StartifySlash   guifg=#585858
+        else
+            hi StartifyHeader  ctermfg=111
+            hi StartifyFooter  ctermfg=111
+            hi StartifyBracket ctermfg=240
+            hi StartifyNumber  ctermfg=215
+            hi StartifyPath    ctermfg=245
+            hi StartifySlash   ctermfg=240
+
+            ""        hi StartifyHeader  ctermfg=114
+            ""        hi StartifyFooter  ctermfg=240
+            ""        hi StartifyBracket ctermfg=240
+            ""        hi StartifyNumber  ctermfg=215
+            ""        hi StartifyPath    ctermfg=245
+            ""        hi StartifySlash   ctermfg=240
+            hi StartifySpecial ctermfg=240
+        endif
+    endif
+
+    " Tagbar
+    if isdirectory(expand("~/.vim/bundle/tagbar/"))
+        let g:tagbar_autofocus=0
+        let g:tagbar_expand=0
+        let g:tagbar_foldlevel=2
+        let g:tagbar_autoshowtag=1
+        let g:tagbar_width=20
+    endif
+
+" }
+
+

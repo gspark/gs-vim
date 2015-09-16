@@ -1,0 +1,44 @@
+" Bundles {
+
+    " Add an UnBundle command {
+        function! UnBundle(arg, ...)
+            for bundle in filter(neobundle#config#get_neobundles(), 'v:val.orig_name ==# a:arg')
+                call neobundle#config#rm(bundle.path)
+            endfor
+        endfunction
+    " }
+
+    " UI {
+        call UnBundle('w0ng/vim-hybrid')                        " Colorscheme hybrid
+        call UnBundle('altercation/vim-colors-solarized')       " Colorscheme solarized
+        call UnBundle('mhinz/vim-startify')                     " Start page
+        NeoBundle 'zenorocha/dracula-theme', {'rtp': 'vim/'}    " Colorscheme dracula
+    " }
+
+    " enhance {
+        if count(g:gsvim_bundle_groups, 'enhance') " Vim enhancement
+            ""call UnBundle('Keithbsmiley/investigate.vim')   " Helper
+        endif
+    " }
+
+    " JavaScript {
+        if count(g:gsvim_bundle_groups, 'javascript')
+            NeoBundle 'moll/vim-node'
+            NeoBundle 'maksimr/vim-jsbeautify'
+            ""Bundle 'einars/js-beautify'
+        endif
+    " }
+
+    " language {
+        if count(g:gsvim_bundle_groups, 'language') " Language Specificity
+            call UnBundle('matthias-guenther/hammer.vim')    " Markup
+            call UnBundle('fatih/vim-go')                    " Golang
+            call UnBundle('tpope/vim-rails')                 " Rails
+            ""call UnBundle('mattn/emmet-vim')                 " Emmet
+            call UnBundle('LaTeX-Box-Team/LaTeX-Box')        " LaTex
+            ""call UnBundle('sheerun/vim-polyglot')          " Language Support
+        endif
+    " }
+    ""call neobundle#commands#clean('!')
+" }
+
