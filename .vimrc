@@ -276,51 +276,51 @@ NeoBundleCheck
 set title
 set titlestring=%t%(\ %m%)%(\ (%{expand('%:p:h')})%)%(\ %a%)
 
-" Set tabline
-set showtabline=2 " Always show tab line
-" Set up tab labels
-set guitablabel=%m%N:%t[%{tabpagewinnr(v:lnum)}]
-set tabline=%!MyTabLine()
-function! MyTabLine()
-    let s=''
-    let t=tabpagenr() " The index of current page
-    let i=1
-    while i<=tabpagenr('$') " From the first page
-        let buflist=tabpagebuflist(i)
-        let winnr=tabpagewinnr(i)
-        let s.=(i==t ? '%#TabLineSel#' : '%#TabLine#')
-        let s.='%'.i.'T'
-        let s.=' '
-        let bufnr=buflist[winnr-1]
-        let file=bufname(bufnr)
-        let buftype = getbufvar(bufnr, 'buftype')
-        let m=''
-        if getbufvar(bufnr, '&modified')
-            let m='[+]'
-        endif
-        if buftype=='nofile'
-            if file=~'\/.'
-                let file=substitute(file, '.*\/\ze.', '', '')
-            endif
-        else
-            let file=fnamemodify(file, ':p:t')
-        endif
-        if file==''
-            let file='[No Name]'
-        endif
-        let s.=m
-        let s.=i.':'
-        let s.=file
-        let s.='['.winnr.']'
-        let s.=' '
-        let i=i+1
-    endwhile
-    let s.='%T%#TabLineFill#%='
-    let s.=(tabpagenr('$')>1 ? '%999XX' : 'X')
-    return s
-endfunction
+""" Set tabline
+""set showtabline=2 " Always show tab line
+""" Set up tab labels
+""set guitablabel=%m%N:%t[%{tabpagewinnr(v:lnum)}]
+""set tabline=%!MyTabLine()
+""function! MyTabLine()
+""    let s=''
+""    let t=tabpagenr() " The index of current page
+""    let i=1
+""    while i<=tabpagenr('$') " From the first page
+""        let buflist=tabpagebuflist(i)
+""        let winnr=tabpagewinnr(i)
+""        let s.=(i==t ? '%#TabLineSel#' : '%#TabLine#')
+""        let s.='%'.i.'T'
+""        let s.=' '
+""        let bufnr=buflist[winnr-1]
+""        let file=bufname(bufnr)
+""        let buftype = getbufvar(bufnr, 'buftype')
+""        let m=''
+""        if getbufvar(bufnr, '&modified')
+""            let m='[+]'
+""        endif
+""        if buftype=='nofile'
+""            if file=~'\/.'
+""                let file=substitute(file, '.*\/\ze.', '', '')
+""            endif
+""        else
+""            let file=fnamemodify(file, ':p:t')
+""        endif
+""        if file==''
+""            let file='[No Name]'
+""        endif
+""        let s.=m
+""        let s.=i.':'
+""        let s.=file
+""        let s.='['.winnr.']'
+""        let s.=' '
+""        let i=i+1
+""    endwhile
+""    let s.='%T%#TabLineFill#%='
+""    let s.=(tabpagenr('$')>1 ? '%999XX' : 'X')
+""    return s
+""endfunction
 " Set up tab tooltips with each buffer name
-set guitabtooltip=%F
+""set guitabtooltip=%F
 
 " Set status line
 if count(g:gsvim_bundle_groups, 'ui')

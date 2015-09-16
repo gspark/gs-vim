@@ -26,11 +26,11 @@
 " }
 
 "Options {
-    let $XDG_CACHE_HOME = $HOME . '/temp/cache'
-    let g:startify_session_dir=$HOME . '/temp/session'
-    let g:unite_data_directory=$HOME . '/temp/cache/unite'
-    let g:neocomplete#data_directory=$HOME . '/temp/cache/neocomplete'
-    let g:neocomplcache_temporary_dir=$HOME . '/temp/cache/neocomplcache'
+    let $XDG_CACHE_HOME               = $HOME . '/temp/cache'
+    let g:startify_session_dir        = $HOME . '/temp/session'
+    let g:unite_data_directory        = $HOME . '/temp/cache/unite'
+    let g:neocomplete#data_directory  = $HOME . '/temp/cache/neocomplete'
+    let g:neocomplcache_temporary_dir = $HOME . '/temp/cache/neocomplcache'
 " }
 
 " Vim UI {
@@ -46,21 +46,43 @@
     endif
 
     set linebreak                                                       " Wrap long lines at a blank
-
-    colorscheme Dracula
+    colorscheme gruvbox
 " }
 
 " Plugins {
+    " UI {
+        if isdirectory(expand("~/.vim/bundle/gruvbox"))
+            ""let g:gruvbox_improved_warnings    = 1
+            ""let g:gruvbox_improved_strings     = 1
+            ""let g:gruvbox_invert_tabline       = 1
+            ""let g:gruvbox_invert_indent_guides = 1
+            ""let g:gruvbox_italicize_strings    = 1
+        endif
+    " "}
+
     " airline
     if isdirectory(expand("~/.vim/bundle/vim-airline"))
-        ""let g:airline#extensions#eclim#enabled = 0
-        ""let g:airline_theme = 'powerlineish'
-        ""let g:airline_branch_prefix = '⎇ '
-        ""let g:airline_left_sep = ''
-        ""let g:airline_right_sep = ''
-        ""let g:airline_linecolumn_prefix = '␊ '
-        ""let g:airline_paste_symbol = 'Þ'
-        let g:airline_section_y = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b][HEX=\%02.2b]"
+        "" 开启tabline
+        let g:airline#extensions#tabline#enabled                = 1
+        "" tabline中当前buffer两端的分隔符
+        ""let g:airline#extensions#tabline#left_sep               = ' '
+        "" tabline为激活的buffer的两端字符
+        let g:airline#extensions#tabline#left_alt_sep           = '|'
+        "" tabline中buffer显示编号
+        let g:airline#extensions#tabline#buffer_nr_show         = 1
+        let g:airline#extensions#bufferline#enabled             = 1
+        let g:airline#extensions#bufferline#overwrite_variables = 1
+
+        ""let g:airline#extensions#eclim#enabled                = 0
+        let g:airline_theme                                     = 'gruvbox'
+        ""let g:airline_theme                                   = 'powerlineish'
+        ""let g:airline_branch_prefix                           = '⎇ '
+        ""let g:airline_left_sep                                = ''
+        ""let g:airline_right_sep                               = ''
+        ""let g:airline_linecolumn_prefix                       = '␊ '
+        ""let g:airline_paste_symbol                            = 'Þ'
+        ""let g:airline_section_y                               = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b][HEX=\%02.2b]"
+        let g:airline_section_y                                 = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b]"
     endif
 
     " Startify
@@ -128,13 +150,32 @@
 
     " Tagbar
     if isdirectory(expand("~/.vim/bundle/tagbar/"))
-        let g:tagbar_autofocus=0
-        let g:tagbar_expand=0
-        let g:tagbar_foldlevel=2
-        let g:tagbar_autoshowtag=1
-        let g:tagbar_width=20
+        let g:tagbar_autofocus     = 0
+        let g:tagbar_expand        = 0
+        let g:tagbar_foldlevel     = 1
+        ""let g:tagbar_autoshowtag = 1
+        ""let g:tagbar_width       = 20     not usage
     endif
 
+    " Tabularize {
+    if isdirectory(expand("~/.vim/bundle/tabular"))
+        nmap <Leader>a& :Tabularize /&<CR>
+        vmap <Leader>a& :Tabularize /&<CR>
+        nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+        vmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+        nmap <Leader>a=> :Tabularize /=><CR>
+        vmap <Leader>a=> :Tabularize /=><CR>
+        nmap <Leader>a: :Tabularize /:<CR>
+        vmap <Leader>a: :Tabularize /:<CR>
+        nmap <Leader>a:: :Tabularize /:\zs<CR>
+        vmap <Leader>a:: :Tabularize /:\zs<CR>
+        nmap <Leader>a, :Tabularize /,<CR>
+        vmap <Leader>a, :Tabularize /,<CR>
+        nmap <Leader>a,, :Tabularize /,\zs<CR>
+        vmap <Leader>a,, :Tabularize /,\zs<CR>
+        nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+        vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+    endif
 " }
 
-
+" }

@@ -12,7 +12,8 @@
         call UnBundle('w0ng/vim-hybrid')                        " Colorscheme hybrid
         call UnBundle('altercation/vim-colors-solarized')       " Colorscheme solarized
         call UnBundle('mhinz/vim-startify')                     " Start page
-        NeoBundle 'zenorocha/dracula-theme', {'rtp': 'vim/'}    " Colorscheme dracula
+        ""NeoBundle 'zenorocha/dracula-theme', {'rtp': 'vim/'}    " Colorscheme dracula
+        NeoBundle 'morhetz/gruvbox'                             " Colorscheme gruvbox
     " }
 
     " enhance {
@@ -31,12 +32,12 @@
 
     " language {
         if count(g:gsvim_bundle_groups, 'language') " Language Specificity
-            call UnBundle('matthias-guenther/hammer.vim')    " Markup
-            call UnBundle('fatih/vim-go')                    " Golang
-            call UnBundle('tpope/vim-rails')                 " Rails
-            ""call UnBundle('mattn/emmet-vim')                 " Emmet
-            call UnBundle('LaTeX-Box-Team/LaTeX-Box')        " LaTex
-            ""call UnBundle('sheerun/vim-polyglot')          " Language Support
+            call UnBundle('matthias-guenther/hammer.vim')       " Markup
+            call UnBundle('fatih/vim-go')                       " Golang
+            call UnBundle('tpope/vim-rails')                    " Rails
+            ""call UnBundle('mattn/emmet-vim')                    " Emmet
+            call UnBundle('LaTeX-Box-Team/LaTeX-Box')           " LaTex
+            ""call UnBundle('sheerun/vim-polyglot')               " Language Support
         endif
     " }
     ""call neobundle#commands#clean('!')
