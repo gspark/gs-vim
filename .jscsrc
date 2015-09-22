@@ -1,35 +1,25 @@
 {
-    "preset": "google",
-    "fileExtensions": [".js", "jscs"],
-
-    "requireSemicolons": true,
-    "requireParenthesesAroundIIFE": true,
-    "maximumLineLength": 120,
-    "validateLineBreaks": "LF",
-    "validateIndentation": 4,
-    "disallowTrailingComma": true,
-    "disallowUnusedParams": true,
-
-    "disallowSpacesInsideObjectBrackets": null,
-    "disallowImplicitTypeConversion": ["string"],
-
-    "safeContextKeyword": "_this",
-
-    "jsDoc": {
-        "checkAnnotations": "closurecompiler",
-        "checkParamNames": true,
-        "requireParamTypes": true,
-        "checkRedundantParams": true,
-        "checkReturnTypes": true,
-        "checkRedundantReturns": true,
-        "requireReturnTypes": true,
-        "checkTypes": "capitalizedNativeCase",
-        "checkRedundantAccess": true,
-        "requireNewlineAfterDescription": true
-    },
-
-    "excludeFiles": [
-        "test/data/**",
-        "patterns/*"
-    ]
+    "preset": "airbnb",
+        "excludeFiles": [
+            "dist/**", "node_modules/**", "webpack*", "styleguide.js"
+        ],
+        "requirePaddingNewLinesBeforeLineComments": null, // 不强制注释前空行
+        "requireTrailingComma": null, // 不强制要求末尾逗号
+        "validateQuoteMarks": null, // 字符串单引号，React 属性双引号
+        "validateIndentation": {
+            "value": 4,
+            "allExcept": [
+                "comments" // 忽略注释中的缩进
+            ]
+        },
+        "maximumLineLength": {
+            "value": 76, // 单行最长80个字符，注释除外
+            "allExcept": [
+                "comments", "urlComments", "functionSignature"
+            ]
+        },
+        "requirePaddingNewLinesAfterBlocks": null,// 区块之间不强制空行
+        "disallowEmptyBlocks": {
+            "allExcept": "comments" // 不把注释当成空处理
+        }
 }
