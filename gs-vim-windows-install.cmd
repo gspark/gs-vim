@@ -35,6 +35,7 @@ call mklink "%HOME%\.vimrc.bundles.local" "%APP_DIR%\.vimrc.bundles.local"
 call mklink "%HOME%\.vimrc.local" "%APP_DIR%\.vimrc.local"
 call mklink "%HOME%\.gvimrc.local" "%APP_DIR%\.gvimrc.local"
 call mklink "%HOME%\.jshintrc" "%APP_DIR%\.jshintrc"
+call mklink "%HOME%\.jscsrc" "%APP_DIR%\.jscsrc"
 
 IF NOT EXIST "%HOME%\.vim\bundle\neobundle.vim" (
     git clone git://github.com/Shougo/neobundle.vim.git %HOME%\.vim\bundle\neobundle.vim
