@@ -826,10 +826,10 @@ if count(g:gsvim_bundle_groups, 'complete')
         imap <C-K> <Plug>(neosnippet_expand_or_jump)
         " Use <C-K> to replace TARGET within snippets in visual mode
         xmap <C-K> <Plug>(neosnippet_start_unite_snippet_target)
-        " For snippet_complete marker
-        if has('conceal')
-            set conceallevel=2 concealcursor=i
-        endif
+        """ For snippet_complete marker
+        ""if has('conceal')
+        ""    set conceallevel=2 concealcursor=i
+        ""endif
     else
         " -> UltiSnips
         let g:UltiSnipsExpandTrigger="<C-K>"

@@ -10,17 +10,19 @@
 
     " UI {
         ""call UnBundle('w0ng/vim-hybrid')                        " Colorscheme hybrid
+        call UnBundle('chriskempson/base16-vim')                " Colorscheme base16
         call UnBundle('altercation/vim-colors-solarized')       " Colorscheme solarized
         ""NeoBundle 'zenorocha/dracula-theme', {'rtp': 'vim/'}    " Colorscheme dracula
         call UnBundle('bling/vim-bufferline')                   " Buffer line
         call UnBundle('mhinz/vim-startify')                     " Start page
         call UnBundle('junegunn/goyo.vim')                      " Distraction-free
         call UnBundle('junegunn/limelight.vim')                 " Hyperfocus-writing
-        NeoBundle 'morhetz/gruvbox'                             " Colorscheme gruvbox
+        NeoBundle('morhetz/gruvbox')                               " Colorscheme gruvbox
     " }
 
     " enhance {
         if count(g:gsvim_bundle_groups, 'enhance')          " Vim enhancement
+            ""call UnBundle('Raimondi/delimitMate')           " Closing of quotes
             call UnBundle('tpope/vim-abolish')              " Abolish
             call UnBundle('tpope/vim-speeddating')          " Speed dating
             call UnBundle('Keithbsmiley/investigate.vim')   " Helper
@@ -32,7 +34,10 @@
 
     " move {
         if count(g:gsvim_bundle_groups, 'move') " Moving
+            call UnBundle('tpope/vim-unimpaired')           " Pairs of mappings
             call UnBundle('unblevable/quick-scope')         " Quick scope
+            call UnBundle('Shougo/unite.vim')               " Search engine
+            call UnBundle('Shougo/unite-outline')           " Unite outline
         endif
     " }
 
@@ -58,7 +63,7 @@
             call UnBundle('tpope/vim-rails')                    " Rails
             ""call UnBundle('mattn/emmet-vim')                    " Emmet
             call UnBundle('LaTeX-Box-Team/LaTeX-Box')           " LaTex
-            ""call UnBundle('sheerun/vim-polyglot')               " Language Support
+            call UnBundle('sheerun/vim-polyglot')               " Language Support
         endif
     " }
     ""call neobundle#commands#clean('!')
