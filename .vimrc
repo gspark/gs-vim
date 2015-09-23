@@ -191,14 +191,15 @@ if count(g:gsvim_bundle_groups, 'move') " Moving
     NeoBundle 'edsono/vim-matchit' " Match it
     NeoBundle 'Shougo/unite.vim' " Search engine
     NeoBundle 'Shougo/unite-outline' " Unite outline
-    NeoBundle 'Shougo/vimproc', {
-                \ 'build' : {
-                \     'windows' : 'make -f make_mingw32.mak',
-                \     'cygwin' : 'make -f make_cygwin.mak',
-                \     'mac' : 'make -f make_mac.mak',
-                \     'unix' : 'make -f make_unix.mak',
-                \    },
-                \ }
+    ""NeoBundle 'Shougo/vimproc', {
+    ""            \ 'build' : {
+    ""            \     'windows' : 'make -f make_mingw32.mak',
+    ""            \     'cygwin' : 'make -f make_cygwin.mak',
+    ""            \     'mac' : 'make -f make_mac.mak',
+    ""            \     'unix' : 'make -f make_unix.mak',
+    ""            \    },
+    ""            \ }
+    NeoBundle 'Shougo/vimproc'      " vimproc
 endif
 
 if count(g:gsvim_bundle_groups, 'navigate') " Navigation
