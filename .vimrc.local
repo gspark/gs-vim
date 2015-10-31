@@ -198,16 +198,16 @@
             endif
             " -> Syntastic
             ""let g:syntastic_javascript_checkers = ['jshint', 'jsl', 'jslint', 'jscs']
-            ""let g:syntastic_javascript_checkers = ['jshint', 'jscs']
-            let g:syntastic_javascript_checkers = ['eslint']
+            let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+            ""let g:syntastic_javascript_checkers = ['eslint']
             " to see error location list
             let g:syntastic_always_populate_loc_list = 0
             let g:syntastic_auto_loc_list = 0
             let g:syntastic_loc_list_height = 5
             ""let g:syntastic_javascript_jshint_conf = '~/.jshintrc'
-            ""let g:syntastic_javascript_jshint_args = "--config ". expand("~/.jshintrc")
-            ""let g:syntastic_javascript_jscs_args = "--config ". expand("~/.jscsrc")
-            let g:syntastic_javascript_eslint_args = "--config ". expand("~/.eslintrc")
+            let g:syntastic_javascript_jshint_args = "--config ". expand("~/.jshintrc")
+            let g:syntastic_javascript_jscs_args = "--config ". expand("~/.jscsrc")
+            ""let g:syntastic_javascript_eslint_args = "--config ". expand("~/.eslintrc")
             function! ToggleErrors()
                 let old_last_winnr = winnr('$')
                 lclose
