@@ -65,16 +65,11 @@
 
 " }
 
-" Customise gsvim settings for personal usage
-if filereadable(expand($HOME . '/.vimrc.before'))
-    source $HOME/.vimrc.before
-endif
-
-" Use bundles config {
-    if filereadable(expand("~/.vimrc.bundles"))
-        source ~/.vimrc.bundles
-    endif
-" }
+""" Use bundles config {
+""    if filereadable(expand("~/.vimrc.bundles"))
+""        source ~/.vimrc.bundles
+""    endif
+""" }
 
 "------------------------------------------------
 " => gsvim Setting
@@ -93,6 +88,11 @@ let g:gsvim_autocomplete='NEO'
 " gsvim plugin setting
 let g:gsvim_bundle_groups=['ui', 'enhance', 'move', 'navigate',
             \'complete', 'compile', 'git', 'language']
+
+" Customise gsvim settings for personal usage
+if filereadable(expand($HOME . '/.vimrc.before'))
+    source $HOME/.vimrc.before
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -508,12 +508,12 @@ set incsearch " Find as you type search
 set gdefault " turn on g flag
 
 " Use sane regexes
-nnoremap / /\v
-vnoremap / /\v
-cnoremap s/ s/\v
-nnoremap ? ?\v
-vnoremap ? ?\v
-cnoremap s? s?\v
+""nnoremap / /\v
+""vnoremap / /\v
+""cnoremap s/ s/\v
+""nnoremap ? ?\v
+""vnoremap ? ?\v
+""cnoremap s? s?\v
 
 " Keep search matches in the middle of the window
 nnoremap n nzzzv
@@ -915,7 +915,7 @@ endif
 if count(g:gsvim_bundle_groups, 'compile')
 
     " -> Syntastic
-    let g:syntastic_check_on_open=1
+    let g:syntastic_check_on_open=0
     let g:syntastic_aggregate_errors=1
     let g:syntastic_auto_jump=1
     let g:syntastic_auto_loc_list=1
@@ -932,9 +932,9 @@ if count(g:gsvim_bundle_groups, 'compile')
 
 endif
 
-" Setting for git plugins
-if count(g:gsvim_bundle_groups, 'git')
-endif
+""" Setting for git plugins
+""if count(g:gsvim_bundle_groups, 'git')
+""endif
 
 " Setting for language specificity
 if count(g:gsvim_bundle_groups, 'language')

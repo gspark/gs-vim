@@ -33,11 +33,12 @@ REM call mklink "%HOME%\.vimrc.bundles.fork" "%APP_DIR%\.vimrc.bundles.fork"
 call mklink "%HOME%\.vimrc.before" "%APP_DIR%\.vimrc.before"
 call mklink "%HOME%\.vimrc.bundles.local" "%APP_DIR%\.vimrc.bundles.local"
 call mklink "%HOME%\.vimrc.local" "%APP_DIR%\.vimrc.local"
-call mklink "%HOME%\.gvimrc.local" "%APP_DIR%\.gvimrc.local"
-call mklink "%HOME%\.jshintrc" "%APP_DIR%\.jshintrc"
-call mklink "%HOME%\.jscsrc" "%APP_DIR%\.jscsrc"
-call mklink "%HOME%\.eslintrc" "%APP_DIR%\.eslintrc"
-call mklink "%HOME%\.editorconfig" "%APP_DIR%\.editorconfig"
+REM call mklink "%HOME%\.gvimrc.local" "%APP_DIR%\.gvimrc.local"
+
+call mklink "%HOME%\.editorconfig" 	"%APP_DIR%\.editorconfig"
+call mklink "%HOME%\.jshintrc" 		"%APP_DIR%\rc\.jshintrc"
+call mklink "%HOME%\.jscsrc" 		"%APP_DIR%\rc\.jscsrc"
+call mklink "%HOME%\.eslintrc" 		"%APP_DIR%\rc\.eslintrc"
 
 IF NOT EXIST "%HOME%\.vim\bundle\neobundle.vim" (
     git clone git://github.com/Shougo/neobundle.vim.git %HOME%\.vim\bundle\neobundle.vim

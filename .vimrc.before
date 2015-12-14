@@ -21,7 +21,7 @@
             " fallback into cp1252 instead of eg. iso-8859-15.
             " Newer Windows files might contain utf-8 or utf-16 LE so we might
             " want to try them first.
-            set fileencodings=ucs-bom,utf-8,cp936,utf-16le,cp1252,iso-8859-15
+            set fileencodings=ucs-bom,utf-8,gb18030,gbk,cp936,utf-16le,cp1252,iso-8859-15
         endif
     " }
 " }
@@ -29,7 +29,7 @@
 
 "Options {
     " gsvim plugin setting
-    let g:gsvim_bundle_groups=['ui', 'enhance', 'move', 'navigate',
+    let g:gsvim_bundle_groups=['ui', 'enhance', 'move',
                 \'complete', 'compile', 'git', 'language','javascript']
     ""let g:gs_vim_font='Consolas'                            " font
     ""let g:gs_vim_font='Ubuntu Mono derivative Powerline'    " font
