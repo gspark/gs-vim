@@ -6,9 +6,9 @@
 "   /_/ |___/_/_/ /_/ /_/
 "
 "   Main Contributor: Xiao-Ou Zhang (kepbod) <kepbod@gmail.com>
-"   Version: 2.0
+"   Version: 2.1
 "   Created: 2012-01-20
-"   Last Modified: 2015-08-20
+"   Last Modified: 2015-10-10
 "
 "   Sections:
 "     -> gsvim Setting
@@ -27,8 +27,54 @@
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Environment {
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " Identify platform {
+        silent function! OSX()
+            return has('macunix')
+        endfunction
+        silent function! LINUX()
+            return has('unix') && !has('macunix') && !has('win32unix')
+        endfunction
+        silent function! WINDOWS()
+            return  (has('win32') || has('win64'))
+        endfunction
+    " }
+
+    " Basics {
+        set nocompatible        " Must be first line
+        if !WINDOWS()
+            set shell=/bin/sh
+        endif
+    " }
+
+    " Windows Compatible {
+        " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+        " across (heterogeneous) systems easier.
+        if WINDOWS()
+          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+        endif
+    " }
+
+    " Arrow Key Fix {
+        " https://github.com/spf13/spf13-vim/issues/780
+        if &term[:4] == "xterm" || &term[:5] == 'screen' || &term[:3] == 'rxvt'
+            inoremap <silent> <C-[>OC <RIGHT>
+        endif
+    " }
+
+" }
+
+" Customise gsvim settings for personal usage
+if filereadable(expand($HOME . '/.vimrc.before'))
+    source $HOME/.vimrc.before
+endif
+
+" Use bundles config {
+    if filereadable(expand("~/.vimrc.bundles"))
+        source ~/.vimrc.bundles
+    endif
+" }
 
 "------------------------------------------------
 " => gsvim Setting
@@ -47,11 +93,6 @@ let g:gsvim_autocomplete='NEO'
 " gsvim plugin setting
 let g:gsvim_bundle_groups=['ui', 'enhance', 'move', 'navigate',
             \'complete', 'compile', 'git', 'language']
-
-" Customise gsvim settings for personal usage
-if filereadable(expand($HOME . '/.vimrc.before'))
-    source $HOME/.vimrc.before
-endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -146,15 +187,40 @@ if has('vim_starting')
     let g:neobundle#install_process_timeout=600
 endif
 
-call neobundle#begin(expand($HOME . '/.vim/bundle/'))
+" Setup Bundle Support {
+        " The next three lines ensure that the ~/.vim/bundle/ system works
+        call neobundle#begin(expand('~/.vim/bundle/'))
 
-" Use NeoBundle to manager plugins
-NeoBundleFetch 'Shougo/neobundle.vim'
+        command! -nargs=? -bang -bar
+              \ -complete=customlist,neobundle#complete_bundles
+              \ BundleInstall
+              \ call neobundle#installer#install('!' == '<bang>', <q-args>)
+
+        command! -nargs=+ Bundle
+              \ call neobundle#parser#bundle(
+              \   substitute(<q-args>, '\s"[^"]\+$', '', ''))
+
+        command! -nargs=? -bang -bar
+              \ -complete=customlist,neobundle#complete_deleted_bundles
+              \ BundleClean
+              \ call neobundle#installer#clean('!' == '<bang>', <q-args>)
+    " }
+
+    " Add an UnBundle command {
+        function! UnBundle(arg, ...)
+            for bundle in filter(neobundle#config#get_neobundles(), 'v:val.orig_name ==# a:arg')
+                call neobundle#config#rmdir(bundle.path)
+            endfor
+        endfunction
+
+        com! -nargs=+         UnBundle
+        \ call UnBundle(<args>)
+    " }
+
 
 if count(g:gsvim_bundle_groups, 'ui') " UI setting
-    NeoBundle 'w0ng/vim-hybrid' " Colorscheme hybrid
-    NeoBundle 'altercation/vim-colors-solarized' " Colorscheme solarized
-    NeoBundle 'chriskempson/base16-vim' " Colorscheme base16
+    NeoBundle 'mrhooray/vim-hybrid' " Colorscheme hybrid
+    NeoBundle 'morhetz/gruvbox' " Colorscheme gruvbox
     NeoBundle 'bling/vim-airline' " Status line
     NeoBundle 'bling/vim-bufferline' " Buffer line
     NeoBundle 'nathanaelkane/vim-indent-guides' " Indent guides
@@ -457,15 +523,15 @@ nnoremap # #zzzv
 nnoremap g* g*zzzv
 nnoremap g# g#zzzv
 
-" Visual search mappings
-function! s:VSetSearch()
-    let temp=@@
-    normal! gvy
-    let @/='\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-    let @@=temp
-endfunction
-vnoremap * :<C-U>call <SID>VSetSearch()<CR>//<CR>
-vnoremap # :<C-U>call <SID>VSetSearch()<CR>??<CR>
+""" Visual search mappings
+""function! s:VSetSearch()
+""    let temp=@@
+""    normal! gvy
+""    let @/='\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+""    let @@=temp
+""endfunction
+""vnoremap * :<C-U>call <SID>VSetSearch()<CR>//<CR>
+""vnoremap # :<C-U>call <SID>VSetSearch()<CR>??<CR>
 
 " Use ,Space to toggle the highlight search
 nnoremap <Leader><Space> :set hlsearch!<CR>
