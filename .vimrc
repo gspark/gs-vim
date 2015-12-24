@@ -106,11 +106,11 @@ let mapleader=',' " Change the mapleader
 let maplocalleader='\' " Change the maplocalleader
 set timeoutlen=500 " Time to wait for a command
 
-" Source the vimrc file after saving it
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
-autocmd BufWritePost $MYVIMRC NeoBundleClean
-" Fast edit the .vimrc file using ,x
-nnoremap <Leader>x :tabedit $MYVIMRC<CR>
+""" Source the vimrc file after saving it
+""autocmd BufWritePost $MYVIMRC source $MYVIMRC
+""autocmd BufWritePost $MYVIMRC NeoBundleClean
+""" Fast edit the .vimrc file using ,x
+""nnoremap <Leader>x :tabedit $MYVIMRC<CR>
 
 set autoread " Set autoread when a file is changed outside
 set autowrite " Write on make/shell commands
@@ -770,8 +770,8 @@ if count(g:gsvim_bundle_groups, 'enhance')
     endif
 
     " -> Undo tree
-    nnoremap <Leader>u :UndotreeToggle<CR>
-    let g:undotree_SetFocusWhenToggle=1
+    ""nnoremap <Leader>u :UndotreeToggle<CR>
+    ""let g:undotree_SetFocusWhenToggle=1
 
     " -> Splitjoin
     let g:splitjoin_split_mapping = ',s'

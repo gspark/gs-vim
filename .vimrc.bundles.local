@@ -39,12 +39,12 @@
 
     " enhance {
         if count(g:gsvim_bundle_groups, 'enhance')          " Vim enhancement
-            " Closing of quotes
-            ""UnBundle 'Raimondi/delimitMate')
             " Abolish
             UnBundle 'tpope/vim-abolish'
             " Speed dating
             UnBundle 'tpope/vim-speeddating'
+            " Undo tree
+            UnBundle 'mbbill/undotree'
             " Helper
             UnBundle 'Keithbsmiley/investigate.vim'
             " Hard mode
