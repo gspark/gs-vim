@@ -221,7 +221,8 @@ endif
 if count(g:gsvim_bundle_groups, 'ui') " UI setting
     NeoBundle 'mrhooray/vim-hybrid' " Colorscheme hybrid
     NeoBundle 'morhetz/gruvbox' " Colorscheme gruvbox
-    NeoBundle 'bling/vim-airline' " Status line
+    NeoBundle 'vim-airline/vim-airline' " Status line
+    NeoBundle 'vim-airline/vim-airline-themes' " Status line theme
     NeoBundle 'bling/vim-bufferline' " Buffer line
     NeoBundle 'nathanaelkane/vim-indent-guides' " Indent guides
     NeoBundle 'mhinz/vim-startify' " Start page
@@ -395,13 +396,13 @@ if count(g:gsvim_bundle_groups, 'ui')
     set noshowmode " Hide the default mode text
     let g:airline_theme='bubblegum'
     set ttimeoutlen=50
-    let g:bufferline_echo=0
-    let g:bufferline_modified='[+]'
+    ""let g:bufferline_echo=0
+    ""let g:bufferline_modified='[+]'
     if g:gsvim_fancy_font
         let g:airline_powerline_fonts=1
     else
-        let g:airline_left_sep=''
-        let g:airline_right_sep=''
+        let g:airline_left_sep='›'
+        let g:airline_right_sep='‹'
     endif
 endif
 
