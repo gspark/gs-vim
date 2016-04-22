@@ -240,9 +240,19 @@
             let g:syntastic_javascript_checkers = ['jshint', 'jscs']
             ""let g:syntastic_javascript_checkers = ['eslint']
             " to see error location list
+            " 每次自动调用 :SyntasticSetLocList, 将错误覆盖 **quickfix**
             let g:syntastic_always_populate_loc_list = 0
+            " 自动拉起/关闭错误窗口, 不需要手动调用 :Errors
             let g:syntastic_auto_loc_list = 0
             let g:syntastic_loc_list_height = 5
+            " 每次保存的时候做检查
+            " let g:syntastic_check_on_wq = 0
+
+            let g:syntastic_mode_map = {
+                \ "mode": "passive",
+                \ "active_filetypes": [],
+                \ "passive_filetypes": ["javascript"] }
+
             ""let g:syntastic_javascript_jshint_conf = '~/.jshintrc'
             let g:syntastic_javascript_jshint_args = "--config ". expand("~/.jshintrc")
             let g:syntastic_javascript_jscs_args = "--config ". expand("~/.jscsrc")
