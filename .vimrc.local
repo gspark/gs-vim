@@ -283,4 +283,17 @@
         ""nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
         let g:vim_json_syntax_conceal = 0
     " }
+
+    " Utils {
+        command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | new | setlocal bt=nofile | put! a
+        "" 详细解释：
+        ""     command!, 定义一个命令
+        ""     -nargs=?, 这个命令接受0或1个参数
+        ""     Filter, 命令的名字，后面跟的是命令的内容
+        ""     let @a='', 清空寄存器a
+        ""     execute 'g/<pattern>/y A', 执行'g/<pattern>/y A' （搜索与<pattern>匹配的行，将其添加到寄存A）
+        ""     new, 创建一个新窗口
+        ""     setlocal bt=nofile, 把当前窗口设为scratch模式
+        ""     put! a, 把寄存器a的内容粘贴到新窗口
+
 " }
