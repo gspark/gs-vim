@@ -1,20 +1,15 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"       _       _
-"      (_)   __(_)___ ___
-"     / / | / / / __ `__ \
-"    / /| |/ / / / / / / /
-"   /_/ |___/_/_/ /_/ /_/
 "
-"   Main Contributor: Xiao-Ou Zhang (kepbod) <kepbod@gmail.com>
+"   Main Contributor: zg
 "   Version: 2.1
 "   Created: 2012-01-20
-"   Last Modified: 2015-10-10
+"   Last Modified: 2017-01-19
 "
 "   Sections:
 "     -> gsvim Setting
 "     -> General
 "     -> Platform Specific Setting
-"     -> NeoBundle
+"     -> Vim-Plug
 "     -> User Interface
 "     -> Colors and Fonts
 "     -> Indent Related
@@ -56,20 +51,8 @@
         endif
     " }
 
-    " Arrow Key Fix {
-        " https://github.com/spf13/spf13-vim/issues/780
-        if &term[:4] == "xterm" || &term[:5] == 'screen' || &term[:3] == 'rxvt'
-            inoremap <silent> <C-[>OC <RIGHT>
-        endif
-    " }
-
 " }
 
-""" Use bundles config {
-""    if filereadable(expand("~/.vimrc.bundles"))
-""        source ~/.vimrc.bundles
-""    endif
-""" }
 
 "------------------------------------------------
 " => gsvim Setting
@@ -105,12 +88,6 @@ filetype plugin indent on " Enable filetype
 let mapleader=',' " Change the mapleader
 let maplocalleader='\' " Change the maplocalleader
 set timeoutlen=500 " Time to wait for a command
-
-""" Source the vimrc file after saving it
-""autocmd BufWritePost $MYVIMRC source $MYVIMRC
-""autocmd BufWritePost $MYVIMRC NeoBundleClean
-""" Fast edit the .vimrc file using ,x
-""nnoremap <Leader>x :tabedit $MYVIMRC<CR>
 
 set autoread " Set autoread when a file is changed outside
 set autowrite " Write on make/shell commands
@@ -161,6 +138,7 @@ set noerrorbells
 set novisualbell
 set t_vb=
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "-------------------------------------------------
@@ -178,161 +156,114 @@ set viewoptions-=options " in case of mapping change
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "--------------------------------------------------
-" => NeoBundle
+" => Vim-Plug
 "--------------------------------------------------
 
-if has('vim_starting')
-    set nocompatible
-    set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
-    let g:neobundle#install_process_timeout=600
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-" Setup Bundle Support {
-        " The next three lines ensure that the ~/.vim/bundle/ system works
-        call neobundle#begin(expand('~/.vim/bundle/'))
-
-        command! -nargs=? -bang -bar
-              \ -complete=customlist,neobundle#complete_bundles
-              \ BundleInstall
-              \ call neobundle#installer#install('!' == '<bang>', <q-args>)
-
-        command! -nargs=+ Bundle
-              \ call neobundle#parser#bundle(
-              \   substitute(<q-args>, '\s"[^"]\+$', '', ''))
-
-        command! -nargs=? -bang -bar
-              \ -complete=customlist,neobundle#complete_deleted_bundles
-              \ BundleClean
-              \ call neobundle#installer#clean('!' == '<bang>', <q-args>)
-    " }
-
-    " Add an UnBundle command {
-        function! UnBundle(arg, ...)
-            for bundle in filter(neobundle#config#get_neobundles(), 'v:val.orig_name ==# a:arg')
-                call neobundle#config#rmdir(bundle.path)
-            endfor
-        endfunction
-
-        com! -nargs=+         UnBundle
-        \ call UnBundle(<args>)
-    " }
-
+call plug#begin('~/.vim/bundle')
 
 if count(g:gsvim_bundle_groups, 'ui') " UI setting
-    NeoBundle 'mrhooray/vim-hybrid' " Colorscheme hybrid
-    NeoBundle 'morhetz/gruvbox' " Colorscheme gruvbox
-    NeoBundle 'vim-airline/vim-airline' " Status line
-    NeoBundle 'vim-airline/vim-airline-themes' " Status line theme
-    NeoBundle 'bling/vim-bufferline' " Buffer line
-    NeoBundle 'nathanaelkane/vim-indent-guides' " Indent guides
-    NeoBundle 'mhinz/vim-startify' " Start page
-    NeoBundle 'junegunn/goyo.vim' " Distraction-free
-    NeoBundle 'junegunn/limelight.vim' " Hyperfocus-writing
+    Plug 'kristijanhusak/vim-hybrid-material' " Colorscheme hybrid material
+    Plug 'morhetz/gruvbox' " Colorscheme gruvbox
+    Plug 'jacoborus/tender.vim' " Colorscheme tender
+    Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes' " Status line
+    Plug 'Yggdroot/indentLine' " Indentation level
+    Plug 'ryanoasis/vim-devicons' " Devicons
+    Plug 'bling/vim-bufferline' " Buffer line
+    Plug 'mhinz/vim-startify' " Start page
+    Plug 'junegunn/goyo.vim', { 'for': 'markdown' } " Distraction-free
+    Plug 'junegunn/limelight.vim', { 'for': 'markdown' } " Hyperfocus-writing
 endif
 
 if count(g:gsvim_bundle_groups, 'enhance') " Vim enhancement
-    NeoBundle 'Raimondi/delimitMate' " Closing of quotes
-    NeoBundle 'scrooloose/nerdcommenter' " NERD commenter
-    NeoBundle 'tpope/vim-abolish' " Abolish
-    NeoBundle 'tpope/vim-speeddating' " Speed dating
-    NeoBundle 'tpope/vim-repeat' " Repeat
-    NeoBundle 'kristijanhusak/vim-multiple-cursors' " Multiple cursors
-    NeoBundle 'mbbill/undotree' " Undo tree
-    NeoBundle 'tpope/vim-surround' " Surround
-    NeoBundle 'godlygeek/tabular' " Tabular
-    NeoBundle 'AndrewRadev/splitjoin.vim' " Splitjoin
-    NeoBundle 'sickill/vim-pasta' " Vim pasta
-    NeoBundle 'Keithbsmiley/investigate.vim' " Helper
-    NeoBundle 'wikitopian/hardmode' " Hard mode
-    NeoBundle 'wellle/targets.vim' " Text objects
-    NeoBundle 'roman/golden-ratio' " Resize windows
-    NeoBundle 'chrisbra/vim-diff-enhanced' " Create better diffs
+    Plug 'Raimondi/delimitMate' " Closing of quotes
+    Plug 'tomtom/tcomment_vim' " Commenter
+    Plug 'tpope/vim-abolish' " Abolish
+    Plug 'tpope/vim-speeddating' " Speed dating
+    Plug 'tpope/vim-repeat' " Repeat
+    Plug 'terryma/vim-multiple-cursors' " Multiple cursors
+    Plug 'junegunn/vim-slash' " In-buffer search
+    Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' } " Undo tree
+    Plug 'tpope/vim-surround' " Surround
+    Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] } " Easy align
+    Plug 'ludovicchabant/vim-gutentags' " Manage tag files
+    Plug 'AndrewRadev/splitjoin.vim' " Splitjoin
+    Plug 'sickill/vim-pasta' " Vim pasta
+    Plug 'Keithbsmiley/investigate.vim' " Helper
+    Plug 'wikitopian/hardmode' " Hard mode
+    Plug 'wellle/targets.vim' " Text objects
+    Plug 'roman/golden-ratio' " Resize windows
+    Plug 'chrisbra/vim-diff-enhanced' " Create better diffs
 endif
 
 if count(g:gsvim_bundle_groups, 'move') " Moving
-    NeoBundle 'tpope/vim-unimpaired' " Pairs of mappings
-    NeoBundle 'Lokaltog/vim-easymotion' " Easy motion
-    NeoBundle 'unblevable/quick-scope' " Quick scope
-    NeoBundle 'bkad/CamelCaseMotion' " Camel case motion
-    NeoBundle 'majutsushi/tagbar' " Tag bar
-    NeoBundle 'edsono/vim-matchit' " Match it
-    NeoBundle 'Shougo/unite.vim' " Search engine
-    NeoBundle 'Shougo/unite-outline' " Unite outline
-    ""NeoBundle 'Shougo/vimproc', {
-    ""            \ 'build' : {
-    ""            \     'windows' : 'make -f make_mingw32.mak',
-    ""            \     'cygwin' : 'make -f make_cygwin.mak',
-    ""            \     'mac' : 'make -f make_mac.mak',
-    ""            \     'unix' : 'make -f make_unix.mak',
-    ""            \    },
-    ""            \ }
-    NeoBundle 'Shougo/vimproc'      " vimproc
+    Plug 'tpope/vim-unimpaired' " Pairs of mappings
+    Plug 'Lokaltog/vim-easymotion' " Easy motion
+    Plug 'kepbod/quick-scope' " Quick scope
+    Plug 'yuttie/comfortable-motion.vim' " Comfortable motion
+    Plug 'bkad/CamelCaseMotion' " Camel case motion
+    Plug 'majutsushi/tagbar' " Tag bar
 endif
 
 if count(g:gsvim_bundle_groups, 'navigate') " Navigation
-    NeoBundle 'scrooloose/nerdtree' " NERD tree
-    NeoBundle 'jistr/vim-nerdtree-tabs' " NERD tree tabs
-    NeoBundle 'mhinz/vim-tmuxify' " Tmux panes
+    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " NERD tree
+    Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' } " NERD tree git plugin
+    Plug 'mhinz/vim-tmuxify' " Tmux panes
 endif
 
 if count(g:gsvim_bundle_groups, 'complete') " Completion
     if g:gsvim_autocomplete=='NEO'
         if has('lua')
-            NeoBundle 'Shougo/neocomplete.vim' " Auto completion framework
             let g:gsvim_completion_engine='neocomplete'
+            Plug 'Shougo/neocomplete.vim' " Auto completion framework
         else
-            NeoBundle 'Shougo/neocomplcache.vim' " Auto completion framework
             let g:gsvim_completion_engine='neocomplcache'
+            Plug 'Shougo/neocomplcache.vim' " Auto completion framework
         endif
-        NeoBundle 'Shougo/neosnippet.vim' " Snippet engine
-        NeoBundle 'Shougo/neosnippet-snippets' " Snippets
+        Plug 'Shougo/neosnippet.vim' " Snippet engine
+        Plug 'Shougo/neosnippet-snippets' " Snippets
     else
         " Auto completion framework
-        NeoBundle 'Valloric/YouCompleteMe', {
-                    \ 'build' : {
-                    \     'mac' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-                    \     'unix' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-                    \     'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-                    \     'cygwin' : './install.sh --clang-completer --system-libclang --omnisharp-completer'
-                    \    }
-                    \ }
         let g:gsvim_completion_engine='YouCompleteMe'
-        NeoBundle 'sirver/ultisnips' " Snippet engine
+        Plug 'Valloric/YouCompleteMe', { 'do': './install.py' } "Auto completion framework
+        Plug 'honza/vim-snippets' " Snippets
+        Plug 'sirver/ultisnips' " Snippet engine
     endif
-    NeoBundle 'honza/vim-snippets' " Snippets
 endif
 
 if count(g:gsvim_bundle_groups, 'compile') " Compiling
-    NeoBundle 'scrooloose/syntastic' " Syntax checking
-    NeoBundle 'xuhdev/SingleCompile' " Single compile
+    Plug 'scrooloose/syntastic' " Syntax checking
+    Plug 'xuhdev/SingleCompile' " Single compile
 endif
 
 if count(g:gsvim_bundle_groups, 'git') " Git
-    NeoBundle 'tpope/vim-fugitive' " Git wrapper
-    NeoBundle 'gregsexton/gitv' " Gitk clone
+    Plug 'tpope/vim-fugitive' " Git wrapper
+    Plug 'junegunn/gv.vim' " Gitk clone
     if has('signs')
-        NeoBundle 'airblade/vim-gitgutter' " Git diff sign
+        Plug 'airblade/vim-gitgutter' " Git diff sign
     endif
 endif
 
 if count(g:gsvim_bundle_groups, 'language') " Language Specificity
-    NeoBundle 'matthias-guenther/hammer.vim' " Markup
-    NeoBundle 'fatih/vim-go' " Golang
-    NeoBundle 'tpope/vim-rails' " Rails
-    NeoBundle 'mattn/emmet-vim' " Emmet
-    NeoBundle 'LaTeX-Box-Team/LaTeX-Box' " LaTex
-    NeoBundle 'sheerun/vim-polyglot' " Language Support
+    Plug 'davidhalter/jedi-vim', { 'for': 'python' } " Python jedi plugin
+    Plug 'fatih/vim-go', { 'for': 'go' } " Golang
+    Plug 'tpope/vim-rails', { 'for': [] } " Rails
+    Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] } " Emmet
+    Plug 'LaTeX-Box-Team/LaTeX-Box' " LaTex
+    Plug 'sheerun/vim-polyglot' " Language Support
 endif
 
 if filereadable(expand($HOME . '/.vimrc.bundles.local')) " Load local bundles
     source $HOME/.vimrc.bundles.local
 endif
 
-call neobundle#end()
+call plug#end()
 
-filetype plugin indent on " Required!
-
-NeoBundleCheck
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -343,52 +274,6 @@ NeoBundleCheck
 " Set title
 set title
 set titlestring=%t%(\ %m%)%(\ (%{expand('%:p:h')})%)%(\ %a%)
-
-""" Set tabline
-""set showtabline=2 " Always show tab line
-""" Set up tab labels
-""set guitablabel=%m%N:%t[%{tabpagewinnr(v:lnum)}]
-""set tabline=%!MyTabLine()
-""function! MyTabLine()
-""    let s=''
-""    let t=tabpagenr() " The index of current page
-""    let i=1
-""    while i<=tabpagenr('$') " From the first page
-""        let buflist=tabpagebuflist(i)
-""        let winnr=tabpagewinnr(i)
-""        let s.=(i==t ? '%#TabLineSel#' : '%#TabLine#')
-""        let s.='%'.i.'T'
-""        let s.=' '
-""        let bufnr=buflist[winnr-1]
-""        let file=bufname(bufnr)
-""        let buftype = getbufvar(bufnr, 'buftype')
-""        let m=''
-""        if getbufvar(bufnr, '&modified')
-""            let m='[+]'
-""        endif
-""        if buftype=='nofile'
-""            if file=~'\/.'
-""                let file=substitute(file, '.*\/\ze.', '', '')
-""            endif
-""        else
-""            let file=fnamemodify(file, ':p:t')
-""        endif
-""        if file==''
-""            let file='[No Name]'
-""        endif
-""        let s.=m
-""        let s.=i.':'
-""        let s.=file
-""        let s.='['.winnr.']'
-""        let s.=' '
-""        let i=i+1
-""    endwhile
-""    let s.='%T%#TabLineFill#%='
-""    let s.=(tabpagenr('$')>1 ? '%999XX' : 'X')
-""    return s
-""endfunction
-" Set up tab tooltips with each buffer name
-""set guitabtooltip=%F
 
 " Set status line
 if count(g:gsvim_bundle_groups, 'ui')
@@ -467,13 +352,6 @@ if !has('gui_running')
     set t_Co=256 " Use 256 colors
 endif
 
-" Load a colorscheme
-if count(g:gsvim_bundle_groups, 'ui')
-    colorscheme hybrid
-else
-    colorscheme desert
-endif
-
 " Set GUI font
 if has('gui_running')
     if has('gui_gtk')
@@ -508,32 +386,6 @@ set hlsearch " Highlight search terms
 set incsearch " Find as you type search
 set gdefault " turn on g flag
 
-" Use sane regexes
-""nnoremap / /\v
-""vnoremap / /\v
-""cnoremap s/ s/\v
-""nnoremap ? ?\v
-""vnoremap ? ?\v
-""cnoremap s? s?\v
-
-" Keep search matches in the middle of the window
-nnoremap n nzzzv
-nnoremap N Nzzzv
-nnoremap * *zzzv
-nnoremap # #zzzv
-nnoremap g* g*zzzv
-nnoremap g# g#zzzv
-
-""" Visual search mappings
-""function! s:VSetSearch()
-""    let temp=@@
-""    normal! gvy
-""    let @/='\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-""    let @@=temp
-""endfunction
-""vnoremap * :<C-U>call <SID>VSetSearch()<CR>//<CR>
-""vnoremap # :<C-U>call <SID>VSetSearch()<CR>??<CR>
-
 " Use ,Space to toggle the highlight search
 nnoremap <Leader><Space> :set hlsearch!<CR>
 
@@ -563,57 +415,6 @@ function! MyFoldText()
     return line.'…'.repeat(' ',fillcharcount).foldedlinecount.'L'.' '
 endfunction
 set foldtext=MyFoldText()
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"-------------------------------------------------
-" => File Type Specific Setting
-"-------------------------------------------------
-
-" QuickFix
-augroup ft_quickfix
-    autocmd!
-    autocmd filetype qf setlocal nolist nocursorline nowrap textwidth=0
-augroup END
-
-" Markdown
-augroup ft_markdown
-    autocmd!
-    " Use <localLeader>1/2/3/4/5/6 to add headings
-    autocmd filetype markdown nnoremap <buffer> <LocalLeader>1 I# <ESC>
-    autocmd filetype markdown nnoremap <buffer> <LocalLeader>2 I## <ESC>
-    autocmd filetype markdown nnoremap <buffer> <LocalLeader>3 I### <ESC>
-    autocmd filetype markdown nnoremap <buffer> <LocalLeader>4 I#### <ESC>
-    autocmd filetype markdown nnoremap <buffer> <LocalLeader>5 I##### <ESC>
-    autocmd filetype markdown nnoremap <buffer> <LocalLeader>6 I###### <ESC>
-    " Use <LocalLeader>b to add blockquotes in normal and visual mode
-    autocmd filetype markdown nnoremap <buffer> <LocalLeader>b I> <ESC>
-    autocmd filetype markdown vnoremap <buffer> <LocalLeader>b :s/^/> /<CR>
-    " Use <localLeader>ul and <localLeader>ol to add list symbols in visual mode
-    autocmd filetype markdown vnoremap <buffer> <LocalLeader>ul :s/^/* /<CR>
-    autocmd filetype markdown vnoremap <buffer> <LocalLeader>ol :s/^/\=(line(".")-line("'<")+1).'. '/<CR>
-    " Use <localLeader>e1/2/3 to add emphasis symbols
-    autocmd filetype markdown nnoremap <buffer> <LocalLeader>e1 I*<ESC>A*<ESC>
-    autocmd filetype markdown nnoremap <buffer> <LocalLeader>e2 I**<ESC>A**<ESC>
-    autocmd filetype markdown nnoremap <buffer> <LocalLeader>e3 I***<ESC>A***<ESC>
-    autocmd filetype markdown vnoremap <buffer> <LocalLeader>e1 :s/\%V\(.*\)\%V/\*\1\*/<CR>
-    autocmd filetype markdown vnoremap <buffer> <LocalLeader>e2 :s/\%V\(.*\)\%V/\*\*\1\*\*/<CR>
-    autocmd filetype markdown vnoremap <buffer> <LocalLeader>e3 :s/\%V\(.*\)\%V/\*\*\*\1\*\*\*/<CR>
-    " Turn on spell
-    autocmd filetype markdown setlocal spell
-augroup END
-
-" HTML
-augroup ft_html
-    autocmd!
-    autocmd filetype html setlocal spell " Turn on spell
-augroup END
-
-" LESS
-augroup ft_less
-    autocmd!
-    autocmd filetype less nnoremap <buffer> <Leader>r :w <BAR> !lessc % > %:t:r.css<CR><Space>
-augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -667,7 +468,7 @@ command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
 " => Plugin Setting
 "--------------------------------------------------
 
-" Setting for UI plugins
+" Setting for UI Plugins
 if count(g:gsvim_bundle_groups, 'ui')
 
     " -> Indent Guides
@@ -684,13 +485,14 @@ if count(g:gsvim_bundle_groups, 'ui')
     " -> Startify
     let g:startify_session_dir=$HOME . '/.vim/session'
     let g:startify_custom_header=[
-                \'       _       _         ',
-                \'      (_)   __(_)___ ___ ',
-                \'     / / | / / / __ `__ \',
-                \'    / /| |/ / / / / / / /',
-                \'   /_/ |___/_/_/ /_/ /_/ ',
-                \'                         ']
-    let g:startify_custom_footer=['', '    This configuration is maintained by Xiao-Ou Zhang <kepbod@gmail.com> and other contributors. Thanks!']
+                \'                          _            ',
+                \'  __ _  ___       __   __(_) _ __ ___  ',
+                \' / _` |/ __| _____\ \ / /| || `_ ` _ \ ',
+                \'| (_| |\__ \|_____|\ V / | || | | | | |',
+                \' \__, ||___/        \_/  |_||_| |_| |_|',
+                \' |___/                                 ',
+                \'                                       ']
+    let g:startify_custom_footer=['', '    This configuration is maintained by zg and other contributors. Thanks!']
     if has('gui_running')
         hi StartifyHeader  guifg=#87afff
         hi StartifyFooter  guifg=#87afff
@@ -708,17 +510,12 @@ if count(g:gsvim_bundle_groups, 'ui')
     endif
 
     " -> Goyo & Limelight
-    function! GoyoBefore()
-        Limelight
-    endfunction
-    function! GoyoAfter()
-        Limelight!
-    endfunction
-    let g:goyo_callbacks = [function('GoyoBefore'), function('GoyoAfter')]
+    autocmd! User GoyoEnter Limelight
+    autocmd! User GoyoLeave Limelight!
 
 endif
 
-" Setting for enhancement plugins
+" Setting for enhancement Plugins
 if count(g:gsvim_bundle_groups, 'enhance')
 
     " -> delimitMate
@@ -726,27 +523,19 @@ if count(g:gsvim_bundle_groups, 'enhance')
     let delimitMate_expand_space=1
     let delimitMate_balance_matchpairs=1
 
-    " -> NERD Commenter
-    let NERDCommentWholeLinesInVMode=2
-    let NERDSpaceDelims=1
-    let NERDRemoveExtraSpaces=1
+    " -> Tcomment
     " Map \<Space> to commenting
     function! IsWhiteLine()
         if (getline('.')=~'^$')
-            let oldlinenumber=line('.')
-            call NERDComment('n', 'sexy')
-            if (line('.')==oldlinenumber)
-                call NERDComment('n', 'append')
-                normal! x
-            else
-                normal! k
-                startinsert!
-            endif
+            exe 'TCommentBlock'
+            normal! j
         else
-            normal! A 
-            call NERDComment('n', 'append')
+            normal! A
+            exe 'TCommentRight'
+            normal! l
             normal! x
         endif
+        startinsert!
     endfunction
     nnoremap <silent> <LocalLeader><Space> :call IsWhiteLine()<CR>
 
@@ -771,8 +560,15 @@ if count(g:gsvim_bundle_groups, 'enhance')
     endif
 
     " -> Undo tree
-    ""nnoremap <Leader>u :UndotreeToggle<CR>
-    ""let g:undotree_SetFocusWhenToggle=1
+    nnoremap <Leader>u :UndotreeToggle<CR>
+    let g:undotree_SetFocusWhenToggle=1
+
+    " -> Easy Align
+    xmap ga <Plug>(EasyAlign)
+    nmap ga <Plug>(EasyAlign)
+
+    " -> Gutentags
+    let g:gutentags_cache_dir=$HOME . '/.vim/cache/ctags'
 
     " -> Splitjoin
     let g:splitjoin_split_mapping = ',s'
@@ -780,7 +576,7 @@ if count(g:gsvim_bundle_groups, 'enhance')
     let g:splitjoin_normalize_whitespace=1
     let g:splitjoin_align=1
 
-    " -> investigate.vim
+    " -> Investigate.vim
     nnoremap K :call investigate#Investigate()<CR>
     let g:investigate_use_dash=1
 
@@ -789,7 +585,7 @@ if count(g:gsvim_bundle_groups, 'enhance')
 
 endif
 
-" setting for moving plugins
+" setting for moving Plugins
 if count(g:gsvim_bundle_groups, 'move')
 
     " -> Tag bar
@@ -800,66 +596,36 @@ if count(g:gsvim_bundle_groups, 'move')
     let g:tagbar_autoshowtag=1
 
     " Matchit
+    " Start mathit
+    packadd! matchit
     " Use Tab instead of % to switch
     nmap <Tab> %
     vmap <Tab> %
 
-    " -> Unite
-    let g:unite_data_directory=$HOME . '/.vim/cache/unite'
-    let g:unite_source_history_yank_enable=1
-    let g:unite_source_rec_max_cache_files=100
-    if g:gsvim_fancy_font
-        let g:unite_prompt='» '
-    endif
-    if executable('ag')
-        " Use ag in unite grep source.
-        let g:unite_source_grep_command='ag'
-        let g:unite_source_grep_default_opts='--line-numbers --nocolor --nogroup --hidden'
-        let g:unite_source_grep_recursive_opt=''
-    elseif executable('ack-grep')
-        " Use ack-grep in unite grep source.
-        let g:unite_source_grep_command='ack-grep'
-        let g:unite_source_grep_default_opts='--no-heading --no-color -a -H'
-        let g:unite_source_grep_recursive_opt=''
-    elseif executable('ack')
-        " Use ack in unite grep source.
-        let g:unite_source_grep_command='ack'
-        let g:unite_source_grep_default_opts='--no-heading --no-color -a -H'
-        let g:unite_source_grep_recursive_opt=''
-    endif
-    function! s:unite_settings() " Use ESC to exit, and use C-J and C-K to move
-        nmap <buffer> <ESC> <plug>(unite_exit)
-        imap <buffer> <ESC> <plug>(unite_exit)
-        imap <buffer> <C-J> <Plug>(unite_select_next_line)
-        imap <buffer> <C-K> <Plug>(unite_select_previous_line)
-    endfunction
-    autocmd filetype unite call s:unite_settings()
-    nnoremap <silent> <Space>f :<C-U>Unite -start-insert -auto-resize -buffer-name=files file_rec/async<CR><C-U>
-    nnoremap <silent> <Space>y :<C-U>Unite -start-insert -buffer-name=yanks history/yank<CR>
-    nnoremap <silent> <Space>l :<C-U>Unite -start-insert -auto-resize -buffer-name=line line<CR>
-    nnoremap <silent> <Space>o :<C-U>Unite -auto-resize -buffer-name=outline outline<CR>
-    nnoremap <silent> <Space>b :<C-U>Unite -quick-match buffer<CR>
-    nnoremap <silent> <Space>t :<C-U>Unite -quick-match tab<CR>
-    nnoremap <silent> <Space>/ :<C-U>Unite -auto-resize -buffer-name=search grep:.<CR>
-
 endif
 
-" Setting for navigation plugins
+" Setting for navigation Plugins
 if count(g:gsvim_bundle_groups, 'navigate')
 
     " -> NERD Tree
-    nnoremap <Leader>d :NERDTreeTabsToggle<CR>
-    nnoremap <Leader>f :NERDTreeFind<CR>
+    nnoremap <Leader>f :NERDTreeToggle<CR>
     let NERDTreeChDirMode=2
     let NERDTreeShowBookmarks=1
     let NERDTreeShowHidden=1
     let NERDTreeShowLineNumbers=1
-    let NERDTreeDirArrows=1
-    let g:nerdtree_tabs_open_on_gui_startup=0
+    augroup nerd_loader
+        autocmd!
+        autocmd VimEnter * silent! autocmd! FileExplorer
+        autocmd BufEnter,BufNew *
+                    \  if isdirectory(expand('<amatch>'))
+                    \|   call plug#load('nerdtree')
+                    \|   execute 'autocmd! nerd_loader'
+                    \| endif
+    augroup END
 
 endif
 
-" Setting for completion plugins
+" Setting for completion Plugins
 if count(g:gsvim_bundle_groups, 'complete')
 
     if g:gsvim_autocomplete=='NEO'
@@ -887,6 +653,26 @@ if count(g:gsvim_bundle_groups, 'complete')
                         \ "\<C-R>=delimitMate#ExpandReturn()\<CR>" :
                         \ pumvisible() ? neocomplcache#close_popup() : "\<CR>"
         endif
+        " Setting for specific language
+        if has('lua')
+            if !exists('g:neocomplete#force_omni_input_patterns')
+                let g:neocomplete#force_omni_input_patterns={}
+            endif
+            let g:neocomplete#force_omni_input_patterns.python=
+            \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+        else
+            if !exists('g:neocomplcache_force_omni_patterns')
+                let g:neocomplcache_force_omni_patterns={}
+            endif
+            let g:neocomplcache_force_omni_patterns.python=
+            \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+        endif
+        autocmd FileType python setlocal omnifunc=jedi#completions
+        let g:jedi#completions_enabled=0
+        let g:jedi#auto_vim_configuration=0
+        let g:jedi#smart_auto_mappings=0
+        let g:jedi#use_tabs_not_buffers=1
+        let g:tmuxcomplete#trigger=''
         " -> Neosnippet
         " Set information for snippets
         let g:neosnippet#enable_snipmate_compatibility=1
@@ -912,7 +698,7 @@ if count(g:gsvim_bundle_groups, 'complete')
 
 endif
 
-" Setting for compiling plugins
+" Setting for compiling Plugins
 if count(g:gsvim_bundle_groups, 'compile')
 
     " -> Syntastic
@@ -933,7 +719,7 @@ if count(g:gsvim_bundle_groups, 'compile')
 
 endif
 
-""" Setting for git plugins
+""" Setting for git Plugins
 ""if count(g:gsvim_bundle_groups, 'git')
 ""endif
 

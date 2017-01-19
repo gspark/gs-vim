@@ -1,106 +1,75 @@
 " Bundles {
 
-    """ Add an UnBundle command {
-    ""    function! UnBundle(arg, ...)
-    ""        for bundle in filter(neobundle#config#get_neobundles(), 'v:val.orig_name ==# a:arg')
-    ""            call neobundle#config#rm(bundle.path)
-    ""        endfor
-    ""    endfunction
-    """ }
-        " Add an UnBundle command {
-        function! UnBundle(arg, ...)
-            for bundle in filter(neobundle#config#get_neobundles(), 'v:val.orig_name ==# a:arg')
-                call neobundle#config#rmdir(bundle.path)
-            endfor
-        endfunction
-
-        com! -nargs=+         UnBundle
-        \ call UnBundle(<args>)
-    " }
-
     " UI {
-        " Colorscheme hybrid
-        ""UnBundle 'w0ng/vim-hybrid'
-        " Colorscheme base16
-        UnBundle 'chriskempson/base16-vim'
-        " Colorscheme solarized
-        UnBundle 'altercation/vim-colors-solarized'
-        ""NeoBundle 'zenorocha/dracula-theme', {'rtp': 'vim/'}    " Colorscheme dracula
+        " Colorscheme hybrid material
+        Plug '~kristijanhusak/vim-hybrid-material'
+        " Colorscheme tender
+        Plug '~jacoborus/tender.vim'
         " Buffer line
-        UnBundle 'bling/vim-bufferline'
+        Plug '~bling/vim-bufferline'
         " Start page
-        UnBundle 'mhinz/vim-startify'
+        Plug '~mhinz/vim-startify'
         " Distraction-free
-        UnBundle 'junegunn/goyo.vim'
+        Plug '~junegunn/goyo.vim'
         " Hyperfocus-writing
-        UnBundle 'junegunn/limelight.vim'
-        NeoBundle 'morhetz/gruvbox'                                " Colorscheme gruvbox
+        Plug '~junegunn/limelight.vim'
     " }
 
     " enhance {
         if count(g:gsvim_bundle_groups, 'enhance')          " Vim enhancement
             " Abolish
-            UnBundle 'tpope/vim-abolish'
+            Plug '~tpope/vim-abolish'
             " Speed dating
-            UnBundle 'tpope/vim-speeddating'
+            Plug '~tpope/vim-speeddating'
             " Undo tree
-            UnBundle 'mbbill/undotree'
+            "" Plug '~mbbill/undotree'
             " Helper
-            UnBundle 'Keithbsmiley/investigate.vim'
+            Plug '~Keithbsmiley/investigate.vim'
             " Hard mode
-            UnBundle 'wikitopian/hardmode'
+            Plug '~wikitopian/hardmode'
             " Text objects
-            UnBundle 'wellle/targets.vim'
+            Plug '~wellle/targets.vim'
             " Resize windows
-            UnBundle 'roman/golden-ratio'
+            Plug '~roman/golden-ratio'
         endif
     " }
 
     " move {
         if count(g:gsvim_bundle_groups, 'move') " Moving
             " Pairs of mappings
-            UnBundle 'tpope/vim-unimpaired'
+            Plug '~tpope/vim-unimpaired'
             " Quick scope
-            UnBundle 'unblevable/quick-scope'
-            " Search engine
-            UnBundle 'Shougo/unite.vim'
-            " Unite outline
-            UnBundle 'Shougo/unite-outline'
+            Plug '~kepbod/quick-scope'
         endif
     " }
 
     " navigate {
         if count(g:gsvim_bundle_groups, 'navigate')         " Navigation
             " Tmux panes
-            UnBundle 'mhinz/vim-tmuxify'
+            Plug '~mhinz/vim-tmuxify'
         endif
     " }
 
     " JavaScript {
         if count(g:gsvim_bundle_groups, 'javascript')
-            NeoBundle 'moll/vim-node'
-            NeoBundle 'maksimr/vim-jsbeautify'
-            ""NeoBundle 'hallettj/jslint.vim'
-            ""NeoBundle 'einars/js-beautify'
+            Plug 'moll/vim-node'
+            Plug 'maksimr/vim-jsbeautify'
+            "" Plug 'hallettj/jslint.vim'
+            "" Plug 'einars/js-beautify'
         endif
     " }
 
     " language {
         if count(g:gsvim_bundle_groups, 'language') " Language Specificity
-            " Markup
-            UnBundle 'matthias-guenther/hammer.vim'
             " Golang
-            UnBundle 'fatih/vim-go'
+            Plug '~fatih/vim-go'
             " Rails
-            UnBundle 'tpope/vim-rails'
-            " Emmet
-            ""UnBundle 'mattn/emmet-vim'
+            Plug '~tpope/vim-rails'
             " LaTex
-            UnBundle 'LaTeX-Box-Team/LaTeX-Box'
+            Plug '~LaTeX-Box-Team/LaTeX-Box'
             " Language Support
-            UnBundle 'sheerun/vim-polyglot'
+            Plug '~sheerun/vim-polyglot'
         endif
     " }
-    ""call neobundle#commands#clean('!')
 " }
 
