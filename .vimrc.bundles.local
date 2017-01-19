@@ -40,6 +40,8 @@
             Plug '~tpope/vim-unimpaired'
             " Quick scope
             Plug '~kepbod/quick-scope'
+            Plug '~yuttie/comfortable-motion.vim' " Comfortable motion
+            Plug '~bkad/CamelCaseMotion'          " Camel case motion
         endif
     " }
 
@@ -49,6 +51,14 @@
             Plug '~mhinz/vim-tmuxify'
         endif
     " }
+
+    " compiling {
+        if count(g:gsvim_bundle_groups, 'compile') " Compiling
+            Plug '~scrooloose/syntastic' " Syntax checking
+            Plug '~xuhdev/SingleCompile' " Single compile
+            Plug 'w0rp/ale'              " ale
+        endif
+    "  }
 
     " JavaScript {
         if count(g:gsvim_bundle_groups, 'javascript')

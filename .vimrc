@@ -6,6 +6,7 @@
 "   Last Modified: 2017-01-19
 "
 "   Sections:
+"     -> Environment
 "     -> gsvim Setting
 "     -> General
 "     -> Platform Specific Setting
@@ -653,6 +654,7 @@ if count(g:gsvim_bundle_groups, 'complete')
                         \ "\<C-R>=delimitMate#ExpandReturn()\<CR>" :
                         \ pumvisible() ? neocomplcache#close_popup() : "\<CR>"
         endif
+
         " Setting for specific language
         if has('lua')
             if !exists('g:neocomplete#force_omni_input_patterns')
