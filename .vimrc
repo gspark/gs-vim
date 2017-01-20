@@ -7,6 +7,11 @@
 
 " Environment {
     set nocompatible " Get out of vi compatible mode
+    " -> Platform Specific Setting
+    " On Windows, also use .vim instead of vimfiles
+    if has('win32') || has('win64')
+        set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+    endif
 " }
 
 " Customise gsvim settings for personal usage {
@@ -16,13 +21,13 @@
 " }
 
 " Use bundles {
-    if filereadable(expand("~/.vimrc.bundles"))
+    if filereadable(expand($HOME . '/.vimrc.bundles'))
         source ~/.vimrc.bundles
     endif
 " }
 
 " Use bundles config {
-    if filereadable(expand("~/.vimrc.bundles.local"))
+    if filereadable(expand($HOME . '/.vimrc.bundles.local'))
         source ~/.vimrc.bundles.local
     endif
 " }
@@ -53,12 +58,6 @@
     set novisualbell
     set t_vb=
 
-    " -> Platform Specific Setting
-    " On Windows, also use .vim instead of vimfiles
-    if has('win32') || has('win64')
-        set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-    endif
-
     set viewoptions+=slash,unix " Better Unix/Windows compatibility
     set viewoptions-=options " in case of mapping change
 
@@ -70,7 +69,6 @@
     if count(g:gsvim_bundle_groups, 'ui')
         set laststatus=2 " Show the statusline
         set noshowmode " Hide the default mode text
-        let g:airline_theme='bubblegum'
         set ttimeoutlen=50
         ""let g:bufferline_echo=0
         ""let g:bufferline_modified='[+]'

@@ -1,5 +1,6 @@
 " ui {
-    colorscheme gruvbox
+    " colorscheme gruvbox
+    colorscheme desert
 " }
 
 " Utils {
