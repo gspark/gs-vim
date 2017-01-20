@@ -28,9 +28,18 @@
 
 
 "Options {
+    let g:gsvim_user='gspark' " User name
+    let g:gsvim_email='gspark@gmail.com' " User email
+    let g:gsvim_github='https://github.com/gspark/gs-vim.git' " User github
+    " gsvim UI setting
+    let g:gsvim_default_scheme=1 " Enable color settings adapted for hybrid
+    let g:gsvim_fancy_font=1 " Enable using fancy font
+    let g:gsvim_show_number=1 " Enable showing number
+    " gsvim Autocomplete setting (YCM or NEO)
+    let g:gsvim_autocomplete='NEO'
     " gsvim plugin setting
-    let g:gsvim_bundle_groups=['ui', 'enhance', 'move',
-                \'complete', 'compile', 'git', 'language','javascript']
+    let g:gsvim_bundle_groups=['ui', 'enhance', 'move', 'navigate',
+                \'complete', 'compile', 'git', 'svn', 'language']
     ""let g:gs_vim_font='Consolas'                            " font
     ""let g:gs_vim_font='Ubuntu Mono derivative Powerline'    " font
     let g:gs_vim_font='DejaVu Sans Mono for Powerline'      " font

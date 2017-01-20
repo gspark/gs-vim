@@ -1,85 +1,252 @@
-" Bundles {
-
-    " UI {
-        " Colorscheme hybrid material
-        Plug '~kristijanhusak/vim-hybrid-material'
-        " Colorscheme tender
-        Plug '~jacoborus/tender.vim'
-        " Buffer line
-        Plug '~bling/vim-bufferline'
-        " Start page
-        Plug '~mhinz/vim-startify'
-        " Distraction-free
-        Plug '~junegunn/goyo.vim'
-        " Hyperfocus-writing
-        Plug '~junegunn/limelight.vim'
-    " }
-
-    " enhance {
-        if count(g:gsvim_bundle_groups, 'enhance')          " Vim enhancement
-            " Abolish
-            Plug '~tpope/vim-abolish'
-            " Speed dating
-            Plug '~tpope/vim-speeddating'
-            " Undo tree
-            "" Plug '~mbbill/undotree'
-            " Helper
-            Plug '~Keithbsmiley/investigate.vim'
-            " Hard mode
-            Plug '~wikitopian/hardmode'
-            " Text objects
-            Plug '~wellle/targets.vim'
-            " Resize windows
-            Plug '~roman/golden-ratio'
+" Plugin Config {
+    if count(g:gsvim_bundle_groups, 'ui')
+        " -> Indent Guides
+        if !has('gui_running') && g:gsvim_default_scheme
+            let g:indent_guides_auto_colors=0
+            autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=235
+            autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
         endif
-    " }
+        let g:indent_guides_enable_on_vim_startup=1
+        let g:indent_guides_guide_size=1
+        let g:indent_guides_default_mapping=0
+        let g:indent_guides_exclude_filetypes=['help', 'nerdtree', 'startify', 'markdown']
 
-    " move {
-        if count(g:gsvim_bundle_groups, 'move') " Moving
-            " Pairs of mappings
-            Plug '~tpope/vim-unimpaired'
-            " Quick scope
-            Plug '~kepbod/quick-scope'
-            Plug '~yuttie/comfortable-motion.vim' " Comfortable motion
-            Plug '~bkad/CamelCaseMotion'          " Camel case motion
+        " -> Startify
+        let g:startify_session_dir=$HOME . '/.vim/session'
+        let g:startify_custom_header=[
+                    \'                          _            ',
+                    \'  __ _  ___       __   __(_) _ __ ___  ',
+                    \' / _` |/ __| _____\ \ / /| || `_ ` _ \ ',
+                    \'| (_| |\__ \|_____|\ V / | || | | | | |',
+                    \' \__, ||___/        \_/  |_||_| |_| |_|',
+                    \' |___/                                 ',
+                    \'                                       ']
+        let g:startify_custom_footer=['', '    This configuration is maintained by zg and other contributors. Thanks!']
+        if has('gui_running')
+            hi StartifyHeader  guifg=#87afff
+            hi StartifyFooter  guifg=#87afff
+            hi StartifyBracket guifg=#585858
+            hi StartifyNumber  guifg=#ffaf5f
+            hi StartifyPath    guifg=#8a8a8a
+            hi StartifySlash   guifg=#585858
+        else
+            hi StartifyHeader  ctermfg=111
+            hi StartifyFooter  ctermfg=111
+            hi StartifyBracket ctermfg=240
+            hi StartifyNumber  ctermfg=215
+            hi StartifyPath    ctermfg=245
+            hi StartifySlash   ctermfg=240
         endif
-    " }
 
-    " navigate {
-        if count(g:gsvim_bundle_groups, 'navigate')         " Navigation
-            " Tmux panes
-            Plug '~mhinz/vim-tmuxify'
-        endif
-    " }
+        " -> Goyo & Limelight
+        autocmd! User GoyoEnter Limelight
+        autocmd! User GoyoLeave Limelight!
 
-    " compiling {
-        if count(g:gsvim_bundle_groups, 'compile') " Compiling
-            Plug '~scrooloose/syntastic' " Syntax checking
-            Plug '~xuhdev/SingleCompile' " Single compile
-            Plug 'w0rp/ale'              " ale
-        endif
-    "  }
+    endif
 
-    " JavaScript {
-        if count(g:gsvim_bundle_groups, 'javascript')
-            Plug 'moll/vim-node'
-            Plug 'maksimr/vim-jsbeautify'
-            "" Plug 'hallettj/jslint.vim'
-            "" Plug 'einars/js-beautify'
+    " Setting for enhancement Plugins
+    if count(g:gsvim_bundle_groups, 'enhance')
+        " -> delimitMate
+        let delimitMate_expand_cr=1
+        let delimitMate_expand_space=1
+        let delimitMate_balance_matchpairs=1
+        " -> Tcomment
+        " Map \<Space> to commenting
+        function! IsWhiteLine()
+            if (getline('.')=~'^$')
+                exe 'TCommentBlock'
+                normal! j
+            else
+                normal! A
+                exe 'TCommentRight'
+                normal! l
+                normal! x
+            endif
+            startinsert!
+        endfunction
+        nnoremap <silent> <LocalLeader><Space> :call IsWhiteLine()<CR>
+        " -> Multiple cursors
+        " Called once right before you start selecting multiple cursors
+        if g:gsvim_autocomplete=='NEO'
+            function! Multiple_cursors_before()
+                if g:gsvim_completion_engine=='neocomplete'
+                    exe 'NeoCompleteLock'
+                else
+                    exe 'NeoComplCacheLock'
+                endif
+            endfunction
+            " Called once only when the multiple selection is canceled (default <Esc>)
+            function! Multiple_cursors_after()
+                if g:gsvim_completion_engine=='neocomplete'
+                    exe 'NeoCompleteUnlock'
+                else
+                    exe 'NeoComplCacheUnlock'
+                endif
+            endfunction
         endif
-    " }
+        " -> Undo tree
+        nnoremap <Leader>u :UndotreeToggle<CR>
+        let g:undotree_SetFocusWhenToggle=1
+        " -> Easy Align
+        xmap ga <Plug>(EasyAlign)
+        nmap ga <Plug>(EasyAlign)
+        " -> Gutentags
+        let g:gutentags_cache_dir=$HOME . '/.vim/cache/ctags'
+        " -> Splitjoin
+        let g:splitjoin_split_mapping = ',s'
+        let g:splitjoin_join_mapping  = ',j'
+        let g:splitjoin_normalize_whitespace=1
+        let g:splitjoin_align=1
+        " -> Investigate.vim
+        nnoremap K :call investigate#Investigate()<CR>
+        let g:investigate_use_dash=1
+        " -> EnhancedDiff
+        let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
+    endif
 
-    " language {
-        if count(g:gsvim_bundle_groups, 'language') " Language Specificity
-            " Golang
-            Plug '~fatih/vim-go'
-            " Rails
-            Plug '~tpope/vim-rails'
-            " LaTex
-            Plug '~LaTeX-Box-Team/LaTeX-Box'
-            " Language Support
-            Plug '~sheerun/vim-polyglot'
+    " setting for moving Plugins
+    if count(g:gsvim_bundle_groups, 'move')
+        " -> Tag bar
+        nnoremap <Leader>t :TagbarToggle<CR>
+        let g:tagbar_autofocus=1
+        let g:tagbar_expand=1
+        let g:tagbar_foldlevel=2
+        let g:tagbar_autoshowtag=1
+
+        " Matchit
+        " Start mathit
+        packadd! matchit
+        " Use Tab instead of % to switch
+        nmap <Tab> %
+        vmap <Tab> %
+    endif
+
+    " Setting for navigation Plugins
+    if count(g:gsvim_bundle_groups, 'navigate')
+        " -> NERD Tree
+        nnoremap <Leader>f :NERDTreeToggle<CR>
+        let NERDTreeChDirMode=2
+        let NERDTreeShowBookmarks=1
+        let NERDTreeShowHidden=1
+        let NERDTreeShowLineNumbers=1
+        augroup nerd_loader
+            autocmd!
+            autocmd VimEnter * silent! autocmd! FileExplorer
+            autocmd BufEnter,BufNew *
+                        \  if isdirectory(expand('<amatch>'))
+                        \|   call plug#load('nerdtree')
+                        \|   execute 'autocmd! nerd_loader'
+                        \| endif
+        augroup END
+
+    endif
+
+    " Setting for completion Plugins
+    if count(g:gsvim_bundle_groups, 'complete')
+        if g:gsvim_autocomplete=='NEO'
+            " -> Neocomplete & Neocomplcache
+            " Use Tab and S-Tab to select candidate
+            inoremap <expr><Tab>  pumvisible() ? "\<C-N>" : "\<Tab>"
+            inoremap <expr><S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
+            if g:gsvim_completion_engine=='neocomplete'
+                let g:neocomplete#enable_at_startup=1
+                let g:neocomplete#data_directory=$HOME . '/.vim/cache/neocomplete'
+                let g:neocomplete#enable_auto_delimiter=1
+                " Use <C-E> to close popup
+                inoremap <expr><C-E> neocomplete#cancel_popup()
+                inoremap <expr><CR> delimitMate#WithinEmptyPair() ?
+                            \ "\<C-R>=delimitMate#ExpandReturn()\<CR>" :
+                            \ pumvisible() ? neocomplete#close_popup() : "\<CR>"
+            else
+                let g:neocomplcache_enable_at_startup=1
+                let g:neocomplcache_temporary_dir=$HOME . '/.vim/cache/neocomplcache'
+                let g:neocomplcache_enable_auto_delimiter=1
+                let g:neocomplcache_enable_fuzzy_completion=1
+                " Use <C-E> to close popup
+                inoremap <expr><C-E> neocomplcache#cancel_popup()
+                inoremap <expr><CR> delimitMate#WithinEmptyPair() ?
+                            \ "\<C-R>=delimitMate#ExpandReturn()\<CR>" :
+                            \ pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+            endif
+
+            " Setting for specific language
+            if has('lua')
+                if !exists('g:neocomplete#force_omni_input_patterns')
+                    let g:neocomplete#force_omni_input_patterns={}
+                endif
+                let g:neocomplete#force_omni_input_patterns.python=
+                \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+            else
+                if !exists('g:neocomplcache_force_omni_patterns')
+                    let g:neocomplcache_force_omni_patterns={}
+                endif
+                let g:neocomplcache_force_omni_patterns.python=
+                \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+            endif
+            autocmd FileType python setlocal omnifunc=jedi#completions
+            let g:jedi#completions_enabled=0
+            let g:jedi#auto_vim_configuration=0
+            let g:jedi#smart_auto_mappings=0
+            let g:jedi#use_tabs_not_buffers=1
+            let g:tmuxcomplete#trigger=''
+            " -> Neosnippet
+            " Set information for snippets
+            let g:neosnippet#enable_snipmate_compatibility=1
+            " Use <C-K> to expand or jump snippets in insert mode
+            imap <C-K> <Plug>(neosnippet_expand_or_jump)
+            " Use <C-K> to replace TARGET within snippets in visual mode
+            xmap <C-K> <Plug>(neosnippet_start_unite_snippet_target)
+            """ For snippet_complete marker
+            ""if has('conceal')
+            ""    set conceallevel=2 concealcursor=i
+            ""endif
+        else
+            " -> UltiSnips
+            let g:UltiSnipsExpandTrigger="<C-K>"
+            let g:UltiSnipsJumpForwardTrigger="<Tab>"
+            let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
         endif
-    " }
+
+        " Setting info for snips
+        let g:snips_author=g:gsvim_user
+        let g:snips_email=g:gsvim_email
+        let g:snips_github=g:gsvim_github
+
+    endif
+
+    " Setting for compiling Plugins
+    if count(g:gsvim_bundle_groups, 'compile')
+
+        " -> Syntastic
+        let g:syntastic_check_on_open=0
+        let g:syntastic_aggregate_errors=1
+        let g:syntastic_auto_jump=1
+        let g:syntastic_auto_loc_list=1
+        if g:gsvim_fancy_font
+            let g:syntastic_error_symbol = '✗'
+            let g:syntastic_style_error_symbol = '✠'
+            let g:syntastic_warning_symbol = '∆'
+            let g:syntastic_style_warning_symbol = '≈'
+        endif
+
+        " -> Singlecompile
+        nnoremap <Leader>r :SingleCompileRun<CR>
+        let g:SingleCompile_showquickfixiferror=1
+
+    endif
+
+    """ Setting for git Plugins
+    ""if count(g:gsvim_bundle_groups, 'git')
+    ""endif
+
+    " Setting for language specificity
+    if count(g:gsvim_bundle_groups, 'language')
+
+        " -> Emmet
+        let g:user_emmet_leader_key='<C-Z>'
+        let g:user_emmet_settings={'indentation':'    '}
+        let g:use_emmet_complete_tag=1
+
+    endif
 " }
 
