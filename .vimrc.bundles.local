@@ -1,5 +1,33 @@
 " Plugin Config {
     if count(g:gsvim_bundle_groups, 'ui')
+        " -> airline
+        if isdirectory(expand("~/.vim/bundle/vim-airline"))
+            "" 开启tabline
+            let g:airline#extensions#tabline#enabled                = 1
+            "" tabline中当前buffer两端的分隔符
+            ""let g:airline#extensions#tabline#left_sep               = ' '
+            "" tabline为激活的buffer的两端字符
+            let g:airline#extensions#tabline#left_alt_sep           = '|'
+            "" tabline中buffer显示编号
+            let g:airline#extensions#tabline#buffer_nr_show         = 1
+            ""let g:airline#extensions#bufferline#enabled             = 1
+            ""let g:airline#extensions#bufferline#overwrite_variables = 1
+
+            ""let g:airline#extensions#eclim#enabled                = 0
+            if g:colors_name=='gruvbox'
+                let g:airline_theme                                 = 'gruvbox'
+            else
+                let g:airline_theme                                 = 'powerlineish'
+            endif
+            ""let g:airline_branch_prefix                           = '⎇ '
+            ""let g:airline_left_sep                                = ''
+            ""let g:airline_right_sep                               = ''
+            ""let g:airline_linecolumn_prefix                       = '␊ '
+            ""let g:airline_paste_symbol                            = 'Þ'
+            ""let g:airline_section_y                               = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b][HEX=\%02.2b]"
+            let g:airline_section_y                                 = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b]"
+        endif
+
         " -> Indent Guides
         if !has('gui_running') && g:gsvim_default_scheme
             let g:indent_guides_auto_colors=0
@@ -12,36 +40,52 @@
         let g:indent_guides_exclude_filetypes=['help', 'nerdtree', 'startify', 'markdown']
 
         " -> Startify
-        let g:startify_session_dir=$HOME . '/.vim/session'
-        let g:startify_custom_header=[
-                    \'                          _            ',
-                    \'  __ _  ___       __   __(_) _ __ ___  ',
-                    \' / _` |/ __| _____\ \ / /| || `_ ` _ \ ',
-                    \'| (_| |\__ \|_____|\ V / | || | | | | |',
-                    \' \__, ||___/        \_/  |_||_| |_| |_|',
-                    \' |___/                                 ',
-                    \'                                       ']
-        let g:startify_custom_footer=['', '    This configuration is maintained by zg and other contributors. Thanks!']
-        if has('gui_running')
-            hi StartifyHeader  guifg=#87afff
-            hi StartifyFooter  guifg=#87afff
-            hi StartifyBracket guifg=#585858
-            hi StartifyNumber  guifg=#ffaf5f
-            hi StartifyPath    guifg=#8a8a8a
-            hi StartifySlash   guifg=#585858
-        else
-            hi StartifyHeader  ctermfg=111
-            hi StartifyFooter  ctermfg=111
-            hi StartifyBracket ctermfg=240
-            hi StartifyNumber  ctermfg=215
-            hi StartifyPath    ctermfg=245
-            hi StartifySlash   ctermfg=240
+        if isdirectory(expand("~/.vim/bundle/vim-startify"))
+            let g:startify_custom_header=[
+                \'                          _            ',
+                \'  __ _  ___       __   __(_) _ __ ___  ',
+                \' / _` |/ __| _____\ \ / /| || `_ ` _ \ ',
+                \'| (_| |\__ \|_____|\ V / | || | | | | |',
+                \' \__, ||___/        \_/  |_||_| |_| |_|',
+                \' |___/                                 ',
+                \'                                       ']
+            let g:startify_custom_footer =
+                        \ ['', "   Vim is charityware. Please read ':help uganda'.", '']
+            let g:startify_relative_path = 1
+            let g:startify_skiplist = [
+                        \ '.git',
+                        \ 'node_modules',
+                        \ 'logs',
+                        \ 'bower_components'
+                        \ ]
+            let g:startify_session_dir=$HOME . '/temp/session'
+            if has('gui_running')
+                hi StartifyHeader  guifg=#87afff
+                hi StartifyFooter  guifg=#87afff
+                hi StartifyBracket guifg=#585858
+                hi StartifyNumber  guifg=#ffaf5f
+                hi StartifyPath    guifg=#8a8a8a
+                hi StartifySlash   guifg=#585858
+            else
+                hi StartifyHeader  ctermfg=111
+                hi StartifyFooter  ctermfg=111
+                hi StartifyBracket ctermfg=240
+                hi StartifyNumber  ctermfg=215
+                hi StartifyPath    ctermfg=245
+                hi StartifySlash   ctermfg=240
+                ""        hi StartifyHeader  ctermfg=114
+                ""        hi StartifyFooter  ctermfg=240
+                ""        hi StartifyBracket ctermfg=240
+                ""        hi StartifyNumber  ctermfg=215
+                ""        hi StartifyPath    ctermfg=245
+                ""        hi StartifySlash   ctermfg=240
+                hi StartifySpecial ctermfg=240
+            endif
         endif
 
         " -> Goyo & Limelight
         autocmd! User GoyoEnter Limelight
         autocmd! User GoyoLeave Limelight!
-
     endif
 
     " Setting for enhancement Plugins
@@ -102,18 +146,40 @@
         let g:investigate_use_dash=1
         " -> EnhancedDiff
         let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
+
+        " Tabularize
+        if isdirectory(expand("~/.vim/bundle/tabular"))
+            nmap <Leader>a& :Tabularize /&<CR>
+            vmap <Leader>a& :Tabularize /&<CR>
+            nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+            vmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+            nmap <Leader>a=> :Tabularize /=><CR>
+            vmap <Leader>a=> :Tabularize /=><CR>
+            nmap <Leader>a: :Tabularize /:<CR>
+            vmap <Leader>a: :Tabularize /:<CR>
+            nmap <Leader>a:: :Tabularize /:\zs<CR>
+            vmap <Leader>a:: :Tabularize /:\zs<CR>
+            nmap <Leader>a, :Tabularize /,<CR>
+            vmap <Leader>a, :Tabularize /,<CR>
+            nmap <Leader>a,, :Tabularize /,\zs<CR>
+            vmap <Leader>a,, :Tabularize /,\zs<CR>
+            nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+            vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+        endif
     endif
 
     " setting for moving Plugins
     if count(g:gsvim_bundle_groups, 'move')
         " -> Tag bar
-        nnoremap <Leader>t :TagbarToggle<CR>
-        let g:tagbar_autofocus=1
-        let g:tagbar_expand=1
-        let g:tagbar_foldlevel=2
-        let g:tagbar_autoshowtag=1
-
-        " Matchit
+        if isdirectory(expand("~/.vim/bundle/tagbar/"))
+            let g:tagbar_autofocus     = 0
+            let g:tagbar_expand        = 0
+            let g:tagbar_foldlevel     = 1
+            let g:tagbar_autoshowtag   = 1
+            ""let g:tagbar_width       = 20     not usage
+            nnoremap <Leader>t :TagbarToggle<CR>
+        endif
+        " -> Matchit
         " Start mathit
         packadd! matchit
         " Use Tab instead of % to switch
@@ -149,9 +215,23 @@
             inoremap <expr><Tab>  pumvisible() ? "\<C-N>" : "\<Tab>"
             inoremap <expr><S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
             if g:gsvim_completion_engine=='neocomplete'
-                let g:neocomplete#enable_at_startup=1
                 let g:neocomplete#data_directory=$HOME . '/.vim/cache/neocomplete'
+                let g:acp_enableAtStartup=1
+                let g:neocomplete#enable_at_startup=1
+                let g:neocomplete#enable_smart_case=1
+                let g:neocomplete#enable_insert_char_pre=1
+                let g:neocomplete#enable_multibyte_completion=1
+                let g:neocomplete#sources#syntax#min_keyword_length=3
+                let g:neocomplete#lock_buffer_name_pattern='\*ku\*'
+                let g:neocomplete#enable_auto_select=1
                 let g:neocomplete#enable_auto_delimiter=1
+                let g:marching_enable_neocomplete=1
+                let g:neocomplete#max_list=16
+                let g:neocomplete#max_keyword_width=58
+                if !exists('g:neocomplete#keyword_patterns')
+                        let g:neocomplete#keyword_patterns = {}
+                endif
+                let g:neocomplete#keyword_patterns['default']='\h\w*'
                 " Use <C-E> to close popup
                 inoremap <expr><C-E> neocomplete#cancel_popup()
                 inoremap <expr><CR> delimitMate#WithinEmptyPair() ?
@@ -197,9 +277,21 @@
             " Use <C-K> to replace TARGET within snippets in visual mode
             xmap <C-K> <Plug>(neosnippet_start_unite_snippet_target)
             """ For snippet_complete marker
-            ""if has('conceal')
-            ""    set conceallevel=2 concealcursor=i
-            ""endif
+            if has('conceal')
+                set conceallevel=2 concealcursor=i
+            endif
+            " FileType Cheacker
+            autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+            autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+            " autocmd FileType javascript setlocal omnifunc=javacriptcomplete#CompleteJS
+            autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+            if !exists('g:neocomplete#sources#omni#input_patterns')
+                    let g:neocomplete#sources#omni#input_patterns={}
+            endif
+            let g:neocomplete#ctags_command="ctags"
+            let g:neocomplete#sources#omni#input_patterns.c='[^.[:digit:] *\t]\%(\.\|->\)'
+            let g:neocomplete#sources#omni#input_patterns.cpp='[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::\w*'
         else
             " -> UltiSnips
             let g:UltiSnipsExpandTrigger="<C-K>"
@@ -214,39 +306,92 @@
 
     endif
 
-    " Setting for compiling Plugins
+    " -> compiling Plugins
     if count(g:gsvim_bundle_groups, 'compile')
+        " " -> Syntastic
+        " if isdirectory(expand("~/.vim/bundle/syntastic"))
+        "     ""let g:syntastic_javascript_checkers = ['jshint', 'jsl', 'jslint', 'jscs']
+        "     let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+        "     ""let g:syntastic_javascript_checkers = ['eslint']
+        "     " to see error location list
+        "     " 每次自动调用 :SyntasticSetLocList, 将错误覆盖 **quickfix**
+        "     let g:syntastic_always_populate_loc_list = 0
+        "     " 自动拉起/关闭错误窗口, 不需要手动调用 :Errors
+        "     let g:syntastic_auto_loc_list = 0
+        "     let g:syntastic_loc_list_height = 5
+        "     " 每次保存的时候做检查
+        "     " let g:syntastic_check_on_wq = 0
 
-        " -> Syntastic
-        let g:syntastic_check_on_open=0
-        let g:syntastic_aggregate_errors=1
-        let g:syntastic_auto_jump=1
-        let g:syntastic_auto_loc_list=1
-        if g:gsvim_fancy_font
-            let g:syntastic_error_symbol = '✗'
-            let g:syntastic_style_error_symbol = '✠'
-            let g:syntastic_warning_symbol = '∆'
-            let g:syntastic_style_warning_symbol = '≈'
+        "     let g:syntastic_mode_map = {
+        "         \ "mode": "passive",
+        "         \ "active_filetypes": [],
+        "         \ "passive_filetypes": ["javascript"] }
+
+        "     ""let g:syntastic_javascript_jshint_conf = '~/.jshintrc'
+        "     let g:syntastic_javascript_jshint_args = "--config ". expand("~/.jshintrc")
+        "     let g:syntastic_javascript_jscs_args = "--config ". expand("~/.jscsrc")
+        "     ""let g:syntastic_javascript_eslint_args = "--config ". expand("~/.eslintrc")
+        "     function! ToggleErrors()
+        "         let old_last_winnr = winnr('$')
+        "         lclose
+        "         if old_last_winnr == winnr('$')
+        "             " Nothing was closed, open syntastic error location panel
+        "             Errors
+        "         endif
+        "     endfunction
+        "     nnoremap <Leader>y :call ToggleErrors()<cr>
+        " endif
+        " -> ale
+        if isdirectory(expand("~/.vim/bundle/ale"))
+            let g:ale_sign_error = '✗'
+            let g:ale_sign_warning = '∆'
         endif
-
-        " -> Singlecompile
-        nnoremap <Leader>r :SingleCompileRun<CR>
-        let g:SingleCompile_showquickfixiferror=1
-
     endif
 
     """ Setting for git Plugins
-    ""if count(g:gsvim_bundle_groups, 'git')
-    ""endif
+    if count(g:gsvim_bundle_groups, 'git')
+        " -> GitGutter Setting
+        let g:gitgutter_sign_column_always = 0
+        let g:gitgutter_max_signs = 99999
+    endif
 
     " Setting for language specificity
     if count(g:gsvim_bundle_groups, 'language')
-
         " -> Emmet
         let g:user_emmet_leader_key='<C-Z>'
-        let g:user_emmet_settings={'indentation':'    '}
+        " let g:user_emmet_settings={'indentation':'    '}
         let g:use_emmet_complete_tag=1
+        " change <Tab> config , if use [YouCompleteMe]
+        let g:user_emmet_expandabbr_key ='<Tab>'
+        let g:user_emmet_settings = {
+                \ 'php'     : {
+                \ 'extends' : 'html',
+                \ 'filters' : 'c',
+                \ },
+                \ 'xml'     : {
+                \ 'extends' : 'html',
+                \ },
+                \ 'haml'    : {
+                \ 'extends' : 'html',
+                \ },
+                \ 'phtml'    : {
+                \ 'extends' : 'html',
+                \ }
+            \}
 
+        " -> javascript
+        " jsbeautify
+        autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+        " for html
+        autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+        " for css or scss
+        autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+        " for json
+        autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
+
+        " JSON
+        ""nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
+        let g:vim_json_syntax_conceal = 0
     endif
 " }
 

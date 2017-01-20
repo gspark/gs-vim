@@ -1,5 +1,32 @@
-
 " Environment {
+    " Set directories
+    function! InitializeDirectories()
+        let parent=$HOME
+        let prefix='temp'
+        let dir_list={
+                    \ 'backup': 'backupdir',
+                    \ 'view': 'viewdir',
+                    \ 'swap': 'directory',
+                    \ 'undo': 'undodir',
+                    \ 'cache': '',
+                    \ 'session': ''}
+        for [dirname, settingname] in items(dir_list)
+            let directory=parent.'/'.prefix.'/'.dirname.'/'
+            if !isdirectory(directory)
+                if exists('*mkdir')
+                    let dir = substitute(directory, "/$", "", "")
+                    call mkdir(dir, 'p')
+                else
+                    echo 'Warning: Unable to create directory: '.directory
+                endif
+            endif
+            if settingname!=''
+                exec 'set '.settingname.'='.directory
+            endif
+        endfor
+    endfunction
+    call InitializeDirectories()
+
     " Windows Compatible {
         " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
         " across (heterogeneous) systems easier.
@@ -26,13 +53,12 @@
     " }
 " }
 
-
 "Options {
     let g:gsvim_user='gspark' " User name
     let g:gsvim_email='gspark@gmail.com' " User email
     let g:gsvim_github='https://github.com/gspark/gs-vim.git' " User github
     " gsvim UI setting
-    let g:gsvim_default_scheme=1 " Enable color settings adapted for hybrid
+    let g:gsvim_default_scheme=1 " Enable color settings
     let g:gsvim_fancy_font=1 " Enable using fancy font
     let g:gsvim_show_number=1 " Enable showing number
     " gsvim Autocomplete setting (YCM or NEO)
@@ -43,5 +69,11 @@
     ""let g:gs_vim_font='Consolas'                            " font
     ""let g:gs_vim_font='Ubuntu Mono derivative Powerline'    " font
     let g:gs_vim_font='DejaVu Sans Mono for Powerline'      " font
+
+    let $XDG_CACHE_HOME               = $HOME . '/temp/cache'
+    let g:startify_session_dir        = $HOME . '/temp/session'
+    let g:unite_data_directory        = $HOME . '/temp/cache/unite'
+    let g:neocomplete#data_directory  = $HOME . '/temp/cache/neocomplete'
+    let g:neocomplcache_temporary_dir = $HOME . '/temp/cache/neocomplcache'
 " }
 
