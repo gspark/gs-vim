@@ -1,29 +1,63 @@
 " Plugin Config {
     if count(g:gsvim_bundle_groups, 'ui')
+        " -> gruvbox
+        if isdirectory(expand("~/.vim/bundle/gruvbox"))
+            let g:gruvbox_italic = 1
+        endif
+
         " -> airline
         if isdirectory(expand("~/.vim/bundle/vim-airline"))
-            "" 开启tabline
-            let g:airline#extensions#tabline#enabled                = 1
-            "" tabline中当前buffer两端的分隔符
-            ""let g:airline#extensions#tabline#left_sep               = ' '
-            "" tabline为激活的buffer的两端字符
-            let g:airline#extensions#tabline#left_alt_sep           = '|'
-            "" tabline中buffer显示编号
-            let g:airline#extensions#tabline#buffer_nr_show         = 1
-            ""let g:airline#extensions#bufferline#enabled             = 1
-            ""let g:airline#extensions#bufferline#overwrite_variables = 1
-
-            ""let g:airline#extensions#eclim#enabled                = 0
-            if exists("g:colors_name") && g:colors_name=='gruvbox'
-                let g:airline_theme                                 = 'gruvbox'
+            let g:airline_skip_empty_sections = 1
+            let g:airline#extensions#tabline#enabled = 1
+            let g:airline#extensions#tmuxline#enabled = 1
+            let g:Powerline_sybols = 'unicode'
+            let g:airline#extensions#tabline#buffer_idx_mode = 1
+            let g:airline#extensions#tabline#buffer_nr_show = 1
+            let g:airline#extensions#tabline#buffer_nr_format = '%s:'
+            let g:airline#extensions#tabline#fnamemod = ':t'
+            let g:airline#extensions#tabline#fnamecollapse = 1
+            let g:airline#extensions#tabline#fnametruncate = 0
+            let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+            nmap <leader>1 <Plug>AirlineSelectTab1
+            nmap <leader>2 <Plug>AirlineSelectTab2
+            nmap <leader>3 <Plug>AirlineSelectTab3
+            nmap <leader>4 <Plug>AirlineSelectTab4
+            nmap <leader>5 <Plug>AirlineSelectTab5
+            nmap <leader>6 <Plug>AirlineSelectTab6
+            nmap <leader>7 <Plug>AirlineSelectTab7
+            nmap <leader>8 <Plug>AirlineSelectTab8
+            nmap <leader>9 <Plug>AirlineSelectTab9
+            nmap <leader>- <Plug>AirlineSelectPrevTab
+            nmap <leader>+ <Plug>AirlineSelectNextTab
+            if g:gsvim_fancy_font
+                let g:airline_powerline_fonts=1
+                " let g:airline_left_sep = ''
+                " let g:airline_left_alt_sep = ''
+                " let g:airline_right_sep = ''
+                " let g:airline_right_alt_sep = ''
+                " let g:airline_symbols.branch = ''
+                " let g:airline_symbols.readonly = ''
+                " let g:airline_symbols.linenr = ''
+                " let g:airline_symbols.maxlinenr= ''
             else
-                let g:airline_theme                                 = 'bubblegum'
+                let g:airline_left_sep = '▶'
+                let g:airline_right_sep = '◀'
+                let g:airline_symbols.crypt = '🔒'
+                let g:airline_symbols.linenr = '¶'
+                let g:airline_symbols.branch = '⎇'
+                let g:airline_symbols.paste = '∥'
+                let g:airline_symbols.notexists = '∄'
+                let g:airline_symbols.whitespace = 'Ξ'
             endif
-            ""let g:airline_branch_prefix                           = '⎇ '
-            ""let g:airline_left_sep                                = ''
-            ""let g:airline_right_sep                               = ''
-            ""let g:airline_linecolumn_prefix                       = '␊ '
-            ""let g:airline_paste_symbol                            = 'Þ'
+            " if exists("g:colors_name") && (g:colors_name=='gruvbox')
+            "     let g:airline_theme = 'gruvbox'
+            " else
+            "     let g:airline_theme = 'bubblegum'
+            " endif
+            augroup Fix_airline_with_unite
+                autocmd FileType unite AirlineRefresh
+                autocmd FileType vimfiler AirlineRefresh
+            augroup END
             ""let g:airline_section_y                               = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b][HEX=\%02.2b]"
             let g:airline_section_y                                 = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b]"
         endif
@@ -128,6 +162,10 @@
                 endif
             endfunction
         endif
+        let g:multi_cursor_next_key='<C-n>'
+        let g:multi_cursor_prev_key='<C-p>'
+        let g:multi_cursor_skip_key='<C-x>'
+        let g:multi_cursor_quit_key='<Esc>'
         " -> Undo tree
         nnoremap <Leader>u :UndotreeToggle<CR>
         let g:undotree_SetFocusWhenToggle=1
@@ -215,7 +253,7 @@
             inoremap <expr><Tab>  pumvisible() ? "\<C-N>" : "\<Tab>"
             inoremap <expr><S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
             if  g:gsvim_completion_engine == 'neocomplete'
-                let g:neocomplete#data_directory=$HOME . '/.vim/cache/neocomplete'
+                let g:neocomplete#data_directory=$HOME . '/temp/cache/neocomplete'
                 let g:acp_enableAtStartup=1
                 let g:neocomplete#enable_at_startup=1
                 let g:neocomplete#enable_smart_case=1
@@ -239,7 +277,7 @@
                             \ pumvisible() ? neocomplete#close_popup() : "\<CR>"
             else
                 let g:neocomplcache_enable_at_startup=1
-                let g:neocomplcache_temporary_dir=$HOME . '/.vim/cache/neocomplcache'
+                let g:neocomplcache_temporary_dir=$HOME . '/temp/cache/neocomplcache'
                 let g:neocomplcache_enable_auto_delimiter=1
                 let g:neocomplcache_enable_fuzzy_completion=1
                 " Use <C-E> to close popup
@@ -272,6 +310,26 @@
             " -> Neosnippet
             " Set information for snippets
             let g:neosnippet#enable_snipmate_compatibility=1
+            let g:neosnippet#enable_complete_done = 1
+            let g:neosnippet#completed_pairs= {}
+            let g:neosnippet#completed_pairs.java = {'(' : ')'}
+            if g:neosnippet#enable_complete_done
+                let g:neopairs#enable = 0
+            endif
+            augroup neosnippet_complete_done
+                autocmd!
+                autocmd CompleteDone * call s:my_complete_done()
+            augroup END
+            function! s:my_complete_done() abort "{{{
+                if !empty(get(v:,'completed_item',''))
+                    let snippet = neosnippet#parser#_get_completed_snippet(v:completed_item,neosnippet#util#get_cur_text(), neosnippet#util#get_next_text())
+                    if snippet ==# ''
+                        return
+                    endif
+                    let [cur_text, col] = neosnippet#mappings#_pre_trigger()[0:1]
+                    call neosnippet#view#_insert(snippet, {}, cur_text, col)
+                endif
+            endfunction"}}}
             " Use <C-K> to expand or jump snippets in insert mode
             imap <C-K> <Plug>(neosnippet_expand_or_jump)
             " Use <C-K> to replace TARGET within snippets in visual mode
@@ -310,6 +368,10 @@
     if count(g:gsvim_bundle_groups, 'compile')
         " " -> Syntastic
         " if isdirectory(expand("~/.vim/bundle/syntastic"))
+        " let g:syntastic_error_symbol = '✗'
+        " let g:syntastic_warning_symbol = '∆'
+        " let g:syntastic_style_error_symbol = '✗'
+        " let g:syntastic_style_warning_symbol = '∆'
         "     ""let g:syntastic_javascript_checkers = ['jshint', 'jsl', 'jslint', 'jscs']
         "     let g:syntastic_javascript_checkers = ['jshint', 'jscs']
         "     ""let g:syntastic_javascript_checkers = ['eslint']

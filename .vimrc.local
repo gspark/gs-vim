@@ -13,5 +13,7 @@
     ""     new, 创建一个新窗口
     ""     setlocal bt=nofile, 把当前窗口设为scratch模式
     ""     put! a, 把寄存器a的内容粘贴到新窗口
+    " 启动输出日志
+    " gvim.exe -V9message.txt
 " }
 

@@ -43,7 +43,6 @@
 
     set history=1000 " Increase the lines of history
     set modeline " Turn on modeline
-    set encoding=utf-8 " Set utf-8 encoding
     set completeopt+=longest " Optimize auto complete
     set completeopt-=preview " Optimize auto complete
 
@@ -70,14 +69,6 @@
         set laststatus=2 " Show the statusline
         set noshowmode " Hide the default mode text
         set ttimeoutlen=50
-        ""let g:bufferline_echo=0
-        ""let g:bufferline_modified='[+]'
-        if g:gsvim_fancy_font
-            let g:airline_powerline_fonts=1
-        else
-            let g:airline_left_sep='›'
-            let g:airline_right_sep='‹'
-        endif
     endif
     " Only have cursorline in current window and in normal window
     autocmd WinLeave * set nocursorline
@@ -111,7 +102,8 @@
     set textwidth=76 " Change text width
     if g:gsvim_fancy_font
         set list " Show these tabs and spaces and so on
-        set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Change listchars
+        " set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Change listchars
+        set listchars=tab:▶\ ,eol:¬,extends:❯,precedes:❮ " Change listchars
         set linebreak " Wrap long lines at a blank
         set showbreak=↪  " Change wrap line break
         set fillchars=diff:⣿,vert:│ " Change fillchars
@@ -128,6 +120,8 @@
             set clipboard=unnamed
         endif
     endif
+    " 设置 alt 键不映射到菜单栏
+    set winaltkeys=no
     " clean no name empty buffers
     function! CleanNoNameEmptyBuffers()
         let buffers = filter(range(1, bufnr('$')),'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val) < 0 && (getbufline(v:val, 1, "$") == [""])')
@@ -151,8 +145,6 @@
     set hlsearch " Highlight search terms
     set incsearch " Find as you type search
     set gdefault " turn on g flag
-    " Use ,Space to toggle the highlight search
-    nnoremap <Leader><Space> :set hlsearch!<CR>
     " -> Fold Related
     set foldlevelstart=0 " Start with all folds closed
     set foldcolumn=1 " Set fold column
@@ -175,6 +167,8 @@
     endfunction
     set foldtext=MyFoldText()
     " -> Key Mapping
+    " Use ,Space to toggle the highlight search
+    nnoremap <Leader><Space> :set hlsearch!<CR>
     " Make j and k work the way you expect
     nnoremap j gj
     nnoremap k gk
@@ -246,6 +240,9 @@
                 elseif g:gs_vim_font=='Consolas'
                     set guifont=Consolas:h12.5:cANSI
                     set guifontwide=微软雅黑:h12.3:w5.2:cGB2312
+                elseif g:gs_vim_font=='Fira Code'
+                    set guifont=Fira\ Code:h11.5:cANSI
+                    " set guifontwide=幼圆:h11:cGB2312
                 endif
             endif
         endif
