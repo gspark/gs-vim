@@ -214,7 +214,7 @@
             " Use Tab and S-Tab to select candidate
             inoremap <expr><Tab>  pumvisible() ? "\<C-N>" : "\<Tab>"
             inoremap <expr><S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
-            if has('lua')
+            if  g:gsvim_completion_engine == 'neocomplete'
                 let g:neocomplete#data_directory=$HOME . '/.vim/cache/neocomplete'
                 let g:acp_enableAtStartup=1
                 let g:neocomplete#enable_at_startup=1
