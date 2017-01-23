@@ -58,20 +58,22 @@
                 autocmd FileType unite AirlineRefresh
                 autocmd FileType vimfiler AirlineRefresh
             augroup END
-            ""let g:airline_section_y                               = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b][HEX=\%02.2b]"
-            let g:airline_section_y                                 = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b]"
+            ""let g:airline_section_y                            = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b][HEX=\%02.2b]"
+            let g:airline_section_y                              = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b]"
         endif
 
         " -> Indent Guides
-        if !has('gui_running') && g:gsvim_default_scheme
-            let g:indent_guides_auto_colors=0
-            autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=235
-            autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
+        if isdirectory(expand("~/.vim/bundle/indentLine"))
+            if !has('gui_running') && g:gsvim_default_scheme
+                let g:indent_guides_auto_colors=0
+                autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=235
+                autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
+            endif
+            let g:indent_guides_enable_on_vim_startup=1
+            let g:indent_guides_guide_size=1
+            let g:indent_guides_default_mapping=0
+            let g:indent_guides_exclude_filetypes=['help', 'nerdtree', 'startify', 'markdown']
         endif
-        let g:indent_guides_enable_on_vim_startup=1
-        let g:indent_guides_guide_size=1
-        let g:indent_guides_default_mapping=0
-        let g:indent_guides_exclude_filetypes=['help', 'nerdtree', 'startify', 'markdown']
 
         " -> Startify
         if isdirectory(expand("~/.vim/bundle/vim-startify"))
@@ -118,74 +120,102 @@
         endif
 
         " -> Goyo & Limelight
-        autocmd! User GoyoEnter Limelight
-        autocmd! User GoyoLeave Limelight!
+        if isdirectory(expand("~/.vim/bundle/limelight.vim"))
+            autocmd! User GoyoEnter Limelight
+            autocmd! User GoyoLeave Limelight!
+        endif
     endif
 
     " Setting for enhancement Plugins
     if count(g:gsvim_bundle_groups, 'enhance')
         " -> delimitMate
-        let delimitMate_expand_cr=1
-        let delimitMate_expand_space=1
-        let delimitMate_balance_matchpairs=1
-        " -> Tcomment
-        " Map \<Space> to commenting
-        function! IsWhiteLine()
-            if (getline('.')=~'^$')
-                exe 'TCommentBlock'
-                normal! j
-            else
-                normal! A
-                exe 'TCommentRight'
-                normal! l
-                normal! x
-            endif
-            startinsert!
-        endfunction
-        nnoremap <silent> <LocalLeader><Space> :call IsWhiteLine()<CR>
-        " -> Multiple cursors
-        " Called once right before you start selecting multiple cursors
-        if g:gsvim_autocomplete=='NEO'
-            function! Multiple_cursors_before()
-                if g:gsvim_completion_engine=='neocomplete'
-                    exe 'NeoCompleteLock'
-                else
-                    exe 'NeoComplCacheLock'
-                endif
-            endfunction
-            " Called once only when the multiple selection is canceled (default <Esc>)
-            function! Multiple_cursors_after()
-                if g:gsvim_completion_engine=='neocomplete'
-                    exe 'NeoCompleteUnlock'
-                else
-                    exe 'NeoComplCacheUnlock'
-                endif
-            endfunction
+        if isdirectory(expand("~/.vim/bundle/delimitMate"))
+            let delimitMate_expand_cr=1
+            let delimitMate_expand_space=1
+            let delimitMate_balance_matchpairs=1
         endif
-        let g:multi_cursor_next_key='<C-n>'
-        let g:multi_cursor_prev_key='<C-p>'
-        let g:multi_cursor_skip_key='<C-x>'
-        let g:multi_cursor_quit_key='<Esc>'
-        " -> Undo tree
-        nnoremap <Leader>u :UndotreeToggle<CR>
-        let g:undotree_SetFocusWhenToggle=1
-        " -> Easy Align
-        xmap ga <Plug>(EasyAlign)
-        nmap ga <Plug>(EasyAlign)
-        " -> Gutentags
-        let g:gutentags_cache_dir=$HOME . '/.vim/cache/ctags'
-        " -> Splitjoin
-        let g:splitjoin_split_mapping = ',s'
-        let g:splitjoin_join_mapping  = ',j'
-        let g:splitjoin_normalize_whitespace=1
-        let g:splitjoin_align=1
-        " -> Investigate.vim
-        nnoremap K :call investigate#Investigate()<CR>
-        let g:investigate_use_dash=1
-        " -> EnhancedDiff
-        let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
 
-        " Tabularize
+        " -> Tcomment
+        " if isdirectory(expand("~/.vim/bundle/tcomment_vim"))
+        "     " Map \<Space> to commenting
+        "     function! IsWhiteLine()
+        "         if (getline('.')=~'^$')
+        "             exe 'TCommentBlock'
+        "             normal! j
+        "         else
+        "             normal! A
+        "             exe 'TCommentRight'
+        "             normal! l
+        "             normal! x
+        "         endif
+        "         startinsert!
+        "     endfunction
+        "     nnoremap <silent> <LocalLeader><Space> :call IsWhiteLine()<CR>
+        " endif
+
+        " -> Multiple cursors
+        if isdirectory(expand("~/.vim/bundle/vim-multiple-cursors"))
+            " Called once right before you start selecting multiple cursors
+            if g:gsvim_autocomplete=='NEO'
+                function! Multiple_cursors_before()
+                    if g:gsvim_completion_engine=='neocomplete'
+                        exe 'NeoCompleteLock'
+                    else
+                        exe 'NeoComplCacheLock'
+                    endif
+                endfunction
+                " Called once only when the multiple selection is canceled (default <Esc>)
+                function! Multiple_cursors_after()
+                    if g:gsvim_completion_engine=='neocomplete'
+                        exe 'NeoCompleteUnlock'
+                    else
+                        exe 'NeoComplCacheUnlock'
+                    endif
+                endfunction
+            endif
+            let g:multi_cursor_next_key='<C-n>'
+            let g:multi_cursor_prev_key='<C-p>'
+            let g:multi_cursor_skip_key='<C-x>'
+            let g:multi_cursor_quit_key='<Esc>'
+        endif
+
+        " -> Undo tree
+        if isdirectory(expand("~/.vim/bundle/undotree"))
+            nnoremap <Leader>u :UndotreeToggle<CR>
+            let g:undotree_SetFocusWhenToggle=1
+        endif
+
+        " -> Easy Align
+        if isdirectory(expand("~/.vim/bundle/vim-easy-align"))
+            xmap ga <Plug>(EasyAlign)
+            nmap ga <Plug>(EasyAlign)
+        endif
+
+        " -> Gutentags
+        if isdirectory(expand("~/.vim/bundle/vim-gutentags"))
+            let g:gutentags_cache_dir=$HOME . '/temp/cache/ctags'
+        endif
+
+        " -> Splitjoin
+        if isdirectory(expand("~/.vim/bundle/splitjoin.vim"))
+            let g:splitjoin_split_mapping = ',s'
+            let g:splitjoin_join_mapping  = ',j'
+            let g:splitjoin_normalize_whitespace=1
+            let g:splitjoin_align=1
+        endif
+
+        " -> Investigate.vim
+        if isdirectory(expand("~/.vim/bundle/investigate.vim"))
+            nnoremap K :call investigate#Investigate()<CR>
+            let g:investigate_use_dash=1
+        endif
+
+        " -> EnhancedDiff
+        if isdirectory(expand("~/.vim/bundle/vim-diff-enhanced"))
+            let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
+        endif
+
+        " -> Tabularize
         if isdirectory(expand("~/.vim/bundle/tabular"))
             nmap <Leader>a& :Tabularize /&<CR>
             vmap <Leader>a& :Tabularize /&<CR>
@@ -204,12 +234,18 @@
             nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
             vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
         endif
+
+        " -> vim-commentary
+        if isdirectory(expand("~/.vim/bundle/vim-commentary" ))
+            autocmd FileType python,shell set commentstring=#\ %s    " 设置Python注释字符
+            autocmd FileType mako set cms=##\ %s
+        endif
     endif
 
     " setting for moving Plugins
     if count(g:gsvim_bundle_groups, 'move')
         " -> Tag bar
-        if isdirectory(expand("~/.vim/bundle/tagbar/"))
+        if isdirectory(expand("~/.vim/bundle/tagbar"))
             let g:tagbar_autofocus     = 0
             let g:tagbar_expand        = 0
             let g:tagbar_foldlevel     = 1
@@ -217,6 +253,7 @@
             ""let g:tagbar_width       = 20     not usage
             nnoremap <Leader>t :TagbarToggle<CR>
         endif
+
         " -> Matchit
         " Start mathit
         packadd! matchit
@@ -228,21 +265,25 @@
     " Setting for navigation Plugins
     if count(g:gsvim_bundle_groups, 'navigate')
         " -> NERD Tree
-        nnoremap <Leader>f :NERDTreeToggle<CR>
-        let NERDTreeChDirMode=2
-        let NERDTreeShowBookmarks=1
-        let NERDTreeShowHidden=1
-        let NERDTreeShowLineNumbers=1
-        augroup nerd_loader
-            autocmd!
-            autocmd VimEnter * silent! autocmd! FileExplorer
-            autocmd BufEnter,BufNew *
-                        \  if isdirectory(expand('<amatch>'))
-                        \|   call plug#load('nerdtree')
-                        \|   execute 'autocmd! nerd_loader'
-                        \| endif
-        augroup END
-
+        if isdirectory(expand("~/.vim/bundle/nerdtree"))
+            nnoremap <Leader>f :NERDTreeToggle<CR>
+            let NERDTreeChDirMode=2
+            let NERDTreeShowBookmarks=1
+            let NERDTreeShowHidden=1
+            let NERDTreeShowLineNumbers=1
+            augroup nerd_loader
+                autocmd!
+                autocmd VimEnter * silent! autocmd! FileExplorer
+                autocmd BufEnter,BufNew *
+                            \  if isdirectory(expand('<amatch>'))
+                            \|   call plug#load('nerdtree')
+                            \|   execute 'autocmd! nerd_loader'
+                            \| endif
+            augroup END
+            " ColorFul NERDTree Settings
+            let g:NERDTreeRespectWildIgnore=1
+            let g:NERDTreeDirArrows=0
+        endif
     endif
 
     " Setting for completion Plugins
@@ -316,20 +357,6 @@
             if g:neosnippet#enable_complete_done
                 let g:neopairs#enable = 0
             endif
-            augroup neosnippet_complete_done
-                autocmd!
-                autocmd CompleteDone * call s:my_complete_done()
-            augroup END
-            function! s:my_complete_done() abort "{{{
-                if !empty(get(v:,'completed_item',''))
-                    let snippet = neosnippet#parser#_get_completed_snippet(v:completed_item,neosnippet#util#get_cur_text(), neosnippet#util#get_next_text())
-                    if snippet ==# ''
-                        return
-                    endif
-                    let [cur_text, col] = neosnippet#mappings#_pre_trigger()[0:1]
-                    call neosnippet#view#_insert(snippet, {}, cur_text, col)
-                endif
-            endfunction"}}}
             " Use <C-K> to expand or jump snippets in insert mode
             imap <C-K> <Plug>(neosnippet_expand_or_jump)
             " Use <C-K> to replace TARGET within snippets in visual mode
@@ -403,6 +430,7 @@
         "     endfunction
         "     nnoremap <Leader>y :call ToggleErrors()<cr>
         " endif
+
         " -> ale
         if isdirectory(expand("~/.vim/bundle/ale"))
             let g:ale_sign_error = '✗'
@@ -413,36 +441,43 @@
     """ Setting for git Plugins
     if count(g:gsvim_bundle_groups, 'git')
         " -> Gitv Gitview Setting
-        let g:Gitv_OpenHorizontal = 1
-        let g:Gitv_WrapLines = 1
+        if isdirectory(expand("~/.vim/bundle/gitv"))
+            let g:Gitv_OpenHorizontal = 1
+            let g:Gitv_WrapLines = 1
+        endif
+
         " -> GitGutter Setting
-        let g:gitgutter_sign_column_always = 0
-        let g:gitgutter_max_signs = 99999
+        if isdirectory(expand("~/.vim/bundle/vim-gitgutter"))
+            let g:gitgutter_sign_column_always = 0
+            let g:gitgutter_max_signs = 99999
+        endif
     endif
 
     " Setting for language specificity
     if count(g:gsvim_bundle_groups, 'language')
         " -> Emmet
-        let g:user_emmet_leader_key='<C-Z>'
-        " let g:user_emmet_settings={'indentation':'    '}
-        let g:use_emmet_complete_tag=1
-        " change <Tab> config , if use [YouCompleteMe]
-        let g:user_emmet_expandabbr_key ='<Tab>'
-        let g:user_emmet_settings = {
-                \ 'php'     : {
-                \ 'extends' : 'html',
-                \ 'filters' : 'c',
-                \ },
-                \ 'xml'     : {
-                \ 'extends' : 'html',
-                \ },
-                \ 'haml'    : {
-                \ 'extends' : 'html',
-                \ },
-                \ 'phtml'    : {
-                \ 'extends' : 'html',
-                \ }
-            \}
+        if isdirectory(expand("~/.vim/bundle/emmet-vim"))
+            let g:user_emmet_leader_key='<C-Z>'
+            " let g:user_emmet_settings={'indentation':'    '}
+            let g:use_emmet_complete_tag=1
+            " change <Tab> config , if use [YouCompleteMe]
+            let g:user_emmet_expandabbr_key ='<Tab>'
+            let g:user_emmet_settings = {
+                    \ 'php'     : {
+                    \ 'extends' : 'html',
+                    \ 'filters' : 'c',
+                    \ },
+                    \ 'xml'     : {
+                    \ 'extends' : 'html',
+                    \ },
+                    \ 'haml'    : {
+                    \ 'extends' : 'html',
+                    \ },
+                    \ 'phtml'    : {
+                    \ 'extends' : 'html',
+                    \ }
+                \}
+        endif
 
         " -> javascript
         " jsbeautify
@@ -454,7 +489,7 @@
         " for json
         autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
 
-        " JSON
+        " -> JSON
         ""nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
         let g:vim_json_syntax_conceal = 0
     endif

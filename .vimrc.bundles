@@ -39,6 +39,7 @@
         " Plug 'wellle/targets.vim' " Text objects
         " Plug 'roman/golden-ratio' " Resize windows
         " Plug 'chrisbra/vim-diff-enhanced' " Create better diffs
+        Plug 'tpope/vim-commentary'
     endif
 
     if count(g:gsvim_bundle_groups, 'move') " Moving

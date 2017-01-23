@@ -15,5 +15,7 @@
     ""     put! a, 把寄存器a的内容粘贴到新窗口
     " 启动输出日志
     " gvim.exe -V9message.txt
+    " 启动时间
+    " gvim d:\workspace\js\electronic-wechat\src\main.js --startuptime tmp.txt
 " }
 

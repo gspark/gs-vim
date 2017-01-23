@@ -36,6 +36,7 @@
     let mapleader=',' " Change the mapleader
     let maplocalleader='\' " Change the maplocalleader
     set timeoutlen=500 " Time to wait for a command
+    set updatetime=250
 
     set autoread " Set autoread when a file is changed outside
     set autowrite " Write on make/shell commands
