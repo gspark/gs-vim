@@ -43,6 +43,7 @@
             set termencoding=cp850
             " Let Vim use utf-8 internally, because many scripts require this
             set encoding=utf-8
+            set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
             setglobal fileencoding=utf-8
             " Windows has traditionally used cp1252, so it's probably wise to
             " fallback into cp1252 instead of eg. iso-8859-15.

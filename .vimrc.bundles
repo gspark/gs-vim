@@ -104,8 +104,10 @@
         " Plug 'LaTeX-Box-Team/LaTeX-Box' " LaTex
         " Plug 'sheerun/vim-polyglot' " Language Support
         Plug 'pangloss/vim-javascript' " javascript
+        Plug 'ap/vim-css-color'
         Plug 'elzr/vim-json'           " json
         Plug 'plasticboy/vim-markdown' " markdown
+        Plug 'Chiel92/vim-autoformat'
     endif
 
     call plug#end()
