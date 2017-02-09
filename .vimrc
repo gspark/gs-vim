@@ -71,11 +71,11 @@
         set noshowmode " Hide the default mode text
         set ttimeoutlen=50
     endif
-    " Only have cursorline in current window and in normal window
-    autocmd WinLeave * set nocursorline
-    autocmd WinEnter * set cursorline
-    autocmd InsertEnter * set nocursorline
-    autocmd InsertLeave * set cursorline
+    " " Only have cursorline in current window and in normal window
+    " autocmd WinLeave * set nocursorline
+    " autocmd WinEnter * set cursorline
+    " autocmd InsertEnter * set nocursorline
+    " autocmd InsertLeave * set cursorline
     set wildmenu " Show list instead of just completing
     set wildmode=list:longest,full " Use powerful wildmenu
     set shortmess=at " Avoids hit enter
