@@ -241,8 +241,11 @@
                 elseif g:gs_vim_font=='Consolas'
                     set guifont=Consolas:h12.5:cANSI
                     set guifontwide=微软雅黑:h12.3:w5.2:cGB2312
-                elseif g:gs_vim_font=='Fira Code'
-                    set guifont=Fira\ Code:h11.5:cANSI
+                elseif g:gs_vim_font=='FuraCode Nerd Font'
+                    set guifont=FuraCode\ Nerd\ Font:h12:cANSI
+                    set guifontwide=幼圆:h12.423:w7.123:cGB2312
+                elseif g:gs_vim_font=='PragmataPro'
+                    set guifont=PragmataPro\ Mono:h12.5
                     " set guifontwide=幼圆:h11:cGB2312
                 endif
             endif
