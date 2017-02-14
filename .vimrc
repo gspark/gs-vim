@@ -244,9 +244,9 @@
                 elseif g:gs_vim_font=='FuraCode Nerd Font'
                     set guifont=FuraCode\ Nerd\ Font:h12:cANSI
                     set guifontwide=幼圆:h12.423:w7.123:cGB2312
-                elseif g:gs_vim_font=='PragmataPro'
+                elseif g:gs_vim_font=='PragmataPro Mono'
                     set guifont=PragmataPro\ Mono:h12.5
-                    " set guifontwide=幼圆:h11:cGB2312
+                    set guifontwide=幼圆:h12.6:w7.123:cGB2312
                 endif
             endif
         endif
