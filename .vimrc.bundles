@@ -84,17 +84,16 @@
         Plug 'w0rp/ale'              " ale
     endif
 
-    if count(g:gsvim_bundle_groups, 'git') " Git
+    if count(g:gsvim_bundle_groups, 'vcs') 
+        " Git
         Plug 'tpope/vim-fugitive' " Git wrapper
         " Plug 'junegunn/gv.vim' " Gitk clone
         Plug 'gregsexton/gitv'    " gitk clone
         if has('signs')
             Plug 'airblade/vim-gitgutter' " Git diff sign
+            " svn
+            Plug 'mhinz/vim-signify'
         endif
-    endif
-
-    if count(g:gsvim_bundle_groups, 'svn') " Svn
-        Plug 'mhinz/vim-signify'
     endif
 
     if count(g:gsvim_bundle_groups, 'language') " Language Specificity

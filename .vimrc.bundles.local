@@ -74,10 +74,11 @@
                 \   'right': [['lineinfo'], ['charvalue','charvaluehex','percent'], ['fileformat', 'fileencoding', 'filetype']]
                 \ },
                 \ 'component': {
-                \  'charvalue': '%b', 'charvaluehex': '%B'
+                \  'lineinfo': '' . '%3l:%-2v',
+                \  'charvalue': '%b', 
+                \  'charvaluehex': '%B'
                 \ },
                 \ 'component_function': {
-                \   'modified': 'LightlineModified',
                 \   'readonly': 'LightlineReadonly',
                 \   'fugitive': 'LightlineFugitive',
                 \   'filename': 'LightlineFilename',
@@ -89,6 +90,7 @@
                 \ 'separator': { 'left': '', 'right': '' },
                 \ 'subseparator': { 'left': '', 'right': '' }
                 \ }
+
             function! LightlineModified()
                 return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
             endfunction
@@ -98,19 +100,27 @@
             endfunction
 
             function! LightlineFilename()
-                return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-                    \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-                    \  &ft == 'unite' ? unite#get_status_string() :
-                    \  &ft == 'vimshell' ? vimshell#get_status_string() :
-                    \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-                    \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+                let fname = expand('%:t')
+                return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+                        \ fname == '__Tagbar__' ? g:lightline.fname :
+                        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+                        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+                        \ &ft == 'unite' ? unite#get_status_string() :
+                        \ &ft == 'vimshell' ? vimshell#get_status_string() :
+                        \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+                        \ ('' != fname ? fname : '[No Name]') .
+                        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
             endfunction
 
             function! LightlineFugitive()
-                if &ft !~? 'vimfiler\|gundo' && exists("*fugitive#head")
-                    let branch = fugitive#head()
-                    return branch !=# '' ? ''.branch : ''
-                endif
+                try
+                    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+                        let mark = ''  " edit here for cool mark
+                        let branch = fugitive#head()
+                        return branch !=# '' ? mark.branch : ''
+                    endif
+                catch
+                endtry
                 return ''
             endfunction
 
@@ -127,8 +137,21 @@
             endfunction
 
             function! LightlineMode()
-                return winwidth(0) > 60 ? lightline#mode() : ''
+                let fname = expand('%:t')
+                return fname == '__Tagbar__' ? 'Tagbar' :
+                        \ fname == 'ControlP' ? 'CtrlP' :
+                        \ fname == '__Gundo__' ? 'Gundo' :
+                        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+                        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+                        \ &ft == 'unite' ? 'Unite' :
+                        \ &ft == 'vimfiler' ? 'VimFiler' :
+                        \ &ft == 'vimshell' ? 'VimShell' :
+                        \ winwidth(0) > 60 ? lightline#mode() : ''
             endfunction
+
+            let g:unite_force_overwrite_statusline = 0
+            let g:vimfiler_force_overwrite_statusline = 0
+            let g:vimshell_force_overwrite_statusline = 0
         endif
 
         " -> Indent Guides
@@ -159,6 +182,7 @@
             let g:startify_relative_path = 1
             let g:startify_skiplist = [
                         \ '.git',
+                        \ '.svn',
                         \ 'node_modules',
                         \ 'logs',
                         \ 'bower_components'
@@ -507,8 +531,8 @@
         endif
     endif
 
-    """ Setting for git Plugins
-    if count(g:gsvim_bundle_groups, 'git')
+    " Setting for vcs Plugins
+    if count(g:gsvim_bundle_groups, 'vcs')
         " -> Gitv Gitview Setting
         if isdirectory(expand("~/.vim/bundle/gitv"))
             let g:Gitv_OpenHorizontal = 1
@@ -519,6 +543,10 @@
         if isdirectory(expand("~/.vim/bundle/vim-gitgutter"))
             let g:gitgutter_sign_column_always = 0
             let g:gitgutter_max_signs = 99999
+        endif
+
+        if isdirectory(expand("~/.vim/bundle/vim-signify"))
+            let g:signify_vcs_list = [ 'hg', 'svn' ]
         endif
     endif
 
