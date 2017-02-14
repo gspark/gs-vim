@@ -554,7 +554,9 @@
     if count(g:gsvim_bundle_groups, 'language')
         " -> Emmet
         if isdirectory(expand("~/.vim/bundle/emmet-vim"))
-            let g:user_emmet_leader_key='<C-Z>'
+            " let g:user_emmet_leader_key='<C-Z>'
+            " imap hh <C-y>,
+            imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
             " let g:user_emmet_settings={'indentation':'    '}
             let g:use_emmet_complete_tag=1
             " change <Tab> config , if use [YouCompleteMe]

@@ -170,32 +170,32 @@
     " -> Key Mapping
     " Use ,Space to toggle the highlight search
     nnoremap <Leader><Space> :set hlsearch!<CR>
-    " Make j and k work the way you expect
-    nnoremap j gj
-    nnoremap k gk
-    vnoremap j gj
-    vnoremap k gk
+    " " Make j and k work the way you expect
+    " nnoremap j gj
+    " nnoremap k gk
+    " vnoremap j gj
+    " vnoremap k gk
 
-    " Navigation between windows
-    nnoremap <C-J> <C-W>j
-    nnoremap <C-K> <C-W>k
-    nnoremap <C-H> <C-W>h
-    nnoremap <C-L> <C-W>l
+    " " Navigation between windows
+    " nnoremap <C-J> <C-W>j
+    " nnoremap <C-K> <C-W>k
+    " nnoremap <C-H> <C-W>h
+    " nnoremap <C-L> <C-W>l
 
-    " Same when jumping around
-    nnoremap g; g;zz
-    nnoremap g, g,zz
+    " " Same when jumping around
+    " nnoremap g; g;zz
+    " nnoremap g, g,zz
 
     " Reselect visual block after indent/outdent
     vnoremap < <gv
     vnoremap > >gv
 
-    " Repeat last substitution, including flags, with &.
-    nnoremap & :&&<CR>
-    xnoremap & :&&<CR>
+    " " Repeat last substitution, including flags, with &.
+    " nnoremap & :&&<CR>
+    " xnoremap & :&&<CR>
 
-    " Keep the cursor in place while joining lines
-    nnoremap J mzJ`z
+    " " Keep the cursor in place while joining lines
+    " nnoremap J mzJ`z
 
     " Select entire buffer
     nnoremap vaa ggvGg_

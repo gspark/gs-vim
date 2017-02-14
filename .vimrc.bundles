@@ -108,6 +108,7 @@
         Plug 'elzr/vim-json'           " json
         Plug 'plasticboy/vim-markdown' " markdown
         Plug 'Chiel92/vim-autoformat'
+        Plug 'posva/vim-vue'    " vue
     endif
 
     call plug#end()
