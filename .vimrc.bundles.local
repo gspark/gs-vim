@@ -280,8 +280,14 @@
 
         " -> Easy Align
         if isdirectory(expand("~/.vim/bundle/vim-easy-align"))
-            xmap ga <Plug>(EasyAlign)
-            nmap ga <Plug>(EasyAlign)
+            " xmap ga <Plug>(EasyAlign)
+            " nmap ga <Plug>(EasyAlign)
+            vmap <Leader>a <Plug>(EasyAlign)
+            nmap <Leader>a <Plug>(EasyAlign)
+            if !exists('g:easy_align_delimiters')
+                let g:easy_align_delimiters = {}
+            endif
+            let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
         endif
 
         " -> Gutentags
@@ -555,12 +561,12 @@
         " -> Emmet
         if isdirectory(expand("~/.vim/bundle/emmet-vim"))
             " let g:user_emmet_leader_key='<C-Z>'
-            " imap hh <C-y>,
-            imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+            imap hh <C-y>,
+            " imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
             " let g:user_emmet_settings={'indentation':'    '}
             let g:use_emmet_complete_tag=1
             " change <Tab> config , if use [YouCompleteMe]
-            let g:user_emmet_expandabbr_key ='<Tab>'
+            " let g:user_emmet_expandabbr_key ='<Tab>'
             let g:user_emmet_settings = {
                     \ 'php'     : {
                     \ 'extends' : 'html',
