@@ -107,8 +107,10 @@
         Plug 'ap/vim-css-color'
         Plug 'elzr/vim-json'           " json
         Plug 'plasticboy/vim-markdown' " markdown
-        Plug 'Chiel92/vim-autoformat'
         Plug 'posva/vim-vue'    " vue
+        " formate
+        Plug 'editorconfig/editorconfig-vim'
+        Plug 'Chiel92/vim-autoformat'
     endif
 
     call plug#end()
