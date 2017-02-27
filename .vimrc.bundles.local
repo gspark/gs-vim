@@ -68,6 +68,7 @@
         " -> lightline
         if isdirectory(expand("~/.vim/bundle/lightline.vim"))
             let g:lightline = {
+                \ 'colorscheme': 'gruvbox',
                 \ 'mode_map': { 'c': 'NORMAL' },
                 \ 'active': {
                 \   'left': [['mode', 'paste'], ['fugitive', 'filename']],
@@ -85,7 +86,7 @@
                 \   'fileformat': 'LightlineFileformat',
                 \   'filetype': 'LightlineFiletype',
                 \   'fileencoding': 'LightlineFileencoding',
-                \   'mode': 'LightlineMode',
+                \   'mode': 'LightlineMode'
                 \ },
                 \ 'separator': { 'left': '', 'right': '' },
                 \ 'subseparator': { 'left': '', 'right': '' }
