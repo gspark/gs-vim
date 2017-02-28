@@ -289,6 +289,17 @@
                 let g:easy_align_delimiters = {}
             endif
             let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
+            " ,a=        对齐等号表达
+            " ,a:        对齐冒号表达式(json/map等)
+
+            " " 默认左对齐
+            " ,a<space>  首个空格对齐
+            " ,a2<space> 第二个空格对齐
+            " ,a-<space> 倒数第一个空格对齐
+            " ,a-2<space> 倒数第二个空格对齐
+            " ,a*<space> 所有空格依次对齐
+            " " 右对齐
+            " ,a<Enter>*<space>
         endif
 
         " -> Gutentags

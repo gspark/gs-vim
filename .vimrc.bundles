@@ -30,7 +30,7 @@
         Plug 'terryma/vim-multiple-cursors' " Multiple cursors
         " Plug 'junegunn/vim-slash' " In-buffer search
         " Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' } " Undo tree
-        Plug 'tpope/vim-surround' " Surround
+        " Plug 'tpope/vim-surround' " Surround
         Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] } " Easy align
         " Plug 'ludovicchabant/vim-gutentags' " Manage tag files
         " Plug 'AndrewRadev/splitjoin.vim' " Splitjoin
