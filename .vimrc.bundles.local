@@ -638,6 +638,18 @@
         if isdirectory(expand("~/.vim/bundle/editorconfig-vim"))
             let g:EditorConfig_exclude_patterns = ['fugitive://.*']
         endif
+
+        " go
+        if isdirectory(expand("~/.vim/bundle/vim-go"))
+            let g:go_bin_path= "e:/opt/go/bin"
+            let g:go_highlight_types = 1
+            let g:go_highlight_fields = 1
+            let g:go_highlight_functions = 1
+            let g:go_highlight_methods = 1
+            let g:go_highlight_operators = 1
+            let g:go_highlight_extra_types = 1
+            let g:go_highlight_build_constraints = 1
+        endif
     endif
 " }
 
