@@ -103,10 +103,10 @@
     set textwidth=76 " Change text width
     if g:gsvim_fancy_font
         set list " Show these tabs and spaces and so on
-        " set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Change listchars
-        set listchars=tab:▶\ ,eol:¬,extends:❯,precedes:❮ " Change listchars
+        "" set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Change listchars
+        "" set listchars=tab:▶\ ,eol:¬,extends:❯,precedes:❮ " Change listchars
+        "" set showbreak=↪  " Change wrap line break
         set linebreak " Wrap long lines at a blank
-        set showbreak=↪  " Change wrap line break
         set fillchars=diff:⣿,vert:│ " Change fillchars
         augroup trailing " Only show trailing whitespace when not in insert mode
             autocmd!
@@ -251,7 +251,7 @@
             endif
         endif
         " Vim UI
-        if g:gs_vim_font=='DejaVu Sans Mono for Powerline'
+        if g:gs_vim_font=='DejaVu Sans Mono for Powerline' | g:gs_vim_font=='FuraMono NF'
             set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:.,trail:• " Highlight problematic whitespace
             set showbreak=↪                                                 " Change wrap line break
         else
@@ -262,7 +262,6 @@
             set showbreak=ˆ
         endif
 
-        set linebreak                                                       " Wrap long lines at a blank
     " }
     " for error highlight
     highlight clear SpellBad
