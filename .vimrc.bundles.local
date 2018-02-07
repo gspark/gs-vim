@@ -668,6 +668,11 @@
             let g:vim_markdown_json_frontmatter = 1
             " Do not require .md extensions for Markdown links
             let g:vim_markdown_no_extensions_in_markdown = 1
+            "" disable conceal regardless of conceallevel
+            let g:vim_markdown_conceal = 0
+            "" disable math conceal with LaTeX math syntax enabled
+            let g:tex_conceal = ""
+            let g:vim_markdown_math = 1
         endif
     endif
 " }
