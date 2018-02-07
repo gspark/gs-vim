@@ -251,7 +251,7 @@
             endif
         endif
         " Vim UI
-        if g:gs_vim_font=='DejaVu Sans Mono for Powerline' | g:gs_vim_font=='FuraMono NF'
+        if g:gs_vim_font=='DejaVu Sans Mono for Powerline' || g:gs_vim_font=='FuraMono NF'
             set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:.,trail:• " Highlight problematic whitespace
             set showbreak=↪                                                 " Change wrap line break
         else
