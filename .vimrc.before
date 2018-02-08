@@ -68,11 +68,14 @@
     " gsvim plugin setting
     let g:gsvim_bundle_groups=['ui', 'enhance', 'move', 'navigate',
                 \'complete', 'compile', 'vcs', 'language']
-    ""let g:gs_vim_font='Consolas'                            " font
-    ""let g:gs_vim_font='Ubuntu Mono derivative Powerline'    " font
-    ""let g:gs_vim_font='DejaVu Sans Mono for Powerline'      " font
-    let g:gs_vim_font='FuraMono NF'      " font
-    ""let g:gs_vim_font='PragmataPro Mono'      " font
+    "" let g:gs_vim_font='Consolas'                         " font
+    "" let g:gs_vim_font='Ubuntu Mono derivative Powerline' " font
+    "" let g:gs_vim_font='DejaVu Sans Mono for Powerline'   " font
+    "" let g:gs_vim_font='FuraMono NF'                      " font
+    "" let g:gs_vim_font='PragmataPro Mono'                 " font
+    let g:gs_vim_font='Fira Code'                           " font
+
+
 
     let $XDG_CACHE_HOME               = $HOME . '/temp/cache'
     let g:startify_session_dir        = $HOME . '/temp/session'

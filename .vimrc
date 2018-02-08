@@ -247,11 +247,14 @@
                 elseif g:gs_vim_font=='PragmataPro Mono'
                     set guifont=PragmataPro\ Mono:h12.5
                     set guifontwide=幼圆:h12.6:w7.123:cGB2312
+                elseif g:gs_vim_font=='Fira Code'
+                    set guifont=Fira\ Code:h13.5
+                    set guifontwide=新宋体:h14:cGB2312
                 endif
             endif
         endif
         " Vim UI
-        if g:gs_vim_font=='DejaVu Sans Mono for Powerline' || g:gs_vim_font=='FuraMono NF'
+        if g:gs_vim_font=='DejaVu Sans Mono for Powerline' || g:gs_vim_font=='FuraMono NF'|| g:gs_vim_font=='Fira Code'
             set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:.,trail:• " Highlight problematic whitespace
             set showbreak=↪                                                 " Change wrap line break
         else

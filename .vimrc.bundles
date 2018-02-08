@@ -12,7 +12,8 @@
         Plug 'morhetz/gruvbox' " Colorscheme gruvbox
         " Plug 'jacoborus/tender.vim' " Colorscheme tender
         " Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes' " Status line
-        Plug 'itchyny/lightline.vim'    " Status line
+        " Plug 'itchyny/lightline.vim'    " Status line
+        Plug 'liuchengxu/eleline.vim'     " Status line
         Plug 'Yggdroot/indentLine' " Indentation level
         " Plug 'ryanoasis/vim-devicons' " Devicons
         " Plug 'bling/vim-bufferline' " Buffer line

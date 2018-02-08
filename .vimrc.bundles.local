@@ -155,6 +155,13 @@
             let g:vimshell_force_overwrite_statusline = 0
         endif
 
+
+        " -> eleline.vim
+        if isdirectory(expand("~/.vim/bundle/eleline.vim"))
+            let g:airline_powerline_fonts = 1
+        endif
+
+
         " -> Indent Guides
         if isdirectory(expand("~/.vim/bundle/indentLine"))
             if !has('gui_running') && g:gsvim_default_scheme
@@ -547,7 +554,9 @@
         if isdirectory(expand("~/.vim/bundle/ale"))
             let g:ale_sign_error = '✗'
             let g:ale_sign_warning = '∆'
-            let g:ale_linters = {'javascript': ['eslint']}
+            let g:ale_linters = {
+                        \'javascript': ['eslint']
+                        \}
             let g:ale_echo_msg_error_str = 'E'
             let g:ale_echo_msg_warning_str = 'W'
             let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
@@ -650,7 +659,6 @@
             let g:go_highlight_extra_types = 1
             let g:go_highlight_build_constraints = 1
         endif
-
 
         " markdown
         if isdirectory(expand("~/.vim/bundle/vim-markdown"))
