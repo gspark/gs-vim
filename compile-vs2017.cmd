@@ -89,7 +89,7 @@ set RUBY_DIR=d:\operation\Ruby251-x64
 set TCL32DIR=d:\operation\tcl-8.6.6.8607-MSWin32
 set TCL64DIR=d:\operation\tcl-8.6.7.0
 
-set PATCHDIFF=..\..
+set PATCHDIFF=..\..\..\..\vim81
 :: set MSVCDIR=%PROGRAMFILES(X86)%\Microsoft Visual Studio 14.0
 set MSVCDIR=%PROGRAMFILES(X86)%\Microsoft Visual Studio\2017\Community
 set WINPTYDIR=d:\operation\winpty-0.4.3-msvc2015
@@ -339,6 +339,7 @@ copy %WINPTYDIR%\x64\bin\winpty.dll tempoutput\x64\winpty64.dll
 copy %WINPTYDIR%\x64\bin\winpty-agent.exe tempoutput\x64\
 
 if exist %PATCHDIFF%\patch.exe copy %PATCHDIFF%\patch.exe tempoutput\x64\
+echo %PATCHDIFF%\diff.exe
 if exist %PATCHDIFF%\diff.exe copy %PATCHDIFF%\diff.exe tempoutput\x64\
 
 copy %PYTHON3_DIR%\python37.dll tempoutput\x64\
@@ -384,10 +385,9 @@ robocopy vim\src\tempoutput\%ARCH% ..\..\vim81\ /NP /NJH /NJS /NFL /NDL /SL /S /
 
 REM -------------------------------------
 REM make clean (manually)
-:: if exist vim\src\tempoutput rd /S /Q vim\src\tempoutput
+if exist vim\src\tempoutput rd /S /Q vim\src\tempoutput
 
-if exist rd /S /Q vim\src\Obj*i386
-if exist rd /S /Q vim\src\ObjCULYHRZAMD64
-if exist rd /S /Q vim\src\ObjGXULYHRZAMD64
+rd /S /Q vim\src\ObjCULYHRZAMD64\
+rd /S /Q vim\src\ObjGXULYHRZAMD64\
 
 
