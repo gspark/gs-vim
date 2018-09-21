@@ -269,7 +269,7 @@ REM compile! (x64)
 REM -------------------------------------
 
 nmake /C /S /f Make_mvc.mak clean
-::    TCL=%TCL64DIR% TCL_VER=%LIBTCLSHRT% TCL_VER_LONG=%LIBTCLLONG% DYNAMIC_TCL=yes ^
+::    TCL=%TCL64DIR% TCL_VER=%LIBTCLSHRT% TCL_VER_LONG=%LIBTCLLONG% DYNAMIC_TCL=yes
 nmake /C /S /f Make_mvc.mak ^
     CPU=AMD64 DEBUG=no USE_MSVCRT=yes FEATURES=HUGE CHANNEL=yes MBYTE=yes CSCOPE=yes TERMINAL=yes IME=yes GIME=yes GUI=yes OLE=no  XPM=.\xpm\x64 DIRECTX=yes ^
     PERL=%PERL_DIR% DYNAMIC_PERL=yes PERL_VER=%LIBPERLVER% ^
