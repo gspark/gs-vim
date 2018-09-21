@@ -496,6 +496,9 @@
             let g:neocomplete#ctags_command="ctags"
             let g:neocomplete#sources#omni#input_patterns.c='[^.[:digit:] *\t]\%(\.\|->\)'
             let g:neocomplete#sources#omni#input_patterns.cpp='[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::\w*'
+        elseif g:gsvim_autocomplete=='DEO'
+            let g:deoplete#enable_at_startup = 1
+            let g:python3_host_prog = 'c:\\Users\\spark\\AppData\\Local\\Programs\\Python\\Python37\\python.exe'
         else
             " -> UltiSnips
             let g:UltiSnipsExpandTrigger="<C-K>"

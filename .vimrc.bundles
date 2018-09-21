@@ -70,6 +70,14 @@
             endif
             Plug 'Shougo/neosnippet.vim' " Snippet engine
             Plug 'Shougo/neosnippet-snippets' " Snippets
+        elseif g:gsvim_autocomplete=='DEO'
+            if has('nvim')
+                Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+            else
+                Plug 'Shougo/deoplete.nvim'
+                Plug 'roxma/nvim-yarp'
+                Plug 'roxma/vim-hug-neovim-rpc'
+            endif
         else
             " Auto completion framework
             let g:gsvim_completion_engine='YouCompleteMe'
