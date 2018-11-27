@@ -65,7 +65,8 @@
     let g:gsvim_show_number=1 " Enable showing number
     " gsvim Autocomplete setting (YCM or NEO)
     "" let g:gsvim_autocomplete='NEO'
-    let g:gsvim_autocomplete='DEO'
+    "" let g:gsvim_autocomplete='DEO'
+    let g:gsvim_autocomplete=''
     " gsvim plugin setting
     let g:gsvim_bundle_groups=['ui', 'enhance', 'move', 'navigate',
                 \'complete', 'compile', 'vcs', 'language']
