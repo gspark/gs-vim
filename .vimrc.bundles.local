@@ -497,8 +497,8 @@
             let g:neocomplete#sources#omni#input_patterns.c='[^.[:digit:] *\t]\%(\.\|->\)'
             let g:neocomplete#sources#omni#input_patterns.cpp='[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::\w*'
         elseif g:gsvim_autocomplete=='DEO'
-            let g:deoplete#enable_at_startup = 1
-            let g:python3_host_prog = 'd:\\Anaconda3\\python.exe'
+            "" let g:deoplete#enable_at_startup = 1
+            "" let g:python3_host_prog = 'd:\\Anaconda3\\python.exe'
         else
             " -> UltiSnips
             let g:UltiSnipsExpandTrigger="<C-K>"

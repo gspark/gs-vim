@@ -78,7 +78,7 @@
                 Plug 'roxma/nvim-yarp'
                 Plug 'roxma/vim-hug-neovim-rpc'
             endif
-        else
+        elseif g:gsvim_autocomplete=='YCM'
             " Auto completion framework
             let g:gsvim_completion_engine='YouCompleteMe'
             Plug 'Valloric/YouCompleteMe', { 'do': './install.py' } "Auto completion framework

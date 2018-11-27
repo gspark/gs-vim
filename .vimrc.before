@@ -70,6 +70,8 @@
     " gsvim plugin setting
     let g:gsvim_bundle_groups=['ui', 'enhance', 'move', 'navigate',
                 \'complete', 'compile', 'vcs', 'language']
+    let g:gsvim_bundle_groups=['ui', 'enhance', 'move', 'navigate',
+                \'compile', 'vcs', 'language']                
     "" let g:gs_vim_font='Consolas'                         " font
     "" let g:gs_vim_font='Ubuntu Mono derivative Powerline' " font
     "" let g:gs_vim_font='DejaVu Sans Mono for Powerline'   " font
