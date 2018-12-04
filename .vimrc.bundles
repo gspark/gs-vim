@@ -1,62 +1,33 @@
 " Bundles {
-    if empty(glob('~/.vim/autoload/plug.vim'))
-        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        autocmd VimEnter * PlugInstall | source $MYVIMRC
-    endif
+    "if empty(glob('~/.vim/autoload/plug.vim'))
+    "    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    "                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    "    autocmd VimEnter * PlugInstall | source $MYVIMRC
+    "endif
 
     call plug#begin('~/.vim/bundle')
 
     if count(g:gsvim_bundle_groups, 'ui') " UI setting
-        " Plug 'kristijanhusak/vim-hybrid-material' " Colorscheme hybrid material
         Plug 'morhetz/gruvbox' " Colorscheme gruvbox
-        " Plug 'jacoborus/tender.vim' " Colorscheme tender
-        " Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes' " Status line
-        " Plug 'itchyny/lightline.vim'    " Status line
         Plug 'liuchengxu/eleline.vim'     " Status line
         Plug 'Yggdroot/indentLine' " Indentation level
-        " Plug 'ryanoasis/vim-devicons' " Devicons
-        " Plug 'bling/vim-bufferline' " Buffer line
-        " Plug 'mhinz/vim-startify' " Start page
-        " Plug 'junegunn/goyo.vim', { 'for': 'markdown' } " Distraction-free
-        " Plug 'junegunn/limelight.vim', { 'for': 'markdown' } " Hyperfocus-writing
     endif
 
     if count(g:gsvim_bundle_groups, 'enhance') " Vim enhancement
         Plug 'Raimondi/delimitMate' " Closing of quotes
-        " Plug 'tomtom/tcomment_vim' " Commenter
-        " Plug 'tpope/vim-abolish' " Abolish
-        " Plug 'tpope/vim-speeddating' " Speed dating
-        " Plug 'tpope/vim-repeat' " Repeat
         Plug 'terryma/vim-multiple-cursors' " Multiple cursors
-        " Plug 'junegunn/vim-slash' " In-buffer search
-        " Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' } " Undo tree
-        " Plug 'tpope/vim-surround' " Surround
         Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] } " Easy align
-        " Plug 'ludovicchabant/vim-gutentags' " Manage tag files
-        " Plug 'AndrewRadev/splitjoin.vim' " Splitjoin
-        " Plug 'sickill/vim-pasta' " Vim pasta
-        " Plug 'Keithbsmiley/investigate.vim' " Helper
-        " Plug 'wikitopian/hardmode' " Hard mode
-        " Plug 'wellle/targets.vim' " Text objects
-        " Plug 'roman/golden-ratio' " Resize windows
-        " Plug 'chrisbra/vim-diff-enhanced' " Create better diffs
         Plug 'tpope/vim-commentary'
     endif
 
+
     if count(g:gsvim_bundle_groups, 'move') " Moving
-        " Plug 'tpope/vim-unimpaired' " Pairs of mappings
         Plug 'Lokaltog/vim-easymotion' " Easy motion
-        " Plug 'kepbod/quick-scope' " Quick scope
-        " Plug 'yuttie/comfortable-motion.vim' " Comfortable motion
-        " Plug 'bkad/CamelCaseMotion' " Camel case motion
-        " Plug 'majutsushi/tagbar' " Tag bar
     endif
 
     if count(g:gsvim_bundle_groups, 'navigate') " Navigation
         Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " NERD tree
         Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' } " NERD tree git plugin
-        " Plug 'mhinz/vim-tmuxify' " Tmux panes
     endif
 
     if count(g:gsvim_bundle_groups, 'complete') " Completion
@@ -105,9 +76,10 @@
         endif
     endif
 
+
     if count(g:gsvim_bundle_groups, 'language') " Language Specificity
         Plug 'davidhalter/jedi-vim', { 'for': 'python' } " Python jedi plugin
-        Plug 'fatih/vim-go', { 'for': 'go' } " Golang
+        "Plug 'fatih/vim-go', { 'for': 'go' } " Golang
         " Plug 'tpope/vim-rails', { 'for': [] } " Rails
         Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] } " Emmet
         " Plug 'LaTeX-Box-Team/LaTeX-Box' " LaTex
@@ -118,9 +90,9 @@
         Plug 'plasticboy/vim-markdown' " markdown
         " Plug 'posva/vim-vue'    " vue
         " formate
-        Plug 'editorconfig/editorconfig-vim'
-        Plug 'Chiel92/vim-autoformat'
+        "Plug 'editorconfig/editorconfig-vim'
     endif
+
 
     call plug#end()
 
