@@ -86,8 +86,9 @@
         " Plug 'sheerun/vim-polyglot' " Language Support
         Plug 'pangloss/vim-javascript' " javascript
         Plug 'ap/vim-css-color'
-        Plug 'elzr/vim-json'           " json
-        Plug 'plasticboy/vim-markdown' " markdown
+        Plug 'elzr/vim-json'            " json
+        Plug 'godlygeek/tabular'        " for vim-markdown
+        Plug 'plasticboy/vim-markdown'  " markdown
         " Plug 'posva/vim-vue'    " vue
         " formate
         "Plug 'editorconfig/editorconfig-vim'
