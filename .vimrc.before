@@ -1,8 +1,8 @@
 " Environment {
     " Set directories
     function! InitializeDirectories()
-        let parent=$HOME
-        let prefix='temp'
+        let parent='z:\temp'
+        let prefix='vim'
         let dir_list={
                     \ 'backup': 'backupdir',
                     \ 'view': 'viewdir',
@@ -80,11 +80,10 @@
     let g:gs_vim_font='Fira Code'                           " font
 
 
-
-    let $XDG_CACHE_HOME               = $HOME . '/temp/cache'
-    let g:startify_session_dir        = $HOME . '/temp/session'
-    let g:unite_data_directory        = $HOME . '/temp/cache/unite'
-    let g:neocomplete#data_directory  = $HOME . '/temp/cache/neocomplete'
-    let g:neocomplcache_temporary_dir = $HOME . '/temp/cache/neocomplcache'
+    let $XDG_CACHE_HOME               = 'z:/temp' . '/vim/cache'
+    let g:startify_session_dir        = 'z:/temp' . '/vim/session'
+    let g:unite_data_directory        = 'z:/temp' . '/vim/cache/unite'
+    let g:neocomplete#data_directory  = 'z:/temp' . '/vim/cache/neocomplete'
+    let g:neocomplcache_temporary_dir = 'z:/temp' . '/vim/cache/neocomplcache'
 " }
 
