@@ -1,7 +1,7 @@
 " Environment {
     " Set directories
     function! InitializeDirectories()
-        let parent='z:\temp'
+        let parent='z:/temp'
         let prefix='vim'
         let dir_list={
                     \ 'backup': 'backupdir',
@@ -9,6 +9,7 @@
                     \ 'swap': 'directory',
                     \ 'undo': 'undodir',
                     \ 'cache': '',
+                    \ 'tmp': '',
                     \ 'session': ''}
         for [dirname, settingname] in items(dir_list)
             let directory=parent.'/'.prefix.'/'.dirname.'/'
@@ -31,7 +32,7 @@
         " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
         " across (heterogeneous) systems easier.
         if has('win32') || has('win64')
-            let $PATH.=';' . expand("$VIM/bin")
+            let $PATH.=';' . expand("$VIM/bin") . ';d:/ops/python3'
             ""set runtimepath^=$RUNTIME
             ""set runtimepath+=$VIM . '/bin'
         endif
@@ -43,7 +44,7 @@
             set termencoding=cp850
             " Let Vim use utf-8 internally, because many scripts require this
             set encoding=utf-8
-            ""set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
+            "" set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
             set rop=type:directx,gamma:1.8,contrast:2.0,level:100,geom:1,renmode:5,taamode:1
             setglobal fileencoding=utf-8
             " Windows has traditionally used cp1252, so it's probably wise to
@@ -63,15 +64,13 @@
     let g:gsvim_default_scheme=1 " Enable color settings
     let g:gsvim_fancy_font=1 " Enable using fancy font
     let g:gsvim_show_number=1 " Enable showing number
-    " gsvim Autocomplete setting (YCM or NEO)
+    " gsvim Autocomplete setting (YCM or NEO or COC)
     "" let g:gsvim_autocomplete='NEO'
     "" let g:gsvim_autocomplete='DEO'
-    let g:gsvim_autocomplete=''
+    let g:gsvim_autocomplete='COC'
     " gsvim plugin setting
-    "" let g:gsvim_bundle_groups=['ui', 'enhance', 'move', 'navigate',
-    ""             \'complete', 'compile', 'vcs', 'language']
     let g:gsvim_bundle_groups=['ui', 'enhance', 'move', 'navigate',
-                \'compile', 'vcs', 'language']                
+            \'complete', 'compile', 'vcs', 'language']
     "" let g:gs_vim_font='Consolas'                         " font
     "" let g:gs_vim_font='Ubuntu Mono derivative Powerline' " font
     "" let g:gs_vim_font='DejaVu Sans Mono for Powerline'   " font
@@ -79,11 +78,15 @@
     "" let g:gs_vim_font='PragmataPro Mono'                 " font
     let g:gs_vim_font='Fira Code'                           " font
 
-
-    let $XDG_CACHE_HOME               = 'z:/temp' . '/vim/cache'
-    let g:startify_session_dir        = 'z:/temp' . '/vim/session'
-    let g:unite_data_directory        = 'z:/temp' . '/vim/cache/unite'
-    let g:neocomplete#data_directory  = 'z:/temp' . '/vim/cache/neocomplete'
-    let g:neocomplcache_temporary_dir = 'z:/temp' . '/vim/cache/neocomplcache'
+    let g:gsvim_temp                  = 'z:/temp/vim'
+    let $PYLINTHOME                   = g:gsvim_temp . '/.pylint.d'
+    let $TMPDIR                       = g:gsvim_temp . '/tmp'
+    let $TMP                          = $TMPDIR
+    let $XDG_CACHE_HOME               = g:gsvim_temp . '/cache'
+    let g:startify_session_dir        = g:gsvim_temp . '/session'
+    let g:unite_data_directory        = g:gsvim_temp . '/cache/unite'
+    let g:neocomplete#data_directory  = g:gsvim_temp . '/cache/neocomplete'
+    let g:neocomplcache_temporary_dir = g:gsvim_temp . '/cache/neocomplcache'
+    "" let $XDG_CONFIG_HOME              = $HOME
 " }
 

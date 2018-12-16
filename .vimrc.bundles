@@ -15,14 +15,14 @@
 
     if count(g:gsvim_bundle_groups, 'enhance') " Vim enhancement
         Plug 'Raimondi/delimitMate' " Closing of quotes
-        Plug 'terryma/vim-multiple-cursors' " Multiple cursors
+        "" Plug 'terryma/vim-multiple-cursors' " Multiple cursors
         Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] } " Easy align
-        Plug 'tpope/vim-commentary'
+        "" Plug 'tpope/vim-commentary'
     endif
 
 
     if count(g:gsvim_bundle_groups, 'move') " Moving
-        Plug 'Lokaltog/vim-easymotion' " Easy motion
+        "" Plug 'Lokaltog/vim-easymotion' " Easy motion
     endif
 
     if count(g:gsvim_bundle_groups, 'navigate') " Navigation
@@ -41,14 +41,8 @@
             endif
             Plug 'Shougo/neosnippet.vim' " Snippet engine
             Plug 'Shougo/neosnippet-snippets' " Snippets
-        elseif g:gsvim_autocomplete=='DEO'
-            if has('nvim')
-                Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-            else
-                Plug 'Shougo/deoplete.nvim'
-                Plug 'roxma/nvim-yarp'
-                Plug 'roxma/vim-hug-neovim-rpc'
-            endif
+        elseif g:gsvim_autocomplete=='COC'
+            Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
         elseif g:gsvim_autocomplete=='YCM'
             " Auto completion framework
             let g:gsvim_completion_engine='YouCompleteMe'
@@ -59,16 +53,14 @@
     endif
 
     if count(g:gsvim_bundle_groups, 'compile') " Compiling
-        " Plug 'scrooloose/syntastic' " Syntax checking
-        " Plug 'xuhdev/SingleCompile' " Single compile
         Plug 'w0rp/ale'              " ale
     endif
 
     if count(g:gsvim_bundle_groups, 'vcs') 
         " Git
-        Plug 'tpope/vim-fugitive' " Git wrapper
-        " Plug 'junegunn/gv.vim' " Gitk clone
-        Plug 'gregsexton/gitv'    " gitk clone
+        "" Plug 'tpope/vim-fugitive' " Git wrapper
+        Plug 'lambdalisue/gina.vim'  " Git wrapper asynchronously
+        "" Plug 'gregsexton/gitv'    " gitk clone
         if has('signs')
             Plug 'airblade/vim-gitgutter' " Git diff sign
             " svn
@@ -82,16 +74,16 @@
         "Plug 'fatih/vim-go', { 'for': 'go' } " Golang
         " Plug 'tpope/vim-rails', { 'for': [] } " Rails
         Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] } " Emmet
-        " Plug 'LaTeX-Box-Team/LaTeX-Box' " LaTex
-        " Plug 'sheerun/vim-polyglot' " Language Support
+        "" Plug 'LaTeX-Box-Team/LaTeX-Box' " LaTex
+        "" Plug 'sheerun/vim-polyglot' " Language Support
         Plug 'pangloss/vim-javascript' " javascript
         Plug 'ap/vim-css-color'
         Plug 'elzr/vim-json'            " json
         Plug 'godlygeek/tabular'        " for vim-markdown
         Plug 'plasticboy/vim-markdown'  " markdown
-        " Plug 'posva/vim-vue'    " vue
+        "" Plug 'posva/vim-vue'    " vue
         " formate
-        "Plug 'editorconfig/editorconfig-vim'
+        "" Plug 'editorconfig/editorconfig-vim'
     endif
 
 

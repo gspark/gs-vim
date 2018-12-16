@@ -61,8 +61,8 @@
                 autocmd FileType unite AirlineRefresh
                 autocmd FileType vimfiler AirlineRefresh
             augroup END
-            ""let g:airline_section_y                            = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b][HEX=\%02.2b]"
-            let g:airline_section_y                              = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b]"
+            ""let g:airline_section_y    = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b][HEX=\%02.2b]"
+            let g:airline_section_y    = "%{strlen(&fenc)>0?&fenc:''}%{&bomb?'(BOM)':''}%{strlen(&ff)>0?'['.&ff.']':''}[ASCII=\%03.3b]"
         endif
 
         " -> lightline
@@ -71,7 +71,7 @@
                 \ 'colorscheme': 'gruvbox',
                 \ 'mode_map': { 'c': 'NORMAL' },
                 \ 'active': {
-                \   'left': [['mode', 'paste'], ['fugitive', 'filename']],
+                \   'left': [['mode', 'paste'], ['fugitive', 'filename'], ['cocstatus', 'readonly', 'filename', 'modified']],
                 \   'right': [['lineinfo'], ['charvalue','charvaluehex','percent'], ['fileformat', 'fileencoding', 'filetype']]
                 \ },
                 \ 'component': {
@@ -86,7 +86,8 @@
                 \   'fileformat': 'LightlineFileformat',
                 \   'filetype': 'LightlineFiletype',
                 \   'fileencoding': 'LightlineFileencoding',
-                \   'mode': 'LightlineMode'
+                \   'mode': 'LightlineMode',
+                \   'cocstatus': 'coc#status'
                 \ },
                 \ 'separator': { 'left': '', 'right': '' },
                 \ 'subseparator': { 'left': '', 'right': '' }
@@ -195,7 +196,7 @@
                         \ 'logs',
                         \ 'bower_components'
                         \ ]
-            let g:startify_session_dir=$HOME . '/temp/session'
+            let g:startify_session_dir = g:gsvim_temp . '/session'
             if has('gui_running')
                 hi StartifyHeader  guifg=#87afff
                 hi StartifyFooter  guifg=#87afff
@@ -311,7 +312,7 @@
 
         " -> Gutentags
         if isdirectory(expand("~/.vim/bundle/vim-gutentags"))
-            let g:gutentags_cache_dir=$HOME . '/temp/cache/ctags'
+            let g:gutentags_cache_dir = 'z:/temp/vim/cache/ctags'
         endif
 
         " -> Splitjoin
@@ -412,7 +413,7 @@
             inoremap <expr><Tab>  pumvisible() ? "\<C-N>" : "\<Tab>"
             inoremap <expr><S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
             if  g:gsvim_completion_engine == 'neocomplete'
-                let g:neocomplete#data_directory=$HOME . '/temp/cache/neocomplete'
+                let g:neocomplete#data_directory= g:gsvim_temp . '/cache/neocomplete'
                 let g:acp_enableAtStartup=0
                 let g:neocomplete#enable_at_startup=1
                 let g:neocomplete#enable_smart_case=1
@@ -437,7 +438,7 @@
                             \ pumvisible() ? neocomplete#close_popup() : "\<CR>"
             else
                 let g:neocomplcache_enable_at_startup=1
-                let g:neocomplcache_temporary_dir=$HOME . '/temp/cache/neocomplcache'
+                let g:neocomplcache_temporary_dir= g:gsvim_temp . '/cache/neocomplcache'
                 let g:neocomplcache_enable_auto_delimiter=1
                 let g:neocomplcache_enable_fuzzy_completion=1
                 " Use <C-E> to close popup
@@ -496,9 +497,97 @@
             let g:neocomplete#ctags_command="ctags"
             let g:neocomplete#sources#omni#input_patterns.c='[^.[:digit:] *\t]\%(\.\|->\)'
             let g:neocomplete#sources#omni#input_patterns.cpp='[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::\w*'
-        elseif g:gsvim_autocomplete=='DEO'
-            "" let g:deoplete#enable_at_startup = 1
-            "" let g:python3_host_prog = 'd:\\Anaconda3\\python.exe'
+        elseif g:gsvim_autocomplete=='COC'
+            " always show signcolumns
+            set signcolumn=yes
+
+            " Use tab for trigger completion with characters ahead and navigate.
+            " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+            inoremap <silent><expr> <TAB>
+                \ pumvisible() ? "\<C-n>" :
+                \ <SID>check_back_space() ? "\<TAB>" :
+                \ coc#refresh()
+            inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+            function! s:check_back_space() abort
+            let col = col('.') - 1
+            return !col || getline('.')[col - 1]  =~# '\s'
+            endfunction
+
+            " Use <c-space> for trigger completion.
+            inoremap <silent><expr> <c-space> coc#refresh()
+
+            " Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+            " Coc only does snippet and additional edit on confirm.
+            inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+            " Use `[c` and `]c` for navigate diagnostics
+            nmap <silent> [c <Plug>(coc-diagnostic-prev)
+            nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+            " Remap keys for gotos
+            nmap <silent> gd <Plug>(coc-definition)
+            nmap <silent> gy <Plug>(coc-type-definition)
+            nmap <silent> gi <Plug>(coc-implementation)
+            nmap <silent> gr <Plug>(coc-references)
+
+            " Use K for show documentation in preview window
+            nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+            function! s:show_documentation()
+            if &filetype == 'vim'
+                execute 'h '.expand('<cword>')
+            else
+                call CocAction('doHover')
+            endif
+            endfunction
+
+            " Highlight symbol under cursor on CursorHold
+            autocmd CursorHold * silent call CocActionAsync('highlight')
+
+            " Remap for rename current word
+            nmap <leader>rn <Plug>(coc-rename)
+
+            " Remap for format selected region
+            vmap <leader>f  <Plug>(coc-format-selected)
+            nmap <leader>f  <Plug>(coc-format-selected)
+
+            augroup mygroup
+            autocmd!
+            " Setup formatexpr specified filetype(s).
+            autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+            " Update signature help on jump placeholder
+            autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+            augroup end
+
+            " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+            vmap <leader>a  <Plug>(coc-codeaction-selected)
+            nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+            " Remap for do codeAction of current line
+            nmap <leader>ac  <Plug>(coc-codeaction)
+
+            " Use `:Format` for format current buffer
+            command! -nargs=0 Format :call CocAction('format')
+
+            " Use `:Fold` for fold current buffer
+            command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+            " Shortcuts for denite interface
+            " Show extension list
+            nnoremap <silent> <space>e  :<C-u>Denite coc-extension<cr>
+            " Show symbols of current buffer
+            nnoremap <silent> <space>o  :<C-u>Denite coc-symbols<cr>
+            " Search symbols of current workspace
+            nnoremap <silent> <space>t  :<C-u>Denite coc-workspace<cr>
+            " Show diagnostics of current workspace
+            nnoremap <silent> <space>a  :<C-u>Denite coc-diagnostic<cr>
+            " Show available commands
+            nnoremap <silent> <space>c  :<C-u>Denite coc-command<cr>
+            " Show available services
+            nnoremap <silent> <space>s  :<C-u>Denite coc-service<cr>
+            " Show links of current buffer
+            nnoremap <silent> <space>l  :<C-u>Denite coc-link<cr>
         else
             " -> UltiSnips
             let g:UltiSnipsExpandTrigger="<C-K>"
@@ -515,44 +604,6 @@
 
     " -> compiling Plugins
     if count(g:gsvim_bundle_groups, 'compile')
-        " " -> Syntastic
-        " if isdirectory(expand("~/.vim/bundle/syntastic"))
-        " let g:syntastic_error_symbol = '✗'
-        " let g:syntastic_warning_symbol = '∆'
-        " let g:syntastic_style_error_symbol = '✗'
-        " let g:syntastic_style_warning_symbol = '∆'
-        "     ""let g:syntastic_javascript_checkers = ['jshint', 'jsl', 'jslint', 'jscs']
-        "     let g:syntastic_javascript_checkers = ['jshint', 'jscs']
-        "     ""let g:syntastic_javascript_checkers = ['eslint']
-        "     " to see error location list
-        "     " 每次自动调用 :SyntasticSetLocList, 将错误覆盖 **quickfix**
-        "     let g:syntastic_always_populate_loc_list = 0
-        "     " 自动拉起/关闭错误窗口, 不需要手动调用 :Errors
-        "     let g:syntastic_auto_loc_list = 0
-        "     let g:syntastic_loc_list_height = 5
-        "     " 每次保存的时候做检查
-        "     " let g:syntastic_check_on_wq = 0
-
-        "     let g:syntastic_mode_map = {
-        "         \ "mode": "passive",
-        "         \ "active_filetypes": [],
-        "         \ "passive_filetypes": ["javascript"] }
-
-        "     ""let g:syntastic_javascript_jshint_conf = '~/.jshintrc'
-        "     let g:syntastic_javascript_jshint_args = "--config ". expand("~/.jshintrc")
-        "     let g:syntastic_javascript_jscs_args = "--config ". expand("~/.jscsrc")
-        "     ""let g:syntastic_javascript_eslint_args = "--config ". expand("~/.eslintrc")
-        "     function! ToggleErrors()
-        "         let old_last_winnr = winnr('$')
-        "         lclose
-        "         if old_last_winnr == winnr('$')
-        "             " Nothing was closed, open syntastic error location panel
-        "             Errors
-        "         endif
-        "     endfunction
-        "     nnoremap <Leader>y :call ToggleErrors()<cr>
-        " endif
-
         " -> ale
         if isdirectory(expand("~/.vim/bundle/ale"))
             let g:ale_sign_error = '✗'
