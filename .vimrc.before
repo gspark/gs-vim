@@ -82,6 +82,7 @@
     let $PYLINTHOME                   = g:gsvim_temp . '/.pylint.d'
     let $TMPDIR                       = g:gsvim_temp . '/tmp'
     let $TMP                          = $TMPDIR
+    let $TEMP                         = $TMPDIR
     let $XDG_CACHE_HOME               = g:gsvim_temp . '/cache'
     let g:startify_session_dir        = g:gsvim_temp . '/session'
     let g:unite_data_directory        = g:gsvim_temp . '/cache/unite'

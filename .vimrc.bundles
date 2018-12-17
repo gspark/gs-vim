@@ -59,12 +59,12 @@
     if count(g:gsvim_bundle_groups, 'vcs') 
         " Git
         "" Plug 'tpope/vim-fugitive' " Git wrapper
-        Plug 'lambdalisue/gina.vim'  " Git wrapper asynchronously
+        "" Plug 'lambdalisue/gina.vim'  " Git wrapper asynchronously
         "" Plug 'gregsexton/gitv'    " gitk clone
         if has('signs')
             Plug 'airblade/vim-gitgutter' " Git diff sign
             " svn
-            Plug 'mhinz/vim-signify'
+            "" Plug 'mhinz/vim-signify'
         endif
     endif
 
