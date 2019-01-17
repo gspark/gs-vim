@@ -32,7 +32,7 @@
         " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
         " across (heterogeneous) systems easier.
         if has('win32') || has('win64')
-            let $PATH.=';' . expand("$VIM/bin") . ';d:/ops/python3'
+            let $PATH.=';' . expand("$VIM/bin") . ';d:/ops/python3' . ';d:/ops/python3/Scripts'
             ""set runtimepath^=$RUNTIME
             ""set runtimepath+=$VIM . '/bin'
         endif
