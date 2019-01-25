@@ -20,7 +20,6 @@
         "" Plug 'tpope/vim-commentary'
     endif
 
-
     if count(g:gsvim_bundle_groups, 'move') " Moving
         "" Plug 'Lokaltog/vim-easymotion' " Easy motion
     endif
@@ -68,9 +67,8 @@
         endif
     endif
 
-
     if count(g:gsvim_bundle_groups, 'language') " Language Specificity
-        Plug 'davidhalter/jedi-vim', { 'for': 'python' } " Python jedi plugin
+        "" Plug 'davidhalter/jedi-vim', { 'for': 'python' } " Python jedi plugin
         "" Plug 'fatih/vim-go', { 'for': 'go' } " Golang
         "" Plug 'tpope/vim-rails', { 'for': [] } " Rails
         Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] } " Emmet
