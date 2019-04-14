@@ -1,12 +1,12 @@
 " Plugin Config {
     if count(g:gsvim_bundle_groups, 'ui')
         " -> gruvbox
-        if isdirectory(expand("~/.vim/bundle/gruvbox"))
+        if isdirectory(g:plug_plugged . "/gruvbox")
             let g:gruvbox_italic = 1
         endif
 
         " -> airline
-        if isdirectory(expand("~/.vim/bundle/vim-airline"))
+        if isdirectory(g:plug_plugged . "/vim-airline")
             let g:airline_skip_empty_sections = 1
             let g:airline#extensions#tabline#enabled = 1
             " let g:airline#extensions#tmuxline#enabled = 1
@@ -66,7 +66,7 @@
         endif
 
         " -> lightline
-        if isdirectory(expand("~/.vim/bundle/lightline.vim"))
+        if isdirectory(g:plug_plugged . "/lightline.vim")
             let g:lightline = {
                 \ 'colorscheme': 'gruvbox',
                 \ 'mode_map': { 'c': 'NORMAL' },
@@ -158,13 +158,13 @@
 
 
         " -> eleline.vim
-        if isdirectory(expand("~/.vim/bundle/eleline.vim"))
+        if isdirectory(g:plug_plugged . "/eleline.vim")
             let g:airline_powerline_fonts = 1
         endif
 
 
         " -> Indent Guides
-        if isdirectory(expand("~/.vim/bundle/indentLine"))
+        if isdirectory(g:plug_plugged . "/indentLine")
             if !has('gui_running') && g:gsvim_default_scheme
                 let g:indent_guides_auto_colors=0
                 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=235
@@ -177,7 +177,7 @@
         endif
 
         " -> Startify
-        if isdirectory(expand("~/.vim/bundle/vim-startify"))
+        if isdirectory(g:plug_plugged . "/vim-startify")
             let g:startify_custom_header=[
                 \'                          _            ',
                 \'  __ _  ___       __   __(_) _ __ ___  ',
@@ -222,7 +222,7 @@
         endif
 
         " -> Goyo & Limelight
-        if isdirectory(expand("~/.vim/bundle/limelight.vim"))
+        if isdirectory(g:plug_plugged . "/limelight.vim")
             autocmd! User GoyoEnter Limelight
             autocmd! User GoyoLeave Limelight!
         endif
@@ -231,14 +231,14 @@
     " Setting for enhancement Plugins
     if count(g:gsvim_bundle_groups, 'enhance')
         " -> delimitMate
-        if isdirectory(expand("~/.vim/bundle/delimitMate"))
+        if isdirectory(g:plug_plugged . "/delimitMate")
             let delimitMate_expand_cr=1
             let delimitMate_expand_space=1
             let delimitMate_balance_matchpairs=1
         endif
 
         " -> Tcomment
-        " if isdirectory(expand("~/.vim/bundle/tcomment_vim"))
+        " if isdirectory(g:plug_plugged . "/tcomment_vim")
         "     " Map \<Space> to commenting
         "     function! IsWhiteLine()
         "         if (getline('.')=~'^$')
@@ -256,7 +256,7 @@
         " endif
 
         " -> Multiple cursors
-        if isdirectory(expand("~/.vim/bundle/vim-multiple-cursors"))
+        if isdirectory(g:plug_plugged . "/vim-multiple-cursors")
             " Called once right before you start selecting multiple cursors
             if g:gsvim_autocomplete=='NEO'
                 function! Multiple_cursors_before()
@@ -282,13 +282,13 @@
         endif
 
         " -> Undo tree
-        if isdirectory(expand("~/.vim/bundle/undotree"))
+        if isdirectory(g:plug_plugged . "/undotree")
             nnoremap <Leader>u :UndotreeToggle<CR>
             let g:undotree_SetFocusWhenToggle=1
         endif
 
         " -> Easy Align
-        if isdirectory(expand("~/.vim/bundle/vim-easy-align"))
+        if isdirectory(g:plug_plugged . "/vim-easy-align")
             " xmap ga <Plug>(EasyAlign)
             " nmap ga <Plug>(EasyAlign)
             vmap <Leader>a <Plug>(EasyAlign)
@@ -311,12 +311,12 @@
         endif
 
         " -> Gutentags
-        if isdirectory(expand("~/.vim/bundle/vim-gutentags"))
-            let g:gutentags_cache_dir = 'z:/temp/vim/cache/ctags'
+        if isdirectory(g:plug_plugged . "/vim-gutentags")
+            let g:gutentags_cache_dir = g:gsvim_temp . '/cache/ctags'
         endif
 
         " -> Splitjoin
-        if isdirectory(expand("~/.vim/bundle/splitjoin.vim"))
+        if isdirectory(g:plug_plugged . "/splitjoin.vim")
             let g:splitjoin_split_mapping = ',s'
             let g:splitjoin_join_mapping  = ',j'
             let g:splitjoin_normalize_whitespace=1
@@ -324,18 +324,18 @@
         endif
 
         " -> Investigate.vim
-        if isdirectory(expand("~/.vim/bundle/investigate.vim"))
+        if isdirectory(g:plug_plugged . "/investigate.vim")
             nnoremap K :call investigate#Investigate()<CR>
             let g:investigate_use_dash=1
         endif
 
         " -> EnhancedDiff
-        if isdirectory(expand("~/.vim/bundle/vim-diff-enhanced"))
+        if isdirectory(g:plug_plugged . "/vim-diff-enhanced")
             let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
         endif
 
         " -> Tabularize
-        if isdirectory(expand("~/.vim/bundle/tabular"))
+        if isdirectory(g:plug_plugged . "/tabular")
             nmap <Leader>a& :Tabularize /&<CR>
             vmap <Leader>a& :Tabularize /&<CR>
             nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
@@ -355,7 +355,7 @@
         endif
 
         " -> vim-commentary
-        if isdirectory(expand("~/.vim/bundle/vim-commentary" ))
+        if isdirectory(g:plug_plugged . "/vim-commentary" )
             autocmd FileType python,shell set commentstring=#\ %s    " 设置Python注释字符
             autocmd FileType mako set cms=##\ %s
         endif
@@ -364,7 +364,7 @@
     " setting for moving Plugins
     if count(g:gsvim_bundle_groups, 'move')
         " -> Tag bar
-        if isdirectory(expand("~/.vim/bundle/tagbar"))
+        if isdirectory(g:plug_plugged . "/tagbar")
             let g:tagbar_autofocus     = 0
             let g:tagbar_expand        = 0
             let g:tagbar_foldlevel     = 1
@@ -384,7 +384,7 @@
     " Setting for navigation Plugins
     if count(g:gsvim_bundle_groups, 'navigate')
         " -> NERD Tree
-        if isdirectory(expand("~/.vim/bundle/nerdtree"))
+        if isdirectory(g:plug_plugged . "/nerdtree")
             nnoremap <Leader>f :NERDTreeToggle<CR>
             let NERDTreeChDirMode=2
             let NERDTreeShowBookmarks=1
@@ -605,7 +605,7 @@
     " -> compiling Plugins
     if count(g:gsvim_bundle_groups, 'compile')
         " -> ale
-        if isdirectory(expand("~/.vim/bundle/ale"))
+        if isdirectory(g:plug_plugged . "/ale")
             let g:ale_sign_error = '✗'
             let g:ale_sign_warning = '∆'
             let g:ale_linters = {
@@ -623,18 +623,18 @@
     " Setting for vcs Plugins
     if count(g:gsvim_bundle_groups, 'vcs')
         " -> Gitv Gitview Setting
-        if isdirectory(expand("~/.vim/bundle/gitv"))
+        if isdirectory(g:plug_plugged . "/gitv")
             let g:Gitv_OpenHorizontal = 1
             let g:Gitv_WrapLines = 1
         endif
 
         " -> GitGutter Setting
-        if isdirectory(expand("~/.vim/bundle/vim-gitgutter"))
+        if isdirectory(g:plug_plugged . "/vim-gitgutter")
             let g:gitgutter_sign_column_always = 0
             let g:gitgutter_max_signs = 99999
         endif
 
-        if isdirectory(expand("~/.vim/bundle/vim-signify"))
+        if isdirectory(g:plug_plugged . "/vim-signify")
             let g:signify_vcs_list = [ 'hg', 'svn' ]
         endif
     endif
@@ -642,7 +642,7 @@
     " Setting for language specificity
     if count(g:gsvim_bundle_groups, 'language')
         " -> Emmet
-        if isdirectory(expand("~/.vim/bundle/emmet-vim"))
+        if isdirectory(g:plug_plugged . "/emmet-vim")
             " let g:user_emmet_leader_key='<C-Z>'
             imap hh <C-y>,
             " imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
@@ -668,7 +668,7 @@
         endif
 
         " -> javascript
-        if isdirectory(expand("~/.vim/bundle/vim-javascript"))
+        if isdirectory(g:plug_plugged . "/vim-javascript")
             let g:javascript_plugin_jsdoc = 1
             " let g:javascript_conceal_function             = "ƒ"
             " let g:javascript_conceal_null                 = "ø"
@@ -685,7 +685,7 @@
             map <leader>l :exec &conceallevel ? "set conceallevel=0" : "set conceallevel=1"<CR>
         endif
         " " -> JsBeautify
-        " if isdirectory(expand("~/.vim/bundle/vim-jsbeautify"))
+        " if isdirectory(g:plug_plugged . "vim-jsbeautify")
         "     " autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
         "     " " for html
         "     " autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
@@ -696,17 +696,17 @@
         " endif
         " " -> JSON
         " ""nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
-        if isdirectory(expand("~/.vim/bundle/vim-json"))
+        if isdirectory(g:plug_plugged . "/vim-json")
             let g:vim_json_syntax_conceal = 0
             let g:indentLine_noConcealCursor=""
         endif
         " editorconfig
-        if isdirectory(expand("~/.vim/bundle/editorconfig-vim"))
+        if isdirectory(g:plug_plugged . "/editorconfig-vim")
             let g:EditorConfig_exclude_patterns = ['fugitive://.*']
         endif
 
         " go
-        if isdirectory(expand("~/.vim/bundle/vim-go"))
+        if isdirectory(g:plug_plugged . "/vim-go")
             let g:go_bin_path= "e:/opt/go/bin"
             let g:go_highlight_types = 1
             let g:go_highlight_fields = 1
@@ -718,7 +718,7 @@
         endif
 
         " markdown
-        if isdirectory(expand("~/.vim/bundle/vim-markdown"))
+        if isdirectory(g:plug_plugged . "/vim-markdown")
             let g:vim_markdown_folding_disabled = 1
             " Enable TOC window auto-fit
             let g:vim_markdown_toc_autofit = 1

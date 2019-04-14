@@ -1,7 +1,7 @@
 " Environment {
     " Set directories
     function! InitializeDirectories()
-        let parent='z:/temp'
+        let parent=$TEMP
         let prefix='vim'
         let dir_list={
                     \ 'backup': 'backupdir',
@@ -32,9 +32,9 @@
         " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
         " across (heterogeneous) systems easier.
         if has('win32') || has('win64')
-            let $PATH.=';' . expand("$VIM/bin") . ';d:/ops/python3' . ';d:/ops/python3/Scripts'
-            ""set runtimepath^=$RUNTIME
-            ""set runtimepath+=$VIM . '/bin'
+            let $PATH.=';' . expand("$VIM/bin") . ';d:/ops/python3' . ';d:/ops/python3/Scripts' . ';d:/ops/yarn/bin'
+            "" set runtimepath^=$RUNTIME
+            let &runtimepath=expand("$VIM/.vim") . ',' . &runtimepath
         endif
         " Be nice and check for multi_byte even if the config requires
         " multi_byte support most of the time
@@ -78,7 +78,7 @@
     "" let g:gs_vim_font='PragmataPro Mono'                 " font
     let g:gs_vim_font='Fira Code'                           " font
 
-    let g:gsvim_temp                  = 'z:/temp/vim'
+    let g:gsvim_temp                  = $TEMP . '/vim'
     let $PYLINTHOME                   = g:gsvim_temp . '/.pylint.d'
     let $TMPDIR                       = g:gsvim_temp . '/tmp'
     let $TMP                          = $TMPDIR
@@ -89,5 +89,6 @@
     let g:neocomplete#data_directory  = g:gsvim_temp . '/cache/neocomplete'
     let g:neocomplcache_temporary_dir = g:gsvim_temp . '/cache/neocomplcache'
     "" let $XDG_CONFIG_HOME              = $HOME
+    let g:plug_plugged                = $VIM . '/.vim/plugged'
 " }
 
