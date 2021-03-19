@@ -250,6 +250,10 @@
                 elseif g:gs_vim_font=='Fira Code'
                     set guifont=Fira\ Code:h13.5
                     set guifontwide=新宋体:h14:cGB2312
+                elseif g:gs_vim_font=='sarasa-mono-sc'
+                    set guifont=等距更纱黑体\ SC:h14:cANSI
+                    set guifontwide=等距更纱黑体\ SC:h13.8:cGB2312
+                    set linespace=0
                 endif
             endif
         endif

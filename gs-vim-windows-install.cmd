@@ -1,6 +1,6 @@
 REM    Copyleft 2012 zg
 
-set HOME=d:\operation\vim\.home
+set HOME=d:\ops\vim\.home
 
 @set APP_DIR=%HOME%\gs-vim
 IF NOT EXIST "%APP_DIR%" (

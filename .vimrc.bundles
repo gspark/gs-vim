@@ -77,11 +77,13 @@
         Plug 'pangloss/vim-javascript' " javascript
         Plug 'ap/vim-css-color'
         Plug 'elzr/vim-json'            " json
-        Plug 'godlygeek/tabular'        " for vim-markdown
-        Plug 'plasticboy/vim-markdown'  " markdown
+        "" Plug 'godlygeek/tabular'        " for vim-markdown
+        "" Plug 'plasticboy/vim-markdown'  " markdown
         "" Plug 'posva/vim-vue'    " vue
         " formate
         "" Plug 'editorconfig/editorconfig-vim'
+        "" Plug 'chr4/nginx.vim'
+        Plug 'chase/vim-ansible-yaml'
     endif
 
 
