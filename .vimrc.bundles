@@ -9,7 +9,7 @@
 
     if count(g:gsvim_bundle_groups, 'ui') " UI setting
         Plug 'morhetz/gruvbox' " Colorscheme gruvbox
-        Plug 'liuchengxu/eleline.vim'     " Status line
+        Plug 'itchyny/lightline.vim' " Status line
         Plug 'Yggdroot/indentLine' " Indentation level
     endif
 
@@ -52,7 +52,7 @@
     endif
 
     if count(g:gsvim_bundle_groups, 'compile') " Compiling
-        Plug 'w0rp/ale'              " ale
+        "" Plug 'w0rp/ale'              " ale
     endif
 
     if count(g:gsvim_bundle_groups, 'vcs') 

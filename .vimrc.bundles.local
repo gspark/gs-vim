@@ -77,7 +77,7 @@
                 \ 'component': {
                 \  'lineinfo': '' . '%3l:%-2v',
                 \  'charvalue': '%b', 
-                \  'charvaluehex': '%B'
+                \  'charvaluehex': '0x%B'
                 \ },
                 \ 'component_function': {
                 \   'readonly': 'LightlineReadonly',
