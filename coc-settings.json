@@ -1,0 +1,48 @@
+{
+  "diagnostic.format": "%message [%source]",
+  "diagnostic.virtualText": true,
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.separateRelatedInformationAsDiagnostics": true,
+  "signature.target": "echo",
+  "signature.floatConfig": {
+    "border": true
+  },
+  "suggest.detailField": "abbr",
+  "suggest.floatConfig": {
+    "border": true
+  },
+  "suggest.timeout": 5000,
+  "suggest.triggerCompletionWait": 30,
+  "suggest.defaultSortMethod": "none",
+  "suggest.noselect": false,
+  "suggest.selection": "recentlyUsedByPrefix",
+  "suggest.enablePreselect": true,
+  "codeLens.enable": true,
+  "codeLens.position": "eol",
+
+  "coc.source.around.firstMatch": false,
+  "coc.source.file.ignoreHidden": false,
+
+  "Lua.runtime.version": "LuaJIT",
+  "Lua.telemetry.enable": false,
+  "Lua.diagnostics.globals": [
+    "vim",
+    "jit",
+    "ngx"
+  ],
+  "Lua.IntelliSense.traceBeSetted": true,
+  "Lua.IntelliSense.traceFieldInject": true,
+  "Lua.IntelliSense.traceLocalSet": true,
+  "Lua.IntelliSense.traceReturn": true,
+  "Lua.completion.callSnippet": "Both",
+  "Lua.workspace.library": [
+    "${3rd}/OpenResty/library"
+  ],
+  "Lua.workspace.checkThirdParty": false,
+  "sumneko-lua.locale": {
+    "default": "zh-cn"
+  },
+  "sumneko-lua.logPath": {
+    "default": "${TEMP}/sumneko-lua"
+  }
+}

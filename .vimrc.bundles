@@ -4,7 +4,9 @@
     "                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     "    autocmd VimEnter * PlugInstall | source $MYVIMRC
     "endif
-
+    "" let g:plug_url_format='https://git::@hub.fastgit.org/%s.git'
+    "" let g:plug_url_format='https://git::@hub.おうか.tw/%s.git'
+    let g:plug_url_format='https://git::@hub.xn--gzu630h.xn--kpry57d/%s.git'
     call plug#begin(g:plug_plugged)
 
     if count(g:gsvim_bundle_groups, 'ui') " UI setting
@@ -16,7 +18,7 @@
     if count(g:gsvim_bundle_groups, 'enhance') " Vim enhancement
         Plug 'Raimondi/delimitMate' " Closing of quotes
         "" Plug 'terryma/vim-multiple-cursors' " Multiple cursors
-        Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] } " Easy align
+        "" Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] } " Easy align
         "" Plug 'tpope/vim-commentary'
     endif
 
@@ -41,7 +43,7 @@
             Plug 'Shougo/neosnippet.vim' " Snippet engine
             Plug 'Shougo/neosnippet-snippets' " Snippets
         elseif g:gsvim_autocomplete=='COC'
-            Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+            Plug 'neoclide/coc.nvim', {'branch': 'release'}
         elseif g:gsvim_autocomplete=='YCM'
             " Auto completion framework
             let g:gsvim_completion_engine='YouCompleteMe'
@@ -77,8 +79,10 @@
         Plug 'pangloss/vim-javascript' " javascript
         Plug 'ap/vim-css-color'
         Plug 'elzr/vim-json'            " json
-        "" Plug 'godlygeek/tabular'        " for vim-markdown
-        "" Plug 'plasticboy/vim-markdown'  " markdown
+        Plug 'godlygeek/tabular'        " for vim-markdown
+        Plug 'preservim/vim-markdown'   " markdown
+        "" Plug 'iamcco/markdown-preview.vim'
+        Plug 'ferrine/md-img-paste.vim' " markdown 插入图片
         "" Plug 'posva/vim-vue'    " vue
         " formate
         "" Plug 'editorconfig/editorconfig-vim'

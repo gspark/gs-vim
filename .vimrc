@@ -134,7 +134,9 @@
     endfunction
     autocmd BufReadPre * call CleanNoNameEmptyBuffers()
     " -> Indent Related
-    set autoindent " Preserve current indent on new lines
+    set smartindent "改进版的cindent,自动识别以#开头的注释，不进行换行 
+    set autoindent  "autoindent配合下面一条命令根据不同语言类型进行不同的缩进操
+    filetype plugin indent on
     set cindent " set C style indent
     set expandtab " Convert all tabs typed to spaces
     set softtabstop=4 " Indentation levels every four columns
@@ -258,7 +260,7 @@
             endif
         endif
         " Vim UI
-        if g:gs_vim_font=='DejaVu Sans Mono for Powerline' || g:gs_vim_font=='FuraMono NF'|| g:gs_vim_font=='Fira Code'
+        if g:gs_vim_font=='DejaVu Sans Mono for Powerline' || g:gs_vim_font=='FuraMono NF'|| g:gs_vim_font=='Fira Code'|| g:gs_vim_font=='sarasa-mono-sc'
             set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,nbsp:.,trail:• " Highlight problematic whitespace
             set showbreak=↪                                                 " Change wrap line break
         else

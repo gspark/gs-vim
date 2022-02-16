@@ -34,6 +34,7 @@
         if has('win32') || has('win64')
             "" let $PATH.=';' . expand("$VIM/bin") . ';d:/ops/python3' . ';d:/ops/python3/Scripts' . ';d:/ops/yarn/bin'
             let $PATH.=';' . expand("$VIM/bin") . ';d:/ops/python3' . ';d:/ops/python3/Scripts'
+            set pythonthreedll=d:/ops/python3/python310.dll
             "" set runtimepath^=$RUNTIME
             let &runtimepath=expand("$VIM/.vim") . ',' . &runtimepath
         endif
@@ -70,8 +71,8 @@
     "" let g:gsvim_autocomplete='DEO'
     let g:gsvim_autocomplete='COC'
     " gsvim plugin setting
-    let g:gsvim_bundle_groups=['ui', 'enhance', 'move', 
-            \'compile', 'vcs', 'language']
+    let g:gsvim_bundle_groups=['ui', 'enhance', 'move',
+            \'complete', 'compile', 'vcs', 'language']
             "" \'navigate', 'complete', 'compile', 'vcs', 'language']
     "" let g:gs_vim_font='Consolas'                         " font
     "" let g:gs_vim_font='Ubuntu Mono derivative Powerline' " font
@@ -93,5 +94,8 @@
     let g:neocomplcache_temporary_dir = g:gsvim_temp . '/cache/neocomplcache'
     "" let $XDG_CONFIG_HOME              = $HOME
     let g:plug_plugged                = $VIM . '/.vim/plugged'
+    let g:coc_data_home = $VIM . '/.vim/.coc'
+    let g:coc_config_home= $HOME
+
 " }
 
