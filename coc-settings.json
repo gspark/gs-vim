@@ -39,10 +39,6 @@
     "${3rd}/OpenResty/library"
   ],
   "Lua.workspace.checkThirdParty": false,
-  "sumneko-lua.locale": {
-    "default": "zh-cn"
-  },
-  "sumneko-lua.logPath": {
-    "default": "${TEMP}/sumneko-lua"
-  }
+  "sumneko-lua.locale": "zh-cn",
+  "sumneko-lua.logPath": "z:/TEMP/sumneko-lua"
 }
