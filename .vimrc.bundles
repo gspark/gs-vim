@@ -10,7 +10,8 @@
     call plug#begin(g:plug_plugged)
 
     if count(g:gsvim_bundle_groups, 'ui') " UI setting
-        Plug 'morhetz/gruvbox' " Colorscheme gruvbox
+        "" Plug 'morhetz/gruvbox' " Colorscheme gruvbox
+        Plug 'rakr/vim-one' " Colorscheme vim-one
         Plug 'itchyny/lightline.vim' " Status line
         Plug 'Yggdroot/indentLine' " Indentation level
     endif
