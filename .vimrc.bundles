@@ -6,7 +6,8 @@
     "endif
     "" let g:plug_url_format='https://git::@hub.fastgit.org/%s.git'
     "" let g:plug_url_format='https://git::@hub.おうか.tw/%s.git'
-    let g:plug_url_format='https://git::@hub.xn--gzu630h.xn--kpry57d/%s.git'
+    "" let g:plug_url_format='https://git::@hub.xn--gzu630h.xn--kpry57d/%s.git'
+    let g:plug_url_format='https://git::@hub.nuaa.cf/%s.git'
     call plug#begin(g:plug_plugged)
 
     if count(g:gsvim_bundle_groups, 'ui') " UI setting
@@ -80,8 +81,8 @@
         Plug 'pangloss/vim-javascript' " javascript
         Plug 'ap/vim-css-color'
         Plug 'elzr/vim-json'            " json
-        Plug 'godlygeek/tabular'        " for vim-markdown
-        Plug 'preservim/vim-markdown'   " markdown
+        "" Plug 'godlygeek/tabular'        " for vim-markdown
+        "" Plug 'preservim/vim-markdown'   " markdown
         "" Plug 'iamcco/markdown-preview.vim'
         Plug 'ferrine/md-img-paste.vim' " markdown 插入图片
         "" Plug 'posva/vim-vue'    " vue

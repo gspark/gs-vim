@@ -20,3 +20,16 @@
     " gvim d:\workspace\js\electronic-wechat\src\main.js --startuptime tmp.txt
 " }
 
+" ime {
+    if has('multi_byte_ime')
+        "未开启 IME 时光标背景色
+        hi Cursor guifg=bg guibg=Orange gui=NONE
+        "开启IME 时光标背景色
+        hi CursorIM guifg=NONE guibg=Skyblue gui=NONE
+        "关闭Vim的自动切换 IME 输入法(插入模式和检索模式)
+        set iminsert=0 imsearch=0
+        "插入模式输入法状态未被记录时，默认关闭IME
+        "inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
+    endif 
+" }
+

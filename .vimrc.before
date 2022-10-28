@@ -33,7 +33,7 @@
         " across (heterogeneous) systems easier.
         if has('win32') || has('win64')
             "" let $PATH.=';' . expand("$VIM/bin") . ';d:/ops/python3' . ';d:/ops/python3/Scripts' . ';d:/ops/yarn/bin'
-            let $PATH.=';' . expand("$VIM/bin") . ';d:/ops/python3' . ';d:/ops/python3/Scripts'
+            let $PATH.=';' . expand("$VIM/bin") . ';' . expand("$VIM/lib") . ';d:/ops/python3' . ';d:/ops/python3/Scripts'
             set pythonthreedll=d:/ops/python3/python310.dll
             "" set runtimepath^=$RUNTIME
             let &runtimepath=expand("$VIM/.vim") . ',' . &runtimepath
