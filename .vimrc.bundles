@@ -84,7 +84,7 @@
         "" Plug 'godlygeek/tabular'        " for vim-markdown
         "" Plug 'preservim/vim-markdown'   " markdown
         "" Plug 'iamcco/markdown-preview.vim'
-        Plug 'ferrine/md-img-paste.vim' " markdown 插入图片
+        "" Plug 'ferrine/md-img-paste.vim' " markdown 插入图片
         "" Plug 'posva/vim-vue'    " vue
         " formate
         "" Plug 'editorconfig/editorconfig-vim'
