@@ -100,7 +100,7 @@
 
     set formatoptions+=rnlmM " Optimize format options
     set wrap " Set wrap
-    set textwidth=76 " Change text width
+    "" set textwidth=76 " Change text width
     if g:gsvim_fancy_font
         set list " Show these tabs and spaces and so on
         "" set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Change listchars
@@ -255,7 +255,7 @@
                 elseif g:gs_vim_font=='sarasa-mono-sc'
                     set guifont=等距更纱黑体\ SC:h14:cANSI
                     "" set guifontwide=等距更纱黑体\ SC:h13.8:cGB2312
-                    set linespace=0
+                    "" set linespace=0
                 endif
             endif
         endif
