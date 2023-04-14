@@ -34,3 +34,4 @@ REM set VIM=e:\opt\vim\vim80\vim.exe
 REM call %VIM% +PlugUpdate +qal
 
 rem mklink /J "d:\ops\vim\.vim\.coc\extensions\coc-sumneko-lua-data\sumneko-lua-ls\extension\server\log" "z:\TEMP\vim"
+mklink "d:\ops\vim\vim90\vim.exe" "d:\ops\vim\vim90\gvim.exe"

@@ -1,6 +1,10 @@
 " ui {
+    set smoothscroll
     "" colorscheme gruvbox
-    "" colorscheme one
+    colorscheme onedark
+    if isdirectory(g:plug_plugged . "/lightline.vim")
+        let lightline.colorscheme = g:colors_name
+    endif
 " }
 
 " Utils {
